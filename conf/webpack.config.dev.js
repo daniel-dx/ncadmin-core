@@ -6,6 +6,7 @@ var config = require('./config');
 // webpack.config.js
 module.exports = {
   entry: {
+    'detail': path.join(config.src, 'components', 'detail', 'index.vue'),
     // Don't touch me - components
 
     // Don't touch me - directives
@@ -62,7 +63,7 @@ module.exports = {
     }
   },
   babel: {
-    presets: ['es2015'],
+    presets: ['es2015', 'stage-0'],
     plugins: ['transform-runtime']
   }
 };
