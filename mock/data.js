@@ -60,5 +60,12 @@ module.exports = {
         }
       }
     };
+  },
+  '/api/getInfo': (param) => {
+    return {
+      data: {
+        name: 'helloworld'
+      }
+    };
   }
 };
