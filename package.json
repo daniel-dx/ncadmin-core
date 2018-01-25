@@ -8,6 +8,7 @@
     "email": "",
     "url": ""
   },
+  "main": "dist/ncadmin-core.min.js",
   "keywords": [
     "vue",
     "component",

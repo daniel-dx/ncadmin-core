@@ -7,7 +7,7 @@ var config = require('./config');
 module.exports = {
 
   entry: {
-    'vue-component': path.join(config.src, 'components', 'index.js')
+    'ncadmin-core': path.join(config.src, 'components', 'index.js')
   },
 
   output: {
