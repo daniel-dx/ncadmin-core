@@ -59,7 +59,7 @@ export default {
 };
 </script>
 
-<style lang="scss" rel="stylesheet/scss" scoped>
+<style lang="sass" rel="stylesheet/scss" scoped>
 .action-object{
   display: inline-block;
 }

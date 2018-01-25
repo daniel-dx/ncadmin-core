@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Component Example</title>
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo">
+    <list :config="config" v-model="valueData"></list>
+  </div>
+
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+  <script type="text/javascript" src="../../../node_modules/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform/dist/vueNcform.min.js"></script>
+
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+
+  <script>
+    Vue.use(vueNcform, { extComponents: ncformStdComps.default });
+  </script>
+  
+  <script type="text/javascript" src="../../../dist/list.js"></script>
+  <script type="text/javascript">
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      components: {
+        list: list
+      },
+      data: {
+        valueData: {
+          pageNum: 1,
+          pageSize: 20,
+          query: {}
+        },
+        config: {
+          // 查询条件
+          query: {
+            normal: {
+              // 普通搜索
+              // ncform的配置
+              type: "object",
+              properties: {
+                name: {
+                  type: "string ",
+                  ui: {
+                    label: "关键字",
+                    placeholder: "普通关键字"
+                  }
+                }
+              }
+            }
+          },
+
+          // 工具栏，位于列表之上
+          toolbar: {
+            batchActions: {
+              // 批量操作，当selectAll为true时有效
+              delete: {
+                name: "批量删除",
+                enable: true, // 支持dx表达式
+                handler: {
+                  type: "ajax", // ajax / page / modal / component
+                  options: {
+                    // type = 'ajax'
+                    apiUrl: "",
+                    params: [
+                      {
+                        name: "id",
+                        value: "dx: {{$item.id}}"
+                      }
+                    ]
+                  },
+                  refresh: true // 操作后是否刷新数据
+                }
+              },
+              others: [
+                // 参考 Action Object config
+              ]
+            },
+            tools: {
+              new: {
+                name: "新建",
+                enable: true, // 支持dx表达式
+                handler: {
+                  type: "page", // ajax / page / modal / component
+                  options: {
+                    // type = 'page'
+                    route: "dx: '/demo/edit/0'"
+                  },
+                  refresh: true // 操作后是否刷新数据
+                }
+              },
+              others: [
+                // 参考 Action Object config
+              ]
+            }
+          },
+
+          // 显示列表
+          list: {
+            selectAll: true, // 是否全选
+            datasource: {
+              // 数据源
+              apiUrl: "/api/getListData", // 请求url
+              paramFields: {
+                // 传过去的参数
+                pageSize: "pageSize", // 每页显示的项数
+                pageNum: "pageNum", // 请求的页码
+                query: "" // 查询条件，当为空时，查询对象的每个Key就是字段。当提供值时，即整个查询对象作为值传过去
+              },
+              otherParams: {
+                // 其它的请求参数，如 type: 1
+              },
+              resField: {
+                // 返回结果字段
+                pageingTotal: "page.total", // 分页总数字段
+                list: "data" // 列表数据字段
+              }
+            },
+            columns: [
+              //
+              {
+                header: "日期", // 表头
+                dataField: "date" // 数据源的字段
+              },
+              {
+                header: "姓名", // 表头
+                dataField: "name" // 数据源的字段
+              },
+              {
+                header: "地址", // 表头
+                dataField: "address" // 数据源的字段
+              },
+              {
+                header: "自定义组件",
+                component: {
+                  // 对于弹窗，需要指定弹窗页面的业务组件，这里约定弹窗页面整个就是一个业务组件
+                  name: "demo.components.say-hi",
+                  config: {
+                    title: "商品", // 标题，editMode不同，显示也不同。比如这里写“商品”，编辑模式下显示为编辑商品，新建模式下显示新建商品
+                    idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+                    formData: {
+                      // 当编辑模式时取表单数据用
+                      apiUrl: "/api/getListData", // 取表单数据的Url
+                      resField: "",
+                      params: [
+                        {
+                          name: "userid",
+                          value: "123"
+                        }
+                      ]
+                    },
+                    formSchema: {
+                      type: "object",
+                      properties: {
+                        name: {
+                          type: "string "
+                        }
+                      }
+                    },
+                    buttons: {
+                      submit: {
+                        // 提交
+                        apiUrl: "/api/getListData", // 提交的Url
+                        idField: "",
+                        valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+                      },
+                      back: {
+                        // 返回
+                        enable: true
+                      }
+                    }
+                  },
+                  value: {
+                    id: "dx: {{$item.id}}"
+                  }
+                }
+              }
+            ],
+            actions: {
+              // 项操作
+              // 删除
+              delete: {
+                enable: true, // 或 dx表达式，如 dx: !!{{$item.id}}
+                handler: {
+                  type: "ajax"
+                  // 参考 Action Object config 的 handler( type = 'modal' 或 'page')
+                }
+              },
+              view: {
+                // 查看
+                enable: false, // 或 dx表达式，如 dx: !!{{$item.id}}
+                handler: {
+                  type: "ajax"
+                  // 参考 Action Object config 的 handler( type = 'modal' 或 'page')
+                }
+              },
+              edit: {
+                // 编辑
+                enable: true,
+                handler: {
+                  type: "page",
+                  options: {
+                    route: "dx: '/demo/edit/'+{{$item.id}}"
+                  }
+                  // 参考 Action Object config 的 handler( type = 'modal' 或 'page')
+                }
+              },
+              others: [
+                // 参考 Action Object config
+                {
+                  // 自定义按钮
+                  name: "查看",
+                  enable: true, // 或 dx表达式，如 dx: !!{{$item.id}}
+                  handler: {
+                    type: "modal",
+                    options: {
+                      component: {
+                        // 对于弹窗，需要指定弹窗页面的业务组件，这里约定弹窗页面整个就是一个业务组件
+                        name: "configurable.components.detail-modal",
+                        config: {
+                          title: "demo详情",
+                          idField: "id",
+                          source: {
+                            apiUrl: "/api/getDetail",
+                            method: "get", // get/post default:get
+                            params: [
+                              {
+                                name: "id",
+                                value: "dx: {{$item.id}}"
+                              }
+                            ],
+                            resField: "data"
+                          },
+                          detail: {
+                            label: "",
+                            value: "dx: {{$data}}",
+                            properties: [
+                              // 普通
+                              {
+                                label: "水果名称", // 标签
+                                value: "dx: {{$data.username}}", // 或填写字段名或dx表达式，比如 "dx: {{$data.firstname}} + ' ' + {{$data.lastname}}"
+                                columns: 6, // 所占的列数
+                                widget: "label", // 使用的widget，默认是label，即只显示只读文本
+                                widgetConfig: {}
+                              },
+
+                              // 对象包含
+                              {
+                                label: "属性", // 标签
+                                value: "dx: {{$data.attribute}}",
+                                properties: [
+                                  {
+                                    label: "颜色",
+                                    value: "dx: {{$object.color}}",
+                                    columns: 6
+                                  },
+                                  {
+                                    label: "重量",
+                                    value: "dx: {{$object.weight}}",
+                                    columns: 6
+                                  }
+                                ],
+                                widget: "object", // 使用的widget，默认是object
+                                widgetConfig: {
+                                  // 针对自身的
+                                  titleColor: "red",
+                                  showOwnLabel: false,
+                                  showTitle: true,
+                                  // 针对子元素的
+                                  labelWidth: "",
+                                  labelColor: "green"
+                                }
+                              },
+
+                              // 数组包含对象
+                              {
+                                label: "标签", // 标签
+                                value: "dx: {{$data.tag}}",
+                                items: {
+                                  label: "",
+                                  value: "dx: {{$item}}",
+                                  columns: 1
+                                },
+                                widget: "array", // array | table | tabs
+                                widgetConfig: {}
+                              },
+
+                              {
+                                label: "想", // 标签
+                                value: "dx: {{$data.attributes}}",
+                                items: {
+                                  label: "属性", // 标签
+                                  value: "dx: {{$item}}",
+                                  properties: [
+                                    {
+                                      label: "颜色",
+                                      value: "dx: {{$object.color}}"
+                                    },
+                                    {
+                                      label: "重量",
+                                      value: "dx: {{$object.weight}}"
+                                    }
+                                  ],
+                                  widget: "object", // 使用的widget，默认是object
+                                  widgetConfig: {
+                                    labelWidth: ""
+                                  }
+                                },
+                                widget: "array", // array | table | tabs
+                                widgetConfig: {}
+                              },
+
+                              {
+                                label: "属性们2", // 标签
+                                value: "dx: {{$data.attributes}}",
+                                items: {
+                                  label: "",
+                                  value: "dx: {{$item.color}}",
+                                  columns: 1
+                                },
+                                widget: "array", // array | table | tabs
+                                widgetConfig: {}
+                              },
+
+                              {
+                                label: "对象数组", // 标签
+                                value: "dx: {{$data.attributes}}",
+                                items: {
+                                  label: "属性", // 标签
+                                  value: "dx: {{$item}}",
+                                  properties: [
+                                    {
+                                      label: "颜色",
+                                      value: "dx: {{$object.color}}"
+                                    },
+                                    {
+                                      label: "重量",
+                                      value: "dx: {{$object.weight}}"
+                                    }
+                                  ],
+                                  widget: "object", // 使用的widget，默认是object
+                                  widgetConfig: {
+                                    labelWidth: ""
+                                  }
+                                },
+                                widget: "tabs", // array | table | tabs
+                                widgetConfig: {}
+                              },
+
+                              {
+                                label: "label数组", // 标签
+                                value: "dx: {{$data.tag}}",
+                                items: {
+                                  label: "",
+                                  value: "dx: {{$item}}",
+                                  columns: 1
+                                },
+                                widget: "table", // array | table | tabs
+                                widgetConfig: {}
+                              },
+
+                              {
+                                label: "哈哈哈",
+                                value: "dx: {{$data.attributes3}}",
+                                items: {
+                                  label: "hello",
+                                  value: "dx: {{$item}}",
+                                  properties: [
+                                    {
+                                      label: "weight",
+                                      value: "dx: {{$object.weight}}",
+                                      properties: [
+                                        {
+                                          label: "value1",
+                                          value: "dx: {{$object.value1}}",
+                                          columns: 6
+                                        },
+                                        {
+                                          label: "value2",
+                                          value: "dx: {{$object.value2}}",
+                                          columns: 6
+                                        }
+                                      ],
+                                      widget: "object",
+                                      widgetConfig: {}
+                                    },
+                                    {
+                                      label: "color",
+                                      value: "dx: {{$object.color}}",
+                                      properties: [
+                                        {
+                                          label: "value3",
+                                          value: "dx: {{$object.value1}}"
+                                        },
+                                        {
+                                          label: "value4",
+                                          value: "dx: {{$object.value2}}"
+                                        }
+                                      ],
+                                      widget: "object",
+                                      widgetConfig: {}
+                                    }
+                                  ],
+                                  widget: "object",
+                                  widgetConfig: {}
+                                },
+                                widget: "table",
+                                widgetConfig: {}
+                              },
+
+                              //对象套对象
+                              {
+                                label: "对象套对象",
+                                value: "dx: {{$data.obj}}",
+                                properties: [
+                                  {
+                                    label: "",
+                                    value: "dx: {{$object.a}}",
+                                    properties: [
+                                      {
+                                        label: "a.a",
+                                        value: "dx: {{$object.a}}"
+                                      },
+                                      {
+                                        label: "a.b",
+                                        value: "dx: {{$object.b}}"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    label: "",
+                                    value: "dx: {{$object.b}}",
+                                    properties: [
+                                      {
+                                        label: "b.a",
+                                        value: "dx: {{$object.a}}"
+                                      },
+                                      {
+                                        label: "b.b",
+                                        value: "dx: {{$object.b}}"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ],
+                            widget: "object",
+                            widgetConfig: {}
+                          },
+                          buttons: {
+                            back: {
+                              enable: true
+                            }
+                          }
+                        },
+                        value: {
+                          id: "dx: {{$item.id}}"
+                        }
+                      },
+                      modalConfig: {
+                        title: "弹窗title",
+                        buttons: {
+                          confirm: {
+                            enable: false
+                          },
+                          cancel: {
+                            name: '关闭',
+                            enable: true
+                          },
+                          others: [
+                          ]
+                        }
+                      }
+                    }
+                    // 参考 Action Object config 的 handler( type = 'modal' 或 'page')
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
