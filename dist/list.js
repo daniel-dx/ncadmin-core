@@ -5782,9 +5782,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _actionObject2 = _interopRequireDefault(_actionObject);
 
-	var _modal = __webpack_require__(214);
+	var _indexLink = __webpack_require__(214);
 
-	var _modal2 = _interopRequireDefault(_modal);
+	var _indexLink2 = _interopRequireDefault(_indexLink);
 
 	var _helper = __webpack_require__(163);
 
@@ -5797,7 +5797,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = {
 	  components: {
 	    actionObject: _actionObject2.default,
-	    modal: _modal2.default
+	    modal: _indexLink2.default
 	  },
 	  props: {
 	    config: {
@@ -6173,7 +6173,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(215)
 	__vue_script__ = __webpack_require__(217)
 	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] src/components/private/modal.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/components/modal/index-link.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(218)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -6190,7 +6190,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-480dfa2e/modal.vue"
+	  var id = "_v-cd5f77c2/index-link.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -6214,8 +6214,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./modal.vue", function() {
-				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./modal.vue");
+			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js!../../../node_modules/sass-loader/lib/loader.js!./modal.scss", function() {
+				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js!../../../node_modules/sass-loader/lib/loader.js!./modal.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -6271,7 +6271,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    modalConfig: {
 	      type: Object,
-	      default: {}
+	      default: function _default() {
+	        return {};
+	      }
 	    }
 	  },
 	  created: function created() {
@@ -6338,43 +6340,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _eventHub2.default.$off("toModal_" + this.$data.modalId);
 	  }
 	};
-	// </script>
-	//
-	// <style lang="sass" rel="stylesheet/scss">
-	// .modal .el-dialog__body {
-	//   padding: 0 20px 15px;
-	// }
-	// </style>
-	// <template>
-	//   <div class="modal">
-	//     <!-- 弹窗 -->
-	//     <el-dialog :visible.sync="visibleData" :title="mdConfig.title">
-	//       <slot v-if="visibleData" :modalId="modalId"></slot>
-	//       <el-row type="flex" style="margin-top:10px;">
-	//         <el-col></el-col>
-	//         <el-button v-if="mdConfig.buttons.confirm.enable" @click="_modalButtonEvent(mdConfig.buttons.confirm)" type="success" plain>
-	//           {{mdConfig.buttons.confirm.name}}
-	//         </el-button>
-	//         <template v-for="(item, index) in mdConfig.buttons.others">
-	//           <el-button v-if="item.enable" @click="_modalButtonEvent(item)" type="primary" plain>
-	//             {{item.name}}
-	//           </el-button>
-	//         </template>
-	//         <el-button v-if="mdConfig.buttons.cancel.enable" @click="closeModal" type="info" plain>
-	//           {{mdConfig.buttons.cancel.name}}
-	//         </el-button>
-	//       </el-row>
-	//     </el-dialog>
-	//   </div>
-	// </template>
-	//
-	// <script>
 
 /***/ }),
 /* 218 */
 /***/ (function(module, exports) {
 
-	module.exports = "\n<div class=\"modal\">\n  <!-- 弹窗 -->\n  <el-dialog :visible.sync=\"visibleData\" :title=\"mdConfig.title\">\n    <slot v-if=\"visibleData\" :modalId=\"modalId\"></slot>\n    <el-row type=\"flex\" style=\"margin-top:10px;\">\n      <el-col></el-col>\n      <el-button v-if=\"mdConfig.buttons.confirm.enable\" @click=\"_modalButtonEvent(mdConfig.buttons.confirm)\" type=\"success\" plain>\n        {{mdConfig.buttons.confirm.name}}\n      </el-button>\n      <template v-for=\"(item, index) in mdConfig.buttons.others\">\n        <el-button v-if=\"item.enable\" @click=\"_modalButtonEvent(item)\" type=\"primary\" plain>\n          {{item.name}}\n        </el-button>\n      </template>\n      <el-button v-if=\"mdConfig.buttons.cancel.enable\" @click=\"closeModal\" type=\"info\" plain>\n        {{mdConfig.buttons.cancel.name}}\n      </el-button>\n    </el-row>\n  </el-dialog>\n</div>\n";
+	module.exports = "<div class=\"modal\">\n  <!-- 弹窗 -->\n  <el-dialog :visible.sync=\"visibleData\" :title=\"mdConfig.title\">\n    <slot v-if=\"visibleData\" :modalId=\"modalId\"></slot>\n    <el-row type=\"flex\" style=\"margin-top:10px;\">\n      <el-col></el-col>\n      <el-button v-if=\"mdConfig.buttons.confirm.enable\" @click=\"_modalButtonEvent(mdConfig.buttons.confirm)\" type=\"success\" plain>\n        {{mdConfig.buttons.confirm.name}}\n      </el-button>\n      <template v-for=\"(item, index) in mdConfig.buttons.others\">\n        <el-button v-if=\"item.enable\" @click=\"_modalButtonEvent(item)\" type=\"primary\" plain>\n          {{item.name}}\n        </el-button>\n      </template>\n      <el-button v-if=\"mdConfig.buttons.cancel.enable\" @click=\"closeModal\" type=\"info\" plain>\n        {{mdConfig.buttons.cancel.name}}\n      </el-button>\n    </el-row>\n  </el-dialog>\n</div>";
 
 /***/ }),
 /* 219 */

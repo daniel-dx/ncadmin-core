@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Component Example</title>
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo">
+    <modal model-config="modalConfig" :visible.sync="visible">
+      随便弹出点东西试试。
+    </modal>
+  </div>
+
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+  <script type="text/javascript" src="../../../node_modules/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform/dist/vueNcform.min.js"></script>
+
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+
+  <script>
+    Vue.use(vueNcform, { extComponents: ncformStdComps.default });
+  </script>
+
+  <script type="text/javascript" src="../../../dist/modal.js"></script>
+  <script type="text/javascript">
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      components: {
+        modal: modal
+      },
+      data: {
+        visible: true,
+        modalConfig: {
+          title: "弹窗title",
+          buttons: {
+            confirm: {
+              enable: false
+            },
+            cancel: {
+              name: '关闭',
+              enable: true
+            },
+            others: [
+            ]
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

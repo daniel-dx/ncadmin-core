@@ -1,7 +1,7 @@
 import _get from "lodash-es/get";
 import { ncformUtils } from "ncform-common";
 import actionObject from "../private/action-object.vue";
-import modal from "../private/modal.vue";
+import modal from "../modal/index-link.vue";
 import { axiosOptions } from "../../utils/helper";
 import axios from 'axios';
 
