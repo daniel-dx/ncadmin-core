@@ -1,7 +1,7 @@
 <template>
   <div class="layout-tabs">
     <el-tabs v-model="activeName" type="border-card">
-      <el-tab-pane v-for="(item, index) in valueData" :label="config.items.label+(index+1)" :name="index+''">
+      <el-tab-pane v-for="(item, index) in valueData" :label="config.items.label+(index+1)" :name="index+''" :key="index">
         <slot :item-config="config.items" :item-value="item"></slot>
       </el-tab-pane>
     </el-tabs>

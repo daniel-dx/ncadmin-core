@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("detail", [], factory);
+		define("detailModal", [], factory);
 	else if(typeof exports === 'object')
-		exports["detail"] = factory();
+		exports["detailModal"] = factory();
 	else
-		root["detail"] = factory();
+		root["detailModal"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -56,11 +56,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(1)
-	__vue_script__ = __webpack_require__(5)
+	__webpack_require__(192)
+	__vue_script__ = __webpack_require__(194)
 	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] src/components/detail/index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(191)
+	  console.warn("[vue-loader] src/components/detail-modal/index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(195)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -76,7 +76,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-49257308/index.vue"
+	  var id = "_v-2c4a7f48/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -85,46 +85,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	})()}
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(2);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js!../../../node_modules/sass-loader/lib/loader.js!./detail.scss", function() {
-				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js!../../../node_modules/sass-loader/lib/loader.js!./detail.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".mgtb10 {\n  margin-top: 10px;\n  margin-bottom: 10px; }\n", ""]);
-
-	// exports
-
-
-/***/ }),
+/* 1 */,
+/* 2 */,
 /* 3 */
 /***/ (function(module, exports) {
 
@@ -403,152 +365,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _detailRecursion = __webpack_require__(6);
-
-	var _detailRecursion2 = _interopRequireDefault(_detailRecursion);
-
-	var _get2 = __webpack_require__(58);
-
-	var _get3 = _interopRequireDefault(_get2);
-
-	var _ncformCommon = __webpack_require__(49);
-
-	var _helper = __webpack_require__(163);
-
-	var _axios = __webpack_require__(164);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	  components: {
-	    detailRecursion: _detailRecursion2.default
-	  },
-	  props: {
-	    config: {
-	      type: Object,
-	      default: function _default() {
-	        return {};
-	      }
-	    },
-	    value: {
-	      type: Object,
-	      default: function _default() {
-	        return {};
-	      }
-	    }
-	  },
-	  created: function created() {
-	    this.$axios = !this.$axios ? _axios2.default : this.$axios;
-	    this.initData();
-	  },
-	  mounted: function mounted() {},
-	  data: function data() {
-	    return {
-	      onlyId: "",
-	      formValue: {
-	        username: "apple",
-	        attribute: {
-	          weight: "300g",
-	          color: "red"
-	        },
-	        tag: ["red", "sweet"],
-	        attributes: [{
-	          weight: "11g",
-	          color: "purple"
-	        }, {
-	          weight: "22g",
-	          color: "green"
-	        }],
-	        attributes3: [{
-	          weight: {
-	            value1: "12g",
-	            value2: "22g"
-	          },
-	          color: {
-	            value1: "purple1",
-	            value2: "purple2"
-	          }
-	        }, {
-	          weight: {
-	            value1: "78g",
-	            value2: "88g"
-	          },
-	          color: {
-	            value1: "purple3",
-	            value2: "purple4"
-	          }
-	        }],
-	        obj: {
-	          a: {
-	            a: 1,
-	            b: 2
-	          },
-	          b: {
-	            a: 3,
-	            b: 4
-	          }
-	        }
-	      }
-	    };
-	  },
-
-	  methods: {
-	    goEdit: function goEdit() {
-	      this.$emit("goEdit");
-	    },
-	    goBack: function goBack() {
-	      this.$emit("goBack");
-	    },
-	    buttonBack: function buttonBack() {
-	      return (0, _get3.default)(this.config, 'buttons.back.enable', true);
-	    },
-	    initData: function initData() {
-	      this.$data.onlyId = this.value[this.config.idField];
-	      this.loadFormData();
-	    },
-	    loadFormData: function loadFormData() {
-	      var _this = this;
-
-	      var formDataConfig = this.config.source;
-	      var data = {};
-	      formDataConfig.params.forEach(function (item) {
-	        data[item.name] = _ncformCommon.ncformUtils.smartAnalyze(item.value, {
-	          data: [{
-	            symbol: "$item",
-	            value: {
-	              id: _this.$data.onlyId
-	            }
-	          }]
-	        });
-	      });
-
-	      this.$axios(formDataConfig.apiUrl, (0, _helper.axiosOptions)(formDataConfig.method, data)).then(function (res) {
-	        var resField = formDataConfig.resField;
-	        _this.$data.formValue = resField ? (0, _get3.default)(res.data, resField) : res.data;
-	      });
-	    }
-	  },
-	  watch: {
-	    value: {
-	      handler: function handler() {
-	        this.initData();
-	      }
-	    }
-	  }
-	};
-
-/***/ }),
+/* 5 */,
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6779,10 +6596,197 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 191 */
+/* 191 */,
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(193);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js!../../../node_modules/sass-loader/lib/loader.js!./detail-modal.scss", function() {
+				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js!../../../node_modules/sass-loader/lib/loader.js!./detail-modal.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(3)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".mgtb10 {\n  margin-top: 10px;\n  margin-bottom: 10px; }\n", ""]);
+
+	// exports
+
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _detailRecursion = __webpack_require__(6);
+
+	var _detailRecursion2 = _interopRequireDefault(_detailRecursion);
+
+	var _get2 = __webpack_require__(58);
+
+	var _get3 = _interopRequireDefault(_get2);
+
+	var _ncformCommon = __webpack_require__(49);
+
+	var _helper = __webpack_require__(163);
+
+	var _axios = __webpack_require__(164);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	  components: {
+	    detailRecursion: _detailRecursion2.default
+	  },
+	  props: {
+	    config: {
+	      type: Object,
+	      default: function _default() {
+	        return {};
+	      }
+	    },
+	    value: {
+	      type: Object,
+	      default: function _default() {
+	        return {};
+	      }
+	    }
+	  },
+	  created: function created() {
+	    this.$axios = !this.$axios ? _axios2.default : this.$axios;
+	    this.initData();
+	  },
+	  mounted: function mounted() {},
+	  data: function data() {
+	    return {
+	      onlyId: "",
+	      formValue: {
+	        username: "apple",
+	        attribute: {
+	          weight: "300g",
+	          color: "red"
+	        },
+	        tag: ["red", "sweet"],
+	        attributes: [{
+	          weight: "11g",
+	          color: "purple"
+	        }, {
+	          weight: "22g",
+	          color: "green"
+	        }],
+	        attributes3: [{
+	          weight: {
+	            value1: "12g",
+	            value2: "22g"
+	          },
+	          color: {
+	            value1: "purple1",
+	            value2: "purple2"
+	          }
+	        }, {
+	          weight: {
+	            value1: "78g",
+	            value2: "88g"
+	          },
+	          color: {
+	            value1: "purple3",
+	            value2: "purple4"
+	          }
+	        }],
+	        obj: {
+	          a: {
+	            a: 1,
+	            b: 2
+	          },
+	          b: {
+	            a: 3,
+	            b: 4
+	          }
+	        }
+	      }
+	    };
+	  },
+
+	  methods: {
+	    goEdit: function goEdit() {
+	      this.$emit("goEdit");
+	    },
+	    goBack: function goBack() {
+	      this.$emit("goBack");
+	    },
+	    buttonBack: function buttonBack() {
+	      return (0, _get3.default)(this.config, 'buttons.back.enable', true);
+	    },
+	    initData: function initData() {
+	      this.$data.onlyId = this.value[this.config.idField];
+	      this.loadFormData();
+	    },
+	    loadFormData: function loadFormData() {
+	      var _this = this;
+
+	      var formDataConfig = this.config.source;
+	      var data = {};
+	      formDataConfig.params.forEach(function (item) {
+	        data[item.name] = _ncformCommon.ncformUtils.smartAnalyze(item.value, {
+	          data: [{
+	            symbol: "$item",
+	            value: {
+	              id: _this.$data.onlyId
+	            }
+	          }]
+	        });
+	      });
+
+	      this.$axios(formDataConfig.apiUrl, (0, _helper.axiosOptions)(formDataConfig.method, data)).then(function (res) {
+	        var resField = formDataConfig.resField;
+	        _this.$data.formValue = resField ? (0, _get3.default)(res.data, resField) : res.data;
+	      });
+	    }
+	  },
+	  watch: {
+	    value: {
+	      handler: function handler() {
+	        this.initData();
+	      }
+	    }
+	  }
+	};
+
+/***/ }),
+/* 195 */
 /***/ (function(module, exports) {
 
-	module.exports = "<div class=\"detail\">\n  <el-row>\n    <el-col>{{config.title}}</el-col>\n  </el-row>\n\n  <el-row>\n    <detail-recursion :config=\"config.detail\" :value=\"formValue\"></detail-recursion>\n  </el-row>\n\n  <el-row class=\"btn-area\" type=\"flex\">\n    <el-col>\n    </el-col>\n    <el-button v-if=\"buttonBack()\" type=\"info\" @click=\"goBack()\" plain>返回</el-button>\n  </el-row>\n</div>";
+	module.exports = "<div class=\"detail-modal\">\n  <el-row>\n    <detail-recursion :config=\"config.detail\" :value=\"formValue\"></detail-recursion>\n  </el-row>\n</div>";
 
 /***/ })
 /******/ ])

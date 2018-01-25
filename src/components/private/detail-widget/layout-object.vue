@@ -3,7 +3,7 @@
     <div v-if="titleShow(config)" class="label" :style="titleStyle()">{{config.label}}</div>
     <div class="content">
       <el-row>
-        <el-col v-for="item in config.properties" :span="columns(item)" style="margin:5px 0;">
+        <el-col v-for="(item, index) in config.properties" :span="columns(item)" style="margin:5px 0;" :key="index">
           <div class="flexBox">
             <div v-if="propertyLabelShow(item)" class="labelArea" :style="labelStyle()">
               {{item.label}}

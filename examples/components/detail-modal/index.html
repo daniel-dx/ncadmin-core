@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <title>Component Example</title>
-
+    <meta charset="UTF-8">
+    <title>Component Example</title>
 </head>
-
 <body>
 
   <!--演示区域-->
   <div id="demo">
-    <detail :config="config" :value="value"></detail>
+    <detail-modal :config="config" :value="value"></detail-modal>
   </div>
 
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
@@ -19,14 +16,13 @@
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <!-- 引入组件库 -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script type="text/javascript" src="../../../dist/detail.js"></script>
+  <script type="text/javascript" src="../../../dist/detailModal.js"></script>
   <script type="text/javascript">
-
     // Bootstrap the app
     new Vue({
       el: '#demo',
       components: {
-        detail: detail
+        detailModal: detailModal
       },
       data: {
         config: {
@@ -225,5 +221,4 @@
     });
   </script>
 </body>
-
 </html>
