@@ -13,14 +13,18 @@ module.exports = {
   output: {
     path: config.dist,
     filename: '[name].min.js',
+    sourceMapFilename: '[file].map',
+    library: '[name]',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
 
   plugins: [
     // compress js
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   }
+    // })
   ]
 };

@@ -54,7 +54,11 @@
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.12.1",
     "babel-preset-stage-0": "^6.24.1",
-    "lodash-es": "^4.16.2"
+    "lodash-es": "^4.16.2",
+    "element-ui": "^2.0.11",
+    "ncform": "^1.0.40",
+    "ncform-common": "^1.0.40",
+    "ncform-theme-elementui": "^1.0.20"
   },
   "scripts": {
     "dev": "gulp dev",
@@ -64,10 +68,6 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.17.1",
-    "element-ui": "^2.0.11",
-    "ncform": "^1.0.40",
-    "ncform-common": "^1.0.40",
-    "ncform-theme-elementui": "^1.0.20",
     "vue": "^2.1.8"
   }
 }

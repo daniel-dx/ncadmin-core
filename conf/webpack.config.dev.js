@@ -32,6 +32,12 @@ module.exports = {
       commonjs2: 'vue',
       commonjs: 'vue',
       amd: 'vue'
+    },
+    'axios': {
+      root: 'axios',
+      commonjs2: 'axios',
+      commonjs: 'axios',
+      amd: 'axios'
     }
   },
 
