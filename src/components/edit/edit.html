@@ -1,0 +1,16 @@
+<div class="edit-page">
+  <el-row>
+    <el-col>{{value.id != '0' ? '编辑' : '新建'}}{{config.title}}</el-col>
+  </el-row>
+  <el-row>
+    <el-col>
+      <ncform :form-schema="config.formSchema" v-model="formValue" form-name="editform"></ncform>
+    </el-col>
+  </el-row>
+  <el-row class="btn-area" type="flex">
+    <el-col>
+    </el-col>
+    <el-button type="success" @click="submitData()" plain>{{value.id != '0' ? '保存' : '新建'}}</el-button>
+    <el-button type="info" @click="goBack()" plain>返回</el-button>
+  </el-row>
+</div>

@@ -9,6 +9,7 @@ module.exports = {
     'detail': path.join(config.src, 'components', 'detail', 'index.vue'),
     'detailModal': path.join(config.src, 'components', 'detail-modal', 'index.vue'),
     'editModal': path.join(config.src, 'components', 'edit-modal', 'index.vue'),
+    'edit': path.join(config.src, 'components', 'edit', 'index.vue'),
     // Don't touch me - components
 
     // Don't touch me - directives

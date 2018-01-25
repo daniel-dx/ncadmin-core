@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("detail", [], factory);
+		define("edit", [], factory);
 	else if(typeof exports === 'object')
-		exports["detail"] = factory();
+		exports["edit"] = factory();
 	else
-		root["detail"] = factory();
+		root["edit"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -56,11 +56,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(1)
-	__vue_script__ = __webpack_require__(5)
+	__webpack_require__(196)
+	__vue_script__ = __webpack_require__(198)
 	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] src/components/detail/index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(191)
+	  console.warn("[vue-loader] src/components/edit/index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(199)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -76,7 +76,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-49257308/index.vue"
+	  var id = "_v-42794616/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -85,46 +85,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	})()}
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(2);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js!../../../node_modules/sass-loader/lib/loader.js!./detail.scss", function() {
-				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js!../../../node_modules/sass-loader/lib/loader.js!./detail.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".mgtb10 {\n  margin-top: 10px;\n  margin-bottom: 10px; }\n", ""]);
-
-	// exports
-
-
-/***/ }),
+/* 1 */,
+/* 2 */,
 /* 3 */
 /***/ (function(module, exports) {
 
@@ -403,331 +365,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _detailRecursion = __webpack_require__(6);
-
-	var _detailRecursion2 = _interopRequireDefault(_detailRecursion);
-
-	var _get2 = __webpack_require__(58);
-
-	var _get3 = _interopRequireDefault(_get2);
-
-	var _ncformCommon = __webpack_require__(49);
-
-	var _helper = __webpack_require__(163);
-
-	var _axios = __webpack_require__(164);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	  components: {
-	    detailRecursion: _detailRecursion2.default
-	  },
-	  props: {
-	    config: {
-	      type: Object,
-	      default: function _default() {
-	        return {};
-	      }
-	    },
-	    value: {
-	      type: Object,
-	      default: function _default() {
-	        return {};
-	      }
-	    }
-	  },
-	  created: function created() {
-	    this.$axios = !this.$axios ? _axios2.default : this.$axios;
-	    this.initData();
-	  },
-	  mounted: function mounted() {},
-	  data: function data() {
-	    return {
-	      onlyId: "",
-	      formValue: {
-	        username: "apple",
-	        attribute: {
-	          weight: "300g",
-	          color: "red"
-	        },
-	        tag: ["red", "sweet"],
-	        attributes: [{
-	          weight: "11g",
-	          color: "purple"
-	        }, {
-	          weight: "22g",
-	          color: "green"
-	        }],
-	        attributes3: [{
-	          weight: {
-	            value1: "12g",
-	            value2: "22g"
-	          },
-	          color: {
-	            value1: "purple1",
-	            value2: "purple2"
-	          }
-	        }, {
-	          weight: {
-	            value1: "78g",
-	            value2: "88g"
-	          },
-	          color: {
-	            value1: "purple3",
-	            value2: "purple4"
-	          }
-	        }],
-	        obj: {
-	          a: {
-	            a: 1,
-	            b: 2
-	          },
-	          b: {
-	            a: 3,
-	            b: 4
-	          }
-	        }
-	      }
-	    };
-	  },
-
-	  methods: {
-	    goEdit: function goEdit() {
-	      this.$emit("goEdit");
-	    },
-	    goBack: function goBack() {
-	      this.$emit("goBack");
-	    },
-	    buttonBack: function buttonBack() {
-	      return (0, _get3.default)(this.config, 'buttons.back.enable', true);
-	    },
-	    initData: function initData() {
-	      this.$data.onlyId = this.value[this.config.idField];
-	      this.loadFormData();
-	    },
-	    loadFormData: function loadFormData() {
-	      var _this = this;
-
-	      var formDataConfig = this.config.source;
-	      var data = {};
-	      formDataConfig.params.forEach(function (item) {
-	        data[item.name] = _ncformCommon.ncformUtils.smartAnalyze(item.value, {
-	          data: [{
-	            symbol: "$item",
-	            value: {
-	              id: _this.$data.onlyId
-	            }
-	          }]
-	        });
-	      });
-
-	      this.$axios(formDataConfig.apiUrl, (0, _helper.axiosOptions)(formDataConfig.method, data)).then(function (res) {
-	        var resField = formDataConfig.resField;
-	        _this.$data.formValue = resField ? (0, _get3.default)(res.data, resField) : res.data;
-	      });
-	    }
-	  },
-	  watch: {
-	    value: {
-	      handler: function handler() {
-	        this.initData();
-	      }
-	    }
-	  }
-	};
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(7)
-	__vue_script__ = __webpack_require__(9)
-	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] src/components/private/detail-widget/detail-recursion.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(162)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-d630976e/detail-recursion.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(8);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./detail-recursion.vue", function() {
-				var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./detail-recursion.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".detail-recursion {\n  font-size: 14px;\n  line-height: 30px; }\n", ""]);
-
-	// exports
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends2 = __webpack_require__(10);
-
-	var _extends3 = _interopRequireDefault(_extends2);
-
-	var _mixin = __webpack_require__(48);
-
-	var _mixin2 = _interopRequireDefault(_mixin);
-
-	var _widget = __webpack_require__(50);
-
-	var _widget2 = _interopRequireDefault(_widget);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// <template>
-	//   <el-col class="detail-recursion" :span="columns">
-	//     <!-- 对象 -->
-	//     <component v-if="config.properties" :is="config.widget?'layout-'+config.widget : defaultWidget.object" :config="config" :value="value">
-	//       <template slot-scope="props">
-	//         <detail-recursion :config="props.itemConfig" :value="props.itemValue">
-	//         </detail-recursion>
-	//       </template>
-	//     </component>
-	//
-	//     <!-- 数组 -->
-	//     <component v-else-if="config.items" :is="config.widget?'layout-'+config.widget : defaultWidget.array" :config="config" :value="value">
-	//       <template slot-scope="props">
-	//         <detail-recursion :config="props.itemConfig" :value="props.itemValue">
-	//         </detail-recursion>
-	//       </template>
-	//     </component>
-	//
-	//     <!-- 具体展示控件 -->
-	//     <component v-else :is="config.widget?'control-'+config.widget : defaultWidget.label" :config="config" :value="value" />
-	//
-	//   </el-col>
-	// </template>
-	// <script>
-	exports.default = {
-	  name: "detail-recursion",
-	  components: (0, _extends3.default)({}, _widget2.default),
-	  mixins: [_mixin2.default],
-	  data: function data() {
-	    return {
-	      defaultWidget: {
-	        object: "layout-object",
-	        array: "layout-array",
-	        label: "control-label"
-	      }
-	    };
-	  },
-
-	  computed: {
-	    columns: function columns() {
-	      return this.config.columns ? this.config.columns * 2 : 24;
-	    }
-	  }
-	};
-	// </script>
-	//
-	// <style lang="sass" rel="stylesheet/scss">
-	// .detail-recursion{
-	//   font-size: 14px;
-	//   line-height: 30px;
-	// }
-	// </style>
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	exports.__esModule = true;
-
-	var _assign = __webpack_require__(11);
-
-	var _assign2 = _interopRequireDefault(_assign);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _assign2.default || function (target) {
-	  for (var i = 1; i < arguments.length; i++) {
-	    var source = arguments[i];
-
-	    for (var key in source) {
-	      if (Object.prototype.hasOwnProperty.call(source, key)) {
-	        target[key] = source[key];
-	      }
-	    }
-	  }
-
-	  return target;
-	};
-
-/***/ }),
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1275,34 +918,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _ncformCommon = __webpack_require__(49);
-
-	exports.default = {
-	  props: ["config", "value"],
-	  methods: {
-	    analyze: function analyze(val, inputData) {
-	      inputData = inputData || this.value;
-	      val = val.replace(/(\$object|\$item|\$data)/g, "$data");
-	      return _ncformCommon.ncformUtils.smartAnalyze(val, {
-	        data: [{
-	          symbol: "$data",
-	          value: inputData
-	        }]
-	      });
-	    }
-	  }
-	};
-
-/***/ }),
+/* 48 */,
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1313,293 +929,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _controlLabel = __webpack_require__(51);
-
-	var _controlLabel2 = _interopRequireDefault(_controlLabel);
-
-	var _layoutObject = __webpack_require__(54);
-
-	var _layoutObject2 = _interopRequireDefault(_layoutObject);
-
-	var _layoutArray = __webpack_require__(145);
-
-	var _layoutArray2 = _interopRequireDefault(_layoutArray);
-
-	var _layoutTable = __webpack_require__(150);
-
-	var _layoutTable2 = _interopRequireDefault(_layoutTable);
-
-	var _layoutTabs = __webpack_require__(157);
-
-	var _layoutTabs2 = _interopRequireDefault(_layoutTabs);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    controlLabel: _controlLabel2.default,
-	    layoutObject: _layoutObject2.default,
-	    layoutArray: _layoutArray2.default,
-	    layoutTable: _layoutTable2.default,
-	    layoutTabs: _layoutTabs2.default
-	};
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(52)
-	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] src/components/private/detail-widget/control-label.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(53)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-0421a331/control-label.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _mixin = __webpack_require__(48);
-
-	var _mixin2 = _interopRequireDefault(_mixin);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	  mixins: [_mixin2.default]
-	};
-	// </script>
-	// <template>
-	//   <span>{{analyze(config.value)}}</span>
-	// </template>
-	// <script>
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports) {
-
-	module.exports = "\n<span>{{analyze(config.value)}}</span>\n";
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(55)
-	__vue_script__ = __webpack_require__(57)
-	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] src/components/private/detail-widget/layout-object.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(144)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-904d3622/layout-object.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(56);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-904d3622&scoped=true!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./layout-object.vue", function() {
-				var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-904d3622&scoped=true!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./layout-object.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".layout-object .label[_v-904d3622] {\n  border-bottom: 1px solid #ebeef5;\n  border-left: 3px solid #409eff;\n  line-height: 30px;\n  padding: 0 0 0 15px;\n  color: #409eff; }\n\n.layout-object .labelArea[_v-904d3622] {\n  width: 72px;\n  padding-right: 12px;\n  text-align: right;\n  line-height: 30px; }\n\n.layout-object .flexBox[_v-904d3622] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex; }\n\n.layout-object .flex[_v-904d3622] {\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1; }\n", ""]);
-
-	// exports
-
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _mixin = __webpack_require__(48);
-
-	var _mixin2 = _interopRequireDefault(_mixin);
-
-	var _get2 = __webpack_require__(58);
-
-	var _get3 = _interopRequireDefault(_get2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// <template>
-	//   <div class="layout-object">
-	//     <div v-if="titleShow(config)" class="label" :style="titleStyle()">{{config.label}}</div>
-	//     <div class="content">
-	//       <el-row>
-	//         <el-col v-for="(item, index) in config.properties" :span="columns(item)" style="margin:5px 0;" :key="index">
-	//           <div class="flexBox">
-	//             <div v-if="propertyLabelShow(item)" class="labelArea" :style="labelStyle()">
-	//               {{item.label}}
-	//             </div>
-	//             <div class="flex">
-	//               <el-row>
-	//                 <slot :item-config="item" :item-value="objectValue"></slot>
-	//               </el-row>
-	//             </div>
-	//           </div>
-	//         </el-col>
-	//       </el-row>
-	//     </div>
-	//   </div>
-	// </template>
-	// <script>
-	exports.default = {
-	  mixins: [_mixin2.default],
-	  created: function created() {
-	    this.$data.objectValue = this.analyze(this.config.value);
-	  },
-	  data: function data() {
-	    return {
-	      objectValue: {}
-	    };
-	  },
-
-	  methods: {
-	    labelStyle: function labelStyle() {
-	      return {
-	        width: (0, _get3.default)(this.config, 'widgetConfig.labelWidth', '72px'),
-	        color: (0, _get3.default)(this.config, 'widgetConfig.labelColor', '#777')
-	      };
-	    },
-	    titleStyle: function titleStyle() {
-	      return {
-	        color: (0, _get3.default)(this.config, 'widgetConfig.titleColor', '#409eff'),
-	        borderLeft: "3px solid " + (0, _get3.default)(this.config, 'widgetConfig.titleColor', '#409eff')
-	      };
-	    },
-	    propertyLabelShow: function propertyLabelShow(item) {
-	      return item.label && (0, _get3.default)(item, "widgetConfig.showOwnLabel", true);
-	    },
-	    titleShow: function titleShow(config) {
-	      return config.label && (0, _get3.default)(config, "widgetConfig.showTitle", true);;
-	    },
-	    columns: function columns(item) {
-	      return item.columns ? item.columns * 2 : 24;
-	    }
-	  }
-	};
-	// </script>
-	//
-	// <style lang="sass" rel="stylesheet/scss" scoped>
-	// .layout-object {
-	//   .content {
-	//     // border: 1px solid #ebeef5;
-	//     // padding: 10px;
-	//   }
-	//   .label {
-	//     border-bottom: 1px solid #ebeef5;
-	//     border-left: 3px solid #409eff;
-	//     line-height: 30px;
-	//     padding: 0 0 0 15px;
-	//     color: #409eff;
-	//   }
-	//
-	//   .labelArea {
-	//     width: 72px;
-	//     padding-right: 12px;
-	//     text-align: right;
-	//     line-height: 30px;
-	//   }
-	//
-	//   .flexBox {
-	//     display: flex;
-	//   }
-	//   .flex {
-	//     flex: 1;
-	//   }
-	// }
-	// </style>
-
-/***/ }),
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
 /* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4546,479 +3883,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = toKey;
 
 /***/ }),
-/* 144 */
-/***/ (function(module, exports) {
-
-	module.exports = "\n<div class=\"layout-object\" _v-904d3622=\"\">\n  <div v-if=\"titleShow(config)\" class=\"label\" :style=\"titleStyle()\" _v-904d3622=\"\">{{config.label}}</div>\n  <div class=\"content\" _v-904d3622=\"\">\n    <el-row _v-904d3622=\"\">\n      <el-col v-for=\"(item, index) in config.properties\" :span=\"columns(item)\" style=\"margin:5px 0;\" :key=\"index\" _v-904d3622=\"\">\n        <div class=\"flexBox\" _v-904d3622=\"\">\n          <div v-if=\"propertyLabelShow(item)\" class=\"labelArea\" :style=\"labelStyle()\" _v-904d3622=\"\">\n            {{item.label}}\n          </div>\n          <div class=\"flex\" _v-904d3622=\"\">\n            <el-row _v-904d3622=\"\">\n              <slot :item-config=\"item\" :item-value=\"objectValue\" _v-904d3622=\"\"></slot>\n            </el-row>\n          </div>\n        </div>\n      </el-col>\n    </el-row>\n  </div>\n</div>\n";
-
-/***/ }),
-/* 145 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(146)
-	__vue_script__ = __webpack_require__(148)
-	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] src/components/private/detail-widget/layout-array.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(149)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-5c4d56d9/layout-array.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ }),
-/* 146 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(147);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-5c4d56d9&scoped=true!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./layout-array.vue", function() {
-				var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-5c4d56d9&scoped=true!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./layout-array.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-/* 147 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".layout-array[_v-5c4d56d9] {\n  width: 100%; }\n", ""]);
-
-	// exports
-
-
-/***/ }),
-/* 148 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _mixin = __webpack_require__(48);
-
-	var _mixin2 = _interopRequireDefault(_mixin);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	  mixins: [_mixin2.default],
-	  created: function created() {
-	    this.$data.valueData = this.analyze(this.config.value);
-	  },
-	  data: function data() {
-	    return {
-	      valueData: []
-	    };
-	  }
-	};
-	// </script>
-	//
-	// <style lang="sass" rel="stylesheet/scss" scoped>
-	// .layout-array {
-	//   width: 100%;
-	// }
-	// </style>
-	// <template>
-	//   <div class="layout-array">
-	//     <el-row>
-	//       <template v-for="item in valueData">
-	//         <slot :item-config="config.items" :item-value="item">
-	//         </slot>
-	//       </template>
-	//     </el-row>
-	//   </div>
-	// </template>
-	// <script>
-
-/***/ }),
-/* 149 */
-/***/ (function(module, exports) {
-
-	module.exports = "\n<div class=\"layout-array\" _v-5c4d56d9=\"\">\n  <el-row _v-5c4d56d9=\"\">\n    <template v-for=\"item in valueData\">\n      <slot :item-config=\"config.items\" :item-value=\"item\" _v-5c4d56d9=\"\">\n      </slot>\n    </template>\n  </el-row>\n</div>\n";
-
-/***/ }),
-/* 150 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(151)
-	__vue_script__ = __webpack_require__(153)
-	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] src/components/private/detail-widget/layout-table.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(156)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-3ab55dce/layout-table.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ }),
-/* 151 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(152);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-3ab55dce&scoped=true!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./layout-table.vue", function() {
-				var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-3ab55dce&scoped=true!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./layout-table.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-/* 152 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".layout-table[_v-3ab55dce] {\n  width: 100%;\n  border-left: 1px solid #ebeef5;\n  border-top: 1px solid #ebeef5; }\n  .layout-table th[_v-3ab55dce], .layout-table td[_v-3ab55dce] {\n    border-right: 1px solid #ebeef5;\n    border-bottom: 1px solid #ebeef5;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    text-align: left;\n    background-color: #fff;\n    padding: 12px 10px;\n    min-width: 0;\n    box-sizing: border-box;\n    text-overflow: ellipsis;\n    vertical-align: top;\n    position: relative;\n    color: #999; }\n  .layout-table td[_v-3ab55dce] {\n    color: #666; }\n", ""]);
-
-	// exports
-
-
-/***/ }),
-/* 153 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _stringify = __webpack_require__(154);
-
-	var _stringify2 = _interopRequireDefault(_stringify);
-
-	var _mixin = __webpack_require__(48);
-
-	var _mixin2 = _interopRequireDefault(_mixin);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	  mixins: [_mixin2.default],
-	  created: function created() {
-	    this.$data.valueData = this.analyze(this.config.value);
-	  },
-	  data: function data() {
-	    return {
-	      valueData: []
-	    };
-	  },
-
-	  methods: {
-	    deleteLabel: function deleteLabel(obj) {
-	      obj = JSON.parse((0, _stringify2.default)(obj));
-	      delete obj.label;
-	      return obj;
-	    }
-	  }
-	};
-	// </script>
-	//
-	// <style lang="sass" rel="stylesheet/scss" scoped>
-	// .layout-table {
-	//   width: 100%;
-	//   border-left: 1px solid #ebeef5;
-	//   border-top: 1px solid #ebeef5;
-	//
-	//   th, td{
-	//     border-right: 1px solid #ebeef5;
-	//     border-bottom: 1px solid #ebeef5;
-	//     user-select: none;
-	//     text-align: left;
-	//     background-color: #fff;
-	//
-	//
-	//     padding: 12px 10px;
-	//     min-width: 0;
-	//     box-sizing: border-box;
-	//     text-overflow: ellipsis;
-	//     vertical-align: top;
-	//     position: relative;
-	//     color: #999;
-	//   }
-	//
-	//   td{
-	//     color: #666;
-	//
-	//   }
-	// }
-	// </style>
-	// <template>
-	//   <table class="layout-table" cellspacing="0" cellpadding="0" border="0" >
-	//     <!-- 内嵌信息为Object -->
-	//     <template v-if="config.items.properties">
-	//       <tr>
-	//         <th v-for="item in config.items.properties">{{item.label}}</th>
-	//       </tr>
-	//       <tr v-for="item in valueData">
-	//         <td v-for="item2 in config.items.properties">
-	//             <!-- 这里的item-value为items.value的值根据数组每一项的值来解析 -->
-	//             <slot :item-config="item2" :item-value="analyze(config.items.value, item)"></slot>
-	//         </td>
-	//       </tr>
-	//     </template>
-	//
-	//     <!-- 内嵌信息为其它 -->
-	//     <template v-else>
-	//       <tr v-if="config.label">
-	//         <th>{{config.label}}</th>
-	//       </tr>
-	//       <tr v-for="item in valueData">
-	//         <td>
-	//           <slot :item-config="config.items" :item-value="item">
-	//           </slot>
-	//         </td>
-	//       </tr>
-	//     </template>
-	//   </table>
-	// </template>
-	// <script>
-
-/***/ }),
-/* 154 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(155), __esModule: true };
-
-/***/ }),
-/* 155 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var core = __webpack_require__(16);
-	var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
-	module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
-	};
-
-
-/***/ }),
-/* 156 */
-/***/ (function(module, exports) {
-
-	module.exports = "\n<table class=\"layout-table\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" _v-3ab55dce=\"\">\n  <!-- 内嵌信息为Object -->\n  <template v-if=\"config.items.properties\">\n    <tr _v-3ab55dce=\"\">\n      <th v-for=\"item in config.items.properties\" _v-3ab55dce=\"\">{{item.label}}</th>\n    </tr>\n    <tr v-for=\"item in valueData\" _v-3ab55dce=\"\">\n      <td v-for=\"item2 in config.items.properties\" _v-3ab55dce=\"\">\n          <!-- 这里的item-value为items.value的值根据数组每一项的值来解析 -->\n          <slot :item-config=\"item2\" :item-value=\"analyze(config.items.value, item)\" _v-3ab55dce=\"\"></slot>\n      </td>\n    </tr>\n  </template>\n\n  <!-- 内嵌信息为其它 -->\n  <template v-else=\"\">\n    <tr v-if=\"config.label\" _v-3ab55dce=\"\">\n      <th _v-3ab55dce=\"\">{{config.label}}</th>\n    </tr>\n    <tr v-for=\"item in valueData\" _v-3ab55dce=\"\">\n      <td _v-3ab55dce=\"\">\n        <slot :item-config=\"config.items\" :item-value=\"item\" _v-3ab55dce=\"\">\n        </slot>\n      </td>\n    </tr>\n  </template>\n</table>\n";
-
-/***/ }),
-/* 157 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(158)
-	__vue_script__ = __webpack_require__(160)
-	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] src/components/private/detail-widget/layout-tabs.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(161)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-022f83ae/layout-tabs.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ }),
-/* 158 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(159);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-022f83ae&scoped=true!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./layout-tabs.vue", function() {
-				var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-022f83ae&scoped=true!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./layout-tabs.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-/* 159 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "", ""]);
-
-	// exports
-
-
-/***/ }),
-/* 160 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _stringify = __webpack_require__(154);
-
-	var _stringify2 = _interopRequireDefault(_stringify);
-
-	var _mixin = __webpack_require__(48);
-
-	var _mixin2 = _interopRequireDefault(_mixin);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	  mixins: [_mixin2.default],
-	  created: function created() {
-	    this.$data.valueData = this.analyze(this.config.value);
-	  },
-	  data: function data() {
-	    return {
-	      valueData: [],
-	      activeName: 0
-	    };
-	  },
-
-	  methods: {
-	    deleteLabel: function deleteLabel(obj) {
-	      obj = JSON.parse((0, _stringify2.default)(obj));
-	      delete obj.label;
-	      return obj;
-	    }
-	  }
-	};
-	// </script>
-	//
-	// <style lang="sass" rel="stylesheet/scss" scoped>
-	// .layout-tabs {
-	// }
-	// </style>
-	// <template>
-	//   <div class="layout-tabs">
-	//     <el-tabs v-model="activeName" type="border-card">
-	//       <el-tab-pane v-for="(item, index) in valueData" :label="config.items.label+(index+1)" :name="index+''" :key="index">
-	//         <slot :item-config="config.items" :item-value="item"></slot>
-	//       </el-tab-pane>
-	//     </el-tabs>
-	//   </div>
-	// </template>
-	// <script>
-
-/***/ }),
-/* 161 */
-/***/ (function(module, exports) {
-
-	module.exports = "\n<div class=\"layout-tabs\" _v-022f83ae=\"\">\n  <el-tabs v-model=\"activeName\" type=\"border-card\" _v-022f83ae=\"\">\n    <el-tab-pane v-for=\"(item, index) in valueData\" :label=\"config.items.label+(index+1)\" :name=\"index+''\" :key=\"index\" _v-022f83ae=\"\">\n      <slot :item-config=\"config.items\" :item-value=\"item\" _v-022f83ae=\"\"></slot>\n    </el-tab-pane>\n  </el-tabs>\n</div>\n";
-
-/***/ }),
-/* 162 */
-/***/ (function(module, exports) {
-
-	module.exports = "\n<el-col class=\"detail-recursion\" :span=\"columns\">\n  <!-- 对象 -->\n  <component v-if=\"config.properties\" :is=\"config.widget?'layout-'+config.widget : defaultWidget.object\" :config=\"config\" :value=\"value\">\n    <template slot-scope=\"props\">\n      <detail-recursion :config=\"props.itemConfig\" :value=\"props.itemValue\">\n      </detail-recursion>\n    </template>\n  </component>\n\n  <!-- 数组 -->\n  <component v-else-if=\"config.items\" :is=\"config.widget?'layout-'+config.widget : defaultWidget.array\" :config=\"config\" :value=\"value\">\n    <template slot-scope=\"props\">\n      <detail-recursion :config=\"props.itemConfig\" :value=\"props.itemValue\">\n      </detail-recursion>\n    </template>\n  </component>\n\n  <!-- 具体展示控件 -->\n  <component v-else :is=\"config.widget?'control-'+config.widget : defaultWidget.label\" :config=\"config\" :value=\"value\" />\n\n</el-col>\n";
-
-/***/ }),
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */,
+/* 162 */,
 /* 163 */
 /***/ (function(module, exports) {
 
@@ -6779,10 +5662,176 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 191 */
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(197);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-42794616&scoped=true!../../../node_modules/sass-loader/lib/loader.js!./edit.scss", function() {
+				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-42794616&scoped=true!../../../node_modules/sass-loader/lib/loader.js!./edit.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 197 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(3)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".btn-area[_v-42794616] {\n  margin-top: 8px; }\n", ""]);
+
+	// exports
+
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _assign = __webpack_require__(11);
+
+	var _assign2 = _interopRequireDefault(_assign);
+
+	var _get2 = __webpack_require__(58);
+
+	var _get3 = _interopRequireDefault(_get2);
+
+	var _ncformCommon = __webpack_require__(49);
+
+	var _helper = __webpack_require__(163);
+
+	var _axios = __webpack_require__(164);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	  components: {},
+	  created: function created() {
+	    this.$axios = !this.$axios ? _axios2.default : this.$axios;
+	    this.initData();
+	  },
+
+	  props: {
+	    config: {
+	      type: Object,
+	      default: {}
+	    },
+	    value: {
+	      type: Object,
+	      default: {}
+	    }
+	  },
+	  data: function data() {
+	    return {
+	      onlyId: "",
+	      formValue: {}
+	    };
+	  },
+
+	  computed: {
+	    isEdit: function isEdit() {
+	      return this.$data.onlyId !== "0";
+	    }
+	  },
+	  methods: {
+	    goBack: function goBack() {
+	      this.$emit("goBack");
+	    },
+	    initData: function initData() {
+	      this.$data.formValue = {};
+
+	      this.$data.onlyId = this.value[this.config.idField];
+	      if (this.$data.onlyId != "0") {
+	        this.loadFormData();
+	      }
+	    },
+	    loadFormData: function loadFormData() {
+	      var _this = this;
+
+	      var formDataConfig = this.config.formData;
+	      var data = {};
+	      formDataConfig.params.forEach(function (item) {
+	        data[item.name] = _ncformCommon.ncformUtils.smartAnalyze(item.value, {
+	          data: [{
+	            symbol: "$item",
+	            value: {
+	              id: _this.$data.onlyId
+	            }
+	          }]
+	        });
+	      });
+
+	      this.$axios(formDataConfig.apiUrl, (0, _helper.axiosOptions)(formDataConfig.method, data)).then(function (res) {
+	        var resField = formDataConfig.resField;
+	        _this.$data.formValue = resField ? (0, _get3.default)(res.data, resField) : res.data;
+	      });
+	    },
+	    submitData: function submitData() {
+	      var _this2 = this;
+
+	      var submitConfig = this.config.buttons.submit;
+	      var data = {};
+	      if (submitConfig.valueField) {
+	        data[submitConfig.valueField] = this.$data.formValue;
+	      } else {
+	        data = (0, _assign2.default)({}, this.$data.formValue);
+	      }
+
+	      data[submitConfig.idField || "id"] = this.$data.onlyId;
+
+	      this.$axios(submitConfig.apiUrl, (0, _helper.axiosOptions)(submitConfig.method, data)).then(function (res) {
+	        _this2.$message({
+	          type: "success",
+	          message: "保存成功"
+	        });
+	        _this2.goBack();
+	      });
+	    }
+	  },
+	  watch: {
+	    value: {
+	      handler: function handler() {
+	        this.initData();
+	      }
+	    }
+	  }
+	};
+
+/***/ }),
+/* 199 */
 /***/ (function(module, exports) {
 
-	module.exports = "<div class=\"detail\">\n  <el-row>\n    <el-col>{{config.title}}</el-col>\n  </el-row>\n\n  <el-row>\n    <detail-recursion :config=\"config.detail\" :value=\"formValue\"></detail-recursion>\n  </el-row>\n\n  <el-row class=\"btn-area\" type=\"flex\">\n    <el-col>\n    </el-col>\n    <el-button v-if=\"buttonBack()\" type=\"info\" @click=\"goBack()\" plain>返回</el-button>\n  </el-row>\n</div>";
+	module.exports = "<div class=\"edit-page\" _v-42794616=\"\">\n  <el-row _v-42794616=\"\">\n    <el-col _v-42794616=\"\">{{value.id != '0' ? '编辑' : '新建'}}{{config.title}}</el-col>\n  </el-row>\n  <el-row _v-42794616=\"\">\n    <el-col _v-42794616=\"\">\n      <ncform :form-schema=\"config.formSchema\" v-model=\"formValue\" form-name=\"editform\" _v-42794616=\"\"></ncform>\n    </el-col>\n  </el-row>\n  <el-row class=\"btn-area\" type=\"flex\" _v-42794616=\"\">\n    <el-col _v-42794616=\"\">\n    </el-col>\n    <el-button type=\"success\" @click=\"submitData()\" plain=\"\" _v-42794616=\"\">{{value.id != '0' ? '保存' : '新建'}}</el-button>\n    <el-button type=\"info\" @click=\"goBack()\" plain=\"\" _v-42794616=\"\">返回</el-button>\n  </el-row>\n</div>";
 
 /***/ })
 /******/ ])
