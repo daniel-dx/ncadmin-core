@@ -27,6 +27,18 @@ function handleErrors() {
   this.emit('end');
 }
 
+function exec(cmd) {
+  return new Promise((resolve, reject) => {
+    childProcess.exec(cmd, function (err, res) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res);
+      }
+    });
+  });
+};
+
 /* ====================== gulp tasks ====================== */
 
 gulp.task('webpack', done => {
@@ -47,16 +59,6 @@ gulp.task('watch', () => {
     gulpSequence('webpack')(err => { !err && reload(); });
   });
 });
-
-function publish() {
-  var pkg = require('./package.json');
-  var [major, minor, revision] = pkg.version.split('.');
-  pkg.version = [major, minor, parseInt(revision, 10) + 1].join('.'); // TODO Daniel: 暂时只自动更新最小版本
-  fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 2), 'utf8');
-
-  // Only tag on master branch
-  childProcess.exec(`git checkout master && git pull origin master && gulp build && git add . && git commit -m "publish" && git push origin master && git tag ${pkg.version} && git push origin ${pkg.version}`);
-}
 
 gulp.task('serve', () => {
 
@@ -101,7 +103,21 @@ gulp.task('serve', () => {
 
 gulp.task('build', gulpSequence('clean', ['webpack']));
 
-gulp.task('publish', publish);
+gulp.task('publish', () => {
+  exec('mv .npmrc .temp_npmrc').then(() => {
+    console.info('building...');
+    return exec('npm run release');
+  }).then(() => {
+    console.info('publish...');
+    return exec('npm publish');
+  }).then(() => {
+    console.info('publish success!');
+    return exec('mv .temp_npmrc .npmrc')
+  }).catch(err => {
+    console.error('publish failed.', err);
+    return exec('mv .temp_npmrc .npmrc')
+  })
+});
 
 gulp.task('dev', gulpSequence('build', ['serve', 'watch']));
 
