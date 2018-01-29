@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Component Example</title>
+</head>
+<body>
+
+  <!--演示区域-->
+  <div id="demo">
+    <image></image>
+  </div>
+
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="../../../dist/image.js"></script>
+  <script type="text/javascript">
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      components: {
+        image: image
+      }
+    });
+  </script>
+</body>
+</html>

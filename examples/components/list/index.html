@@ -26,12 +26,13 @@
   <script>
     Vue.use(vueNcform, { extComponents: ncformStdComps.default });
   </script>
-  
+
   <script type="text/javascript" src="../../../dist/list.js"></script>
   <script type="text/javascript" src="../../../dist/label.js"></script>
+  <script type="text/javascript" src="../../../dist/image.js"></script>
   <script type="text/javascript">
-
     Vue.component('nca-label', label);
+    Vue.component('nca-image', image);
 
     // Bootstrap the app
     new Vue({
@@ -145,12 +146,22 @@
                 dataField: "address" // 数据源的字段
               },
               {
-                header: '自定义组件',
+                header: '控件-label',
                 component: {
                   name: 'nca-label',
                   value: 'dx: {{$item.name}}',
                   config: {
                     color: 'dx: {{$item.name}} === "daniel" ? "red" : "orange"'
+                  }
+                }
+              },
+              {
+                header: '控件-图片',
+                component: {
+                  name: 'nca-image',
+                  value: 'dx: {{$item.photo}}',
+                  config: {
+                    maxWidth: '100px'
                   }
                 }
               }

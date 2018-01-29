@@ -13,6 +13,7 @@ module.exports = {
     'list': path.join(config.src, 'components', 'list', 'index.vue'),
     'modal': path.join(config.src, 'components', 'modal', 'index.vue'),
     'label': path.join(config.src, 'components', 'widgets', 'label', 'index.vue'),
+    'image': path.join(config.src, 'components', 'widgets', 'image', 'index.vue'),
     // Don't touch me - components
 
     // Don't touch me - directives

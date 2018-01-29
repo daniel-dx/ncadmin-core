@@ -75,13 +75,15 @@ module.exports = {
           id: 1,
           date: '2018-12-12',
           name: 'daniel',
-          address: 'china'
+          address: 'china',
+          photo: 'http://img1.imgtn.bdimg.com/it/u=1195753862,969387509&fm=11&gp=0.jpg'
         },
         {
           id: 2,
           date: '2018-10-12',
           name: 'simon',
-          address: 'china'
+          address: 'china',
+          photo: 'http://img4.imgtn.bdimg.com/it/u=587623031,2088137249&fm=27&gp=0.jpg'
         }
       ],
       page: {

@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("label", [], factory);
+		define("image", [], factory);
 	else if(typeof exports === 'object')
-		exports["label"] = factory();
+		exports["image"] = factory();
 	else
-		root["label"] = factory();
+		root["image"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -57,11 +57,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(214)
-	__vue_script__ = __webpack_require__(216)
+	__webpack_require__(208)
+	__vue_script__ = __webpack_require__(210)
 	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] src/components/widgets/label/index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(217)
+	  console.warn("[vue-loader] src/components/widgets/image/index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(213)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -77,7 +77,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-9a54e18c/index.vue"
+	  var id = "_v-4a4824e1/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -367,6 +367,110 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 
+/***/ 208:
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(209);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js!../../../../node_modules/sass-loader/lib/loader.js!./image.scss", function() {
+				var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js!../../../../node_modules/sass-loader/lib/loader.js!./image.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+
+/***/ 209:
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(3)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "", ""]);
+
+	// exports
+
+
+/***/ }),
+
+/***/ 210:
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _mixin = __webpack_require__(211);
+
+	var _mixin2 = _interopRequireDefault(_mixin);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * <image></image>
+	 */
+	exports.default = {
+
+	  mixins: [_mixin2.default],
+
+	  /* ====================== 生命周期 ====================== */
+
+	  created: function created() {
+	    // 在这里做一些跟DOM无关的初始化, 比如获取初始化数据
+
+	  },
+	  mounted: function mounted() {
+	    // 在这里做一些跟DOM有关的初始化
+
+	  },
+	  destroyed: function destroyed() {
+	    // 在这里销毁无用的资源，比如setTimeout返回的值
+
+	  },
+
+
+	  /* ====================== 引用组件 ====================== */
+
+	  components: {},
+
+	  /* ====================== 数据绑定 ====================== */
+
+	  props: {},
+
+	  data: function data() {
+	    return {
+	      maxWidth: ''
+	    };
+	  },
+
+
+	  /* ====================== 事件处理 ====================== */
+
+	  methods: {},
+
+	  watch: {}
+	};
+
+/***/ }),
+
 /***/ 211:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -499,116 +603,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 
-/***/ 214:
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(215);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js!../../../../node_modules/sass-loader/lib/loader.js!./label.scss", function() {
-				var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js!../../../../node_modules/sass-loader/lib/loader.js!./label.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-
-/***/ 215:
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "", ""]);
-
-	// exports
-
-
-/***/ }),
-
-/***/ 216:
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _mixin = __webpack_require__(211);
-
-	var _mixin2 = _interopRequireDefault(_mixin);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * <label></label>
-	 */
-	exports.default = {
-
-	  mixins: [_mixin2.default],
-
-	  /* ====================== 生命周期 ====================== */
-
-	  created: function created() {
-	    // 在这里做一些跟DOM无关的初始化, 比如获取初始化数据
-
-	  },
-	  mounted: function mounted() {
-	    // 在这里做一些跟DOM有关的初始化
-
-	  },
-	  destroyed: function destroyed() {
-	    // 在这里销毁无用的资源，比如setTimeout返回的值
-
-	  },
-
-
-	  /* ====================== 引用组件 ====================== */
-
-	  components: {},
-
-	  /* ====================== 数据绑定 ====================== */
-
-	  props: {},
-
-	  data: function data() {
-	    return {
-	      defaultConfig: {
-	        color: ''
-	      }
-	    };
-	  },
-
-
-	  /* ====================== 事件处理 ====================== */
-
-	  methods: {},
-
-	  watch: {}
-	};
-
-/***/ }),
-
-/***/ 217:
+/***/ 213:
 /***/ (function(module, exports) {
 
-	module.exports = "<span class=\"nca-label\" :style=\"{color: mergeConfig.color}\">\n  {{value}}\n</span>\n";
+	module.exports = "<div class=\"nca-image\">\n  <img :src=\"value\" :style=\"{'max-width': mergeConfig.maxWidth}\">\n</div>\n";
 
 /***/ })
 
