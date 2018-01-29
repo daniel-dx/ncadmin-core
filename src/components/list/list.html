@@ -72,10 +72,19 @@
         <el-table-column v-for="(item, key) in config.list.columns" :key="key" :label="item.header">
           <template slot-scope="scope">
             <template v-if="!item.component">
-              {{ scope.row[item.dataField] }}
+              <nc-component 
+                comp-name="nca-label" 
+                :value="scope.row[item.dataField]"
+                :smart-data="{$item:scope.row}">
+              </nc-component>
             </template>
             <template v-else>
-              <component v-bind:is="item.component.name.replace(/\./g, '_')" :config="item.component.config" :value="item.component.value"></component>
+              <nc-component 
+                :comp-name="item.component.name.replace(/\./g, '_')" 
+                :config="item.component.config" 
+                :value="item.component.value"
+                :smart-data="{$item:scope.row}">
+              </nc-component>
             </template>
           </template>
         </el-table-column>

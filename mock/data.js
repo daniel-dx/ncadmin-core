@@ -67,5 +67,26 @@ module.exports = {
         name: 'helloworld'
       }
     };
+  },
+  '/api/getListData': (param) => {
+    return {
+      data: [
+        {
+          id: 1,
+          date: '2018-12-12',
+          name: 'daniel',
+          address: 'china'
+        },
+        {
+          id: 2,
+          date: '2018-10-12',
+          name: 'simon',
+          address: 'china'
+        }
+      ],
+      page: {
+        total: 2
+      }
+    }
   }
 };

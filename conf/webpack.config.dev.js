@@ -12,6 +12,7 @@ module.exports = {
     'edit': path.join(config.src, 'components', 'edit', 'index.vue'),
     'list': path.join(config.src, 'components', 'list', 'index.vue'),
     'modal': path.join(config.src, 'components', 'modal', 'index.vue'),
+    'label': path.join(config.src, 'components', 'widgets', 'label', 'index.vue'),
     // Don't touch me - components
 
     // Don't touch me - directives

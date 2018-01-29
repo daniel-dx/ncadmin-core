@@ -1,12 +1,14 @@
 import _get from "lodash-es/get";
 import { ncformUtils } from "ncform-common";
 import actionObject from "../private/action-object.vue";
+import ncComponent from "../private/nc-component.vue";
 import modal from "../modal/index-link.vue";
 import { axiosOptions } from "../../utils/helper";
 import axios from 'axios';
 
 export default {
   components: {
+    ncComponent,
     actionObject,
     modal
   },
