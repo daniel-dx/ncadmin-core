@@ -29,6 +29,5 @@ Vue.component('nca-image', image);
 export default {
   ncformCommon,
   eventHub,
-  image,
   // Don't touch me - export
 };
