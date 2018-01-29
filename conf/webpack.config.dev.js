@@ -26,21 +26,6 @@ module.exports = {
     umdNamedDefine: true
   },
 
-  externals: {
-    'vue': {
-      root: 'Vue',
-      commonjs2: 'vue',
-      commonjs: 'vue',
-      amd: 'vue'
-    },
-    'axios': {
-      root: 'axios',
-      commonjs2: 'axios',
-      commonjs: 'axios',
-      amd: 'axios'
-    }
-  },
-
   module: {
     loaders: [
       {
