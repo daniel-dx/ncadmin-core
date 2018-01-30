@@ -101,8 +101,7 @@ export default {
           data: [
             {
               symbol: "$id",
-              value: this.$data.onlyId
-              
+              value: this.$data.onlyId   
             }
           ]
         });

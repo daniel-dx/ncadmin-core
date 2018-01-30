@@ -49,10 +49,8 @@ export default {
         data[item.name] = ncformUtils.smartAnalyze(item.value, {
           data: [
             {
-              symbol: "$item",
-              value: {
-                id: this.$data.onlyId
-              }
+              symbol: "$id",
+              value: this.$data.onlyId
             }
           ]
         });

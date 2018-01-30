@@ -34,19 +34,19 @@
             params: [
               {
                 name: "id",
-                value: "dx: {{$item.id}}"
+                value: "dx: {{$id}}"
               }
             ],
             resField: "data"
           },
           detail: {
             label: "",
-            value: "dx: {{$data}}",
+            value: "dx: {{$root}}",
             properties: [
               // label
               {
                 label: "水果名称", // 标签
-                value: "dx: {{$data.username}}", // 或填写字段名或dx表达式，比如 "dx: {{$data.firstname}} + ' ' + {{$data.lastname}}"
+                value: "dx: {{$root.username}}", // 或填写字段名或dx表达式，比如 "dx: {{$root.firstname}} + ' ' + {{$root.lastname}}"
                 columns: 6, // 所占的列数
                 widget: "label", // 使用的widget，默认是label，即只显示只读文本
                 widgetConfig: {}
@@ -55,16 +55,16 @@
               // 对象内含label， widget: object
               {
                 label: "属性", // 标签
-                value: "dx: {{$data.attribute}}",
+                value: "dx: {{$root.attribute}}",
                 properties: [
                   {
                     label: "颜色",
-                    value: "dx: {{$object.color}}",
+                    value: "dx: {{$parent.color}}",
                     columns: 6
                   },
                   {
                     label: "重量",
-                    value: "dx: {{$object.weight}}",
+                    value: "dx: {{$parent.weight}}",
                     columns: 6
                   }
                 ],
@@ -83,33 +83,33 @@
               //对象套对象, widget: object
               {
                 label: "对象套对象",
-                value: "dx: {{$data.obj}}",
+                value: "dx: {{$root.obj}}",
                 properties: [
                   {
                     label: "",
-                    value: "dx: {{$object.a}}",
+                    value: "dx: {{$parent.a}}",
                     properties: [
                       {
                         label: "a.a",
-                        value: "dx: {{$object.a}}"
+                        value: "dx: {{$parent.a}}"
                       },
                       {
                         label: "a.b",
-                        value: "dx: {{$object.b}}"
+                        value: "dx: {{$parent.b}}"
                       }
                     ]
                   },
                   {
                     label: "",
-                    value: "dx: {{$object.b}}",
+                    value: "dx: {{$parent.b}}",
                     properties: [
                       {
                         label: "b.a",
-                        value: "dx: {{$object.a}}"
+                        value: "dx: {{$parent.a}}"
                       },
                       {
                         label: "b.b",
-                        value: "dx: {{$object.b}}"
+                        value: "dx: {{$parent.b}}"
                       }
                     ]
                   }
@@ -122,18 +122,18 @@
               // 数组包含对象 widget: array
               {
                 label: "对象数组", // 标签
-                value: "dx: {{$data.attributes}}",
+                value: "dx: {{$root.attributes}}",
                 items: {
                   label: "属性", // 标签
                   value: "dx: {{$item}}",
                   properties: [
                     {
                       label: "颜色",
-                      value: "dx: {{$object.color}}"
+                      value: "dx: {{$parent.color}}"
                     },
                     {
                       label: "重量",
-                      value: "dx: {{$object.weight}}"
+                      value: "dx: {{$parent.weight}}"
                     }
                   ],
                   widgetConfig: {
@@ -147,18 +147,18 @@
               // 数组包含对象 widget: table
               {
                 label: "对象数组", // 标签
-                value: "dx: {{$data.attributes}}",
+                value: "dx: {{$root.attributes}}",
                 items: {
                   label: "属性", // 标签
                   value: "dx: {{$item}}",
                   properties: [
                     {
                       label: "颜色",
-                      value: "dx: {{$object.color}}"
+                      value: "dx: {{$parent.color}}"
                     },
                     {
                       label: "重量",
-                      value: "dx: {{$object.weight}}"
+                      value: "dx: {{$parent.weight}}"
                     }
                   ]
                 },
@@ -169,18 +169,18 @@
               // 数组包含对象 widget: tabs
               {
                 label: "对象数组", // 标签
-                value: "dx: {{$data.attributes}}",
+                value: "dx: {{$root.attributes}}",
                 items: {
                   label: "类别", // 标签
                   value: "dx: {{$item}}",
                   properties: [
                     {
                       label: "颜色",
-                      value: "dx: {{$object.color}}"
+                      value: "dx: {{$parent.color}}"
                     },
                     {
                       label: "重量",
-                      value: "dx: {{$object.weight}}"
+                      value: "dx: {{$parent.weight}}"
                     },
                   ],
                   widget: "object",
@@ -196,7 +196,7 @@
               // 数组内为label widget: array
               {
                 label: "数组", // 标签
-                value: "dx: {{$data.tag}}",
+                value: "dx: {{$root.tag}}",
                 items: {
                   label: "",
                   value: "dx: {{$item}}",
