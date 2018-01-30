@@ -7,8 +7,8 @@ var config = require('./config');
 module.exports = {
   entry: {
     'detail': path.join(config.src, 'components', 'detail', 'index.vue'),
-    'detailModal': path.join(config.src, 'components', 'detail-modal', 'index.vue'),
-    'editModal': path.join(config.src, 'components', 'edit-modal', 'index.vue'),
+    'detailModalInside': path.join(config.src, 'components', 'detail-modal-inside', 'index.vue'),
+    'editModalInside': path.join(config.src, 'components', 'edit-modal-inside', 'index.vue'),
     'edit': path.join(config.src, 'components', 'edit', 'index.vue'),
     'list': path.join(config.src, 'components', 'list', 'index.vue'),
     'modal': path.join(config.src, 'components', 'modal', 'index.vue'),

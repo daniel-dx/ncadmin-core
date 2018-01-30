@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Component Example</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo">
+    <el-button @click="config1.visible = true">1: 远程获取数据</el-button>
+    <nca-modal :visible.sync="config1.visible" :modal-config="config1.modalConfig">
+      <nca-detail-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config1.config" :value="config1.value"></nca-detail-modal-inside>
+    </nca-modal>
+
+    <p></p>
+
+    <el-button @click="config2.visible = true">2: 本地提供数据</el-button>
+    <nca-modal :visible.sync="config2.visible" :modal-config="config2.modalConfig">
+      <nca-detail-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config2.config" :value="config2.value"></nca-detail-modal-inside>
+    </nca-modal>
+  </div>
+
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform/dist/vueNcform.min.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+
+  <script type="text/javascript" src="../../../dist/modal.js"></script>
+  <script type="text/javascript" src="../../../dist/detailModalInside.js"></script>
+
+  <script type="text/javascript">
+    Vue.use(vueNcform, { extComponents: ncformStdComps.default });
+    Vue.component('nca-modal', modal);
+    Vue.component('nca-detail-modal-inside', detailModalInside);
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+
+        config1: {
+          visible: false,
+          modalConfig: {
+            title: '详情信息', // 弹窗标题
+          },
+          config: {
+            idField: "id",
+            source: {
+              apiUrl: "/api/getDetail",
+              method: "get", // get/post default:get
+              params: [
+                {
+                  name: "id",
+                  value: "dx: {{$id}}"
+                }
+              ],
+              resField: "data"
+            },
+            detail: {
+              properties: [
+                // label
+                {
+                  label: "水果名称Remote", // 标签
+                  value: "dx: {{$root.username}}", // 或填写字段名或dx表达式，比如 "dx: {{$root.firstname}} + ' ' + {{$root.lastname}}"
+                  columns: 6, // 所占的列数
+                  widget: "label", // 使用的widget，默认是label，即只显示只读文本
+                  widgetConfig: {}
+                },
+
+                // 对象内含label， widget: object
+                {
+                  label: "属性", // 标签
+                  value: "dx: {{$root.attribute}}",
+                  properties: [
+                    {
+                      label: "颜色",
+                      value: "dx: {{$parent.color}}",
+                      columns: 6
+                    },
+                    {
+                      label: "重量",
+                      value: "dx: {{$parent.weight}}",
+                      columns: 6
+                    }
+                  ],
+                  widget: "object", // 使用的widget，默认是object
+                  widgetConfig: {
+                    // 针对自身的
+                    titleColor: "red",
+                    showOwnLabel: false,
+                    showTitle: true,
+                    // 针对子元素的
+                    labelWidth: "",
+                    labelColor: "green"
+                  }
+                },
+
+                //对象套对象, widget: object
+                {
+                  label: "对象套对象",
+                  value: "dx: {{$root.obj}}",
+                  properties: [
+                    {
+                      label: "",
+                      value: "dx: {{$parent.a}}",
+                      properties: [
+                        {
+                          label: "a.a",
+                          value: "dx: {{$parent.a}}"
+                        },
+                        {
+                          label: "a.b",
+                          value: "dx: {{$parent.b}}"
+                        }
+                      ]
+                    },
+                    {
+                      label: "",
+                      value: "dx: {{$parent.b}}",
+                      properties: [
+                        {
+                          label: "b.a",
+                          value: "dx: {{$parent.a}}"
+                        },
+                        {
+                          label: "b.b",
+                          value: "dx: {{$parent.b}}"
+                        }
+                      ]
+                    }
+                  ],
+                  widgetConfig: {
+                    showOwnLabel: false
+                  }
+                },
+
+                // 数组包含对象 widget: array
+                {
+                  label: "对象数组", // 标签
+                  value: "dx: {{$root.attributes}}",
+                  items: {
+                    label: "属性", // 标签
+                    value: "dx: {{$item}}",
+                    properties: [
+                      {
+                        label: "颜色",
+                        value: "dx: {{$parent.color}}"
+                      },
+                      {
+                        label: "重量",
+                        value: "dx: {{$parent.weight}}"
+                      }
+                    ],
+                    widgetConfig: {
+                      showTitle: false
+                    }
+                  },
+                  widget: "array", // array | table | tabs
+                  widgetConfig: {}
+                },
+
+                // 数组包含对象 widget: table
+                {
+                  label: "对象数组", // 标签
+                  value: "dx: {{$root.attributes}}",
+                  items: {
+                    label: "属性", // 标签
+                    value: "dx: {{$item}}",
+                    properties: [
+                      {
+                        label: "颜色",
+                        value: "dx: {{$parent.color}}"
+                      },
+                      {
+                        label: "重量",
+                        value: "dx: {{$parent.weight}}"
+                      }
+                    ]
+                  },
+                  widget: "table", // array | table | tabs
+                  widgetConfig: {}
+                },
+
+                // 数组包含对象 widget: tabs
+                {
+                  label: "对象数组", // 标签
+                  value: "dx: {{$root.attributes}}",
+                  items: {
+                    label: "类别", // 标签
+                    value: "dx: {{$item}}",
+                    properties: [
+                      {
+                        label: "颜色",
+                        value: "dx: {{$parent.color}}"
+                      },
+                      {
+                        label: "重量",
+                        value: "dx: {{$parent.weight}}"
+                      },
+                    ],
+                    widget: "object",
+                    widgetConfig: {
+                      showTitle: false,
+                    }
+                  },
+                  widget: "tabs", // array | table | tabs
+                  widgetConfig: {
+                  }
+                },
+
+                // 数组内为label widget: array
+                {
+                  label: "数组", // 标签
+                  value: "dx: {{$root.tag}}",
+                  items: {
+                    label: "",
+                    value: "dx: {{$item}}",
+                    columns: 1
+                  },
+                  widget: "array", // array | table | tabs
+                  widgetConfig: {}
+                },
+
+              ]
+            }
+          },
+          value: {
+            id: 1
+          }
+        },
+
+        config2: {
+          visible: false,
+          modalConfig: {
+            title: '编辑用户', // 弹窗标题
+          },
+          config: {
+            idField: "id",
+            source: {
+              isRemote: false
+            },
+            detail: {
+              properties: [
+                // label
+                {
+                  label: "水果名称Local", // 标签
+                  value: "dx: {{$root.username}}", // 或填写字段名或dx表达式，比如 "dx: {{$root.firstname}} + ' ' + {{$root.lastname}}"
+                  columns: 6, // 所占的列数
+                  widget: "label", // 使用的widget，默认是label，即只显示只读文本
+                  widgetConfig: {}
+                },
+
+                // 对象内含label， widget: object
+                {
+                  label: "属性", // 标签
+                  value: "dx: {{$root.attribute}}",
+                  properties: [
+                    {
+                      label: "颜色",
+                      value: "dx: {{$parent.color}}",
+                      columns: 6
+                    },
+                    {
+                      label: "重量",
+                      value: "dx: {{$parent.weight}}",
+                      columns: 6
+                    }
+                  ],
+                  widget: "object", // 使用的widget，默认是object
+                  widgetConfig: {
+                    // 针对自身的
+                    titleColor: "red",
+                    showOwnLabel: false,
+                    showTitle: true,
+                    // 针对子元素的
+                    labelWidth: "",
+                    labelColor: "green"
+                  }
+                },
+
+                //对象套对象, widget: object
+                {
+                  label: "对象套对象",
+                  value: "dx: {{$root.obj}}",
+                  properties: [
+                    {
+                      label: "",
+                      value: "dx: {{$parent.a}}",
+                      properties: [
+                        {
+                          label: "a.a",
+                          value: "dx: {{$parent.a}}"
+                        },
+                        {
+                          label: "a.b",
+                          value: "dx: {{$parent.b}}"
+                        }
+                      ]
+                    },
+                    {
+                      label: "",
+                      value: "dx: {{$parent.b}}",
+                      properties: [
+                        {
+                          label: "b.a",
+                          value: "dx: {{$parent.a}}"
+                        },
+                        {
+                          label: "b.b",
+                          value: "dx: {{$parent.b}}"
+                        }
+                      ]
+                    }
+                  ],
+                  widgetConfig: {
+                    showOwnLabel: false
+                  }
+                },
+
+                // 数组包含对象 widget: array
+                {
+                  label: "对象数组", // 标签
+                  value: "dx: {{$root.attributes}}",
+                  items: {
+                    label: "属性", // 标签
+                    value: "dx: {{$item}}",
+                    properties: [
+                      {
+                        label: "颜色",
+                        value: "dx: {{$parent.color}}"
+                      },
+                      {
+                        label: "重量",
+                        value: "dx: {{$parent.weight}}"
+                      }
+                    ],
+                    widgetConfig: {
+                      showTitle: false
+                    }
+                  },
+                  widget: "array", // array | table | tabs
+                  widgetConfig: {}
+                },
+
+                // 数组包含对象 widget: table
+                {
+                  label: "对象数组", // 标签
+                  value: "dx: {{$root.attributes}}",
+                  items: {
+                    label: "属性", // 标签
+                    value: "dx: {{$item}}",
+                    properties: [
+                      {
+                        label: "颜色",
+                        value: "dx: {{$parent.color}}"
+                      },
+                      {
+                        label: "重量",
+                        value: "dx: {{$parent.weight}}"
+                      }
+                    ]
+                  },
+                  widget: "table", // array | table | tabs
+                  widgetConfig: {}
+                },
+
+                // 数组包含对象 widget: tabs
+                {
+                  label: "对象数组", // 标签
+                  value: "dx: {{$root.attributes}}",
+                  items: {
+                    label: "类别", // 标签
+                    value: "dx: {{$item}}",
+                    properties: [
+                      {
+                        label: "颜色",
+                        value: "dx: {{$parent.color}}"
+                      },
+                      {
+                        label: "重量",
+                        value: "dx: {{$parent.weight}}"
+                      },
+                    ],
+                    widget: "object",
+                    widgetConfig: {
+                      showTitle: false,
+                    }
+                  },
+                  widget: "tabs", // array | table | tabs
+                  widgetConfig: {
+                  }
+                },
+
+                // 数组内为label widget: array
+                {
+                  label: "数组", // 标签
+                  value: "dx: {{$root.tag}}",
+                  items: {
+                    label: "",
+                    value: "dx: {{$item}}",
+                    columns: 1
+                  },
+                  widget: "array", // array | table | tabs
+                  widgetConfig: {}
+                },
+
+              ]
+            }
+          },
+          value: {
+            id: 1,
+            username: "apple local",
+            attribute: {
+              weight: "300g",
+              color: "red"
+            },
+            tag: ["red", "sweet"],
+            attributes: [
+              {
+                weight: "11g",
+                color: "purple"
+              },
+              {
+                weight: "22g",
+                color: "green"
+              }
+            ],
+            attributes3: [
+              {
+                weight: {
+                  value1: "12g",
+                  value2: "22g"
+                },
+                color: {
+                  value1: "purple1",
+                  value2: "purple2"
+                }
+              },
+              {
+                weight: {
+                  value1: "78g",
+                  value2: "88g"
+                },
+                color: {
+                  value1: "purple3",
+                  value2: "purple4"
+                }
+              }
+            ],
+            obj: {
+              a: {
+                a: 1,
+                b: 2
+              },
+              b: {
+                a: 3,
+                b: 4
+              }
+            }
+          }
+        },
+      }
+    });
+  </script>
+</body>
+
+</html>

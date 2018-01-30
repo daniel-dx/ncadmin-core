@@ -1,4 +1,4 @@
-## DetailModal
+## edit-modal-inside
 
 描述一下组件吧
 
@@ -6,7 +6,7 @@
 
 ## Usage
 
-请参考`examples/components/detail-modal/index.html`
+请参考`examples/components/edit-modal-inside/index.html`
 
 ## Options
 

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Component Example</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo">
+    <el-button @click="config1.visible = true">1: 远程获取数据</el-button>
+    <nca-modal :visible.sync="config1.visible" :modal-config="config1.modalConfig">
+      <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config1.config" :value="config1.value"></nca-edit-modal-inside>
+    </nca-modal>
+
+    <p></p>
+
+    <el-button @click="config2.visible = true">2: 本地提供数据</el-button>
+    <nca-modal :visible.sync="config2.visible" :modal-config="config2.modalConfig">
+      <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config2.config" :value="config2.value"></nca-edit-modal-inside>
+    </nca-modal>
+
+    <p></p>
+
+    <el-button @click="config3.visible = true">3: 新建</el-button>
+    <nca-modal :visible.sync="config3.visible" :modal-config="config3.modalConfig">
+      <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config3.config" :value="config3.value"></nca-edit-modal-inside>
+    </nca-modal>
+  </div>
+
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform/dist/vueNcform.min.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+
+  <script type="text/javascript" src="../../../dist/modal.js"></script>
+  <script type="text/javascript" src="../../../dist/editModalInside.js"></script>
+
+  <script type="text/javascript">
+    Vue.use(vueNcform, { extComponents: ncformStdComps.default });
+    Vue.component('nca-modal', modal);
+    Vue.component('nca-edit-modal-inside', editModalInside);
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+
+        config1: {
+          visible: false,
+          modalConfig: {
+            title: '编辑用户', // 弹窗标题
+          },
+          config: {
+            idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+            formData: {
+              // 当编辑模式时取表单数据用
+              apiUrl: "/api/getInfo", // 取表单数据的Url
+              resField: "data",
+              params: [
+                {
+                  name: "userid",
+                  value: "123"
+                }
+              ]
+            },
+            formSchema: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string"
+                }
+              }
+            },
+            buttons: {
+              submit: {
+                // 提交
+                apiUrl: "/api/getListData", // 提交的Url
+                idField: "userxx",
+                valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+              },
+              back: {
+                // 返回
+                enable: true
+              }
+            }
+          },
+          value: {
+            id: 1
+          }
+        },
+
+        config2: {
+          visible: false,
+          modalConfig: {
+            title: '编辑用户', // 弹窗标题
+          },
+          config: {
+            idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+            formData: {
+              isRemote: false,
+            },
+            formSchema: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string"
+                }
+              }
+            },
+            buttons: {
+              submit: {
+                // 提交
+                apiUrl: "/api/getListData", // 提交的Url
+                idField: "userxx",
+                valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+              },
+              back: {
+                // 返回
+                enable: true
+              }
+            }
+          },
+          value: {
+            id: 1,
+            name: 'hello daniel'
+          }
+        },
+
+        config3: {
+          visible: false,
+          modalConfig: {
+            title: '新建用户', // 弹窗标题
+          },
+          config: {
+            idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+            formData: {
+              isRemote: false,
+            },
+            formSchema: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string"
+                }
+              }
+            },
+            buttons: {
+              submit: {
+                // 提交
+                apiUrl: "/api/getListData", // 提交的Url
+                idField: "userxx",
+                valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+              },
+              back: {
+                // 返回
+                enable: true
+              }
+            }
+          },
+          value: {
+          }
+        },
+      }
+    });
+  </script>
+</body>
+
+</html>

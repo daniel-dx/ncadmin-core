@@ -4,21 +4,53 @@ import eventHub from '../../utils/event-hub.js'
 import axios from 'axios';
 
 export default {
+
   components: {},
+
   props: {
+
     config: {
       type: Object,
-      default: () => ({})
+      default: () => ({
+        idField: 'id', // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+        formData: { // 当编辑模式时取表单数据用
+          // 是否远程读取，默认是。如果不是，则从value属性中直接读取
+          isRemote: true,
+          // 当远程读取时，从以下信息请求远程数据
+          apiUrl: '', // 取表单数据的Url
+          method: 'get', // get/post default:get
+          params: [
+            {
+              name: 'userid',
+              value: 'dx: {{$item.id}}'    // $item.id 为表单记录的唯一标识
+            }
+          ],
+          resField: '' // 返回数据的实际字段
+        },
+        formSchema: { // ncform 配置
+        },
+        buttons: {
+          submit: { // 提交
+            apiUrl: '', // 提交的Url
+            method: 'get', // get/post default:get
+            idField: '',
+            valueField: '', // 当为空时，即表单的每个一级字段即为参数名
+          }
+        }
+      })
     },
+
     value: {
       type: Object,
       default: () => ({})
     },
+
     // 与弹窗通信的事件名。由弹窗随机生成。
     modalId: {
       type: String
     }
   },
+
   created() {
     this.$axios = !this.$axios ? axios : this.$axios;
     this._initData();
@@ -38,29 +70,42 @@ export default {
       }
     });
   },
+
   data() {
     return {
       onlyId: "",
       formValue: {}
     };
   },
+
   computed: {
     isEdit() {
       return this.$data.onlyId !== "0";
     }
   },
+
   destroyed() {
     eventHub.$off(`fromModal_${this.modalId}`);
   },
+
   methods: {
+
     _initData() {
       this.$data.formValue = {};
       this.$data.onlyId = this.value[this.config.idField];
-      if (this.$data.onlyId != "0") {
+      if (this.$data.onlyId && this.$data.onlyId != "0") {
         this._loadFormData();
       }
     },
+
     _loadFormData() {
+
+      // 如果指定数据从本地数据源获取，则直接将value当数据源
+      if (this.config.formData.isRemote === false) {
+        this.$data.formValue = this.value;
+        return;
+      }
+
       const formDataConfig = this.config.formData;
       const data = {};
       formDataConfig.params.forEach(item => {
@@ -79,6 +124,7 @@ export default {
         this.$data.formValue = resField ? _get(res.data, resField) : res.data;
       });
     },
+
     _submitData(config) {
       const submitConfig = this.config.buttons.submit;
       let data = {};
@@ -99,6 +145,7 @@ export default {
         }
       });
     },
+
     _closeModal() {
       eventHub.$emit(`toModal_${this.modalId}`, {
         eventName: "modalCancel"

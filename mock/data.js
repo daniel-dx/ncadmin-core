@@ -10,7 +10,8 @@ module.exports = {
   '/api/getDetail': (params) => {
     return {
       data: {
-        username: "apple",
+        id: 1,
+        username: "apple remote",
         attribute: {
           weight: "300g",
           color: "red"

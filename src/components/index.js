@@ -5,8 +5,8 @@ import ncformThemeElementui from 'ncform-theme-elementui';
 
 import eventHub from '../utils/event-hub.js';
 import detail from './detail/index.vue';
-import detailModal from './detail-modal/index.vue';
-import editModal from './edit-modal/index.vue';
+import detailModalInside from './detail-modal-inside/index.vue';
+import editModalInside from './edit-modal-inside/index.vue';
 import edit from './edit/index.vue';
 import list from './list/index.vue';
 import modal from './modal/index.vue';
@@ -16,9 +16,9 @@ import image from './widgets/image/index.vue';
 
 Vue.use(ncform, { extComponents: ncformThemeElementui });
 
+Vue.component('nca-detail-modal-inside', detailModalInside);
+Vue.component('nca-edit-modal-inside', editModalInside);
 Vue.component('nca-detail', detail);
-Vue.component('nca-detail-modal', detailModal);
-Vue.component('nca-edit-modal', editModal);
 Vue.component('nca-edit', edit);
 Vue.component('nca-list', list);
 Vue.component('nca-modal', modal);
