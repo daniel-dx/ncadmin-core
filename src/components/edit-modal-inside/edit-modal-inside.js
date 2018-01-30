@@ -73,6 +73,7 @@ export default {
 
   data() {
     return {
+      formName: 'edit-modal-inside_' + ncformUtils.genRandomId(),
       onlyId: "",
       formValue: {}
     };
@@ -126,22 +127,27 @@ export default {
     },
 
     _submitData(config) {
-      const submitConfig = this.config.buttons.submit;
-      let data = {};
-      if (submitConfig.valueField) {
-        data[submitConfig.valueField] = this.$data.formValue;
-      } else {
-        data = Object.assign({}, this.$data.formValue);
-      }
 
-      data[submitConfig.idField || "id"] = this.$data.onlyId;
-      this.$axios.post(submitConfig.apiUrl, data).then(res => {
-        this.$message({
-          type: "success",
-          message: "保存成功"
-        });
-        if (config.close) {
-          this._closeModal();
+      this.$ncformValidate(this.$data.formName).then(data => {
+        if (data.result) {
+          const submitConfig = this.config.buttons.submit;
+          let data = {};
+          if (submitConfig.valueField) {
+            data[submitConfig.valueField] = this.$data.formValue;
+          } else {
+            data = Object.assign({}, this.$data.formValue);
+          }
+
+          data[submitConfig.idField || "id"] = this.$data.onlyId;
+          this.$axios.post(submitConfig.apiUrl, data).then(res => {
+            this.$message({
+              type: "success",
+              message: "保存成功"
+            });
+            if (config.close) {
+              this._closeModal();
+            }
+          });
         }
       });
     },
