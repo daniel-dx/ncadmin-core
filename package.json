@@ -1,10 +1,10 @@
 {
   "name": "ncadmin-core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "homepage": "",
   "author": {
-    "name": "",
+    "name": "daniel.xiao; kyle.lo",
     "email": "",
     "url": ""
   },

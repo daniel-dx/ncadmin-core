@@ -1,32 +1,256 @@
-## ncadmin-core
-可配置列表，编辑，详情页 核心组件
+# ncadmin-core
 
-依赖 `vue`、`axios`
+![vue 2.5](https://img.shields.io/badge/vue-2.5-green.svg)
+![axios](https://img.shields.io/badge/axios-0.17-green.svg)
 
-### install 
+ncadmin的核心组件库，包括配置开发的查询列表，编辑，详情页，弹窗等
+
+## install 
+
 ```javascript
-  npm install ncadmin-core
+npm install ncadmin-core
 ```
 
-### Usage
-``` javascript
-  // 引入
-  import {
-    ncformCommon,
-    ncForm, 
-    eventHub,
-    
-    // 组件
-    detail,
-    detailModal,
-    editModal,
-    edit,
-    list,
-    modal,
-  } from 'ncadmin-core';
+## Usage
+
+``` js
+// 使用其工具库
+import {
+  ncformCommon,
+  eventHub,
+} from 'ncadmin-core';
+
+// 使用其组件。具体的组件请阅读下面的组件文档
+<nca-xxx></nca-xxx>
+```
+
+## 工具库 
+
+### eventHub
+
+事件总线，用于全局触发和监听事件
+
+```js
+  import ncAdminCore from 'ncadmin-core';
+  const { eventHub } = ncAdminCore;
+
+  eventHub.$on(); // 监听事件
+  eventHub.$emit(); // 触发事件 
+```
+
+### ncformCommon
+
+ncform的通用类库，请参考ncform-common项目的文档
+
+## 组件列表
+
+### ncform
+
+请参考ncform项目的文档
+
+### nac-detail
+
+```html
+<template>
+  <nac-detail></nac-detail>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+
+      }
+    }
+  }
+</script>
+```
+
+### nac-detail-modal
+
+```html
+<template>
+  <nac-detail-modal></nac-detail-modal>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        
+      }
+    }
+  }
+</script>
+```
+
+### nac-edit
+
+```html
+<template>
+  <nac-edit></nac-edit>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        
+      }
+    }
+  }
+</script>
+```
+
+### nac-edit-modal
+
+```html
+<template>
+  <nac-edit-modal></nac-edit-modal>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        
+      }
+    }
+  }
+</script>
+```
+
+### nac-list
+
+```html
+<template>
+  <nac-list></nac-list>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        
+      }
+    }
+  }
+</script>
+```
+
+### nac-modal
+
+弹窗组件，可配置弹窗的标题，底部按钮
+
+弹窗里面的内容需要当一个组件来开发，组件需遵循nac-modal内容组件的规则来开发
+
+```html
+<template>
+  <nac-modal :visible.sync="visible" :modal-config="modalConfig">
+    <!--
+      当组件需要与弹窗进行交互时（比如通知弹窗关闭），请按下面的例子填写slot-scope和modal-id
+    -->
+    <component slot-scope="modalProps" :modal-id="modalProps.modalId"></component>
+  </nac-modal>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        visible: false,
+        modalConfig: {
+          title: '', // 弹窗标题
+          buttons: {
+            confirm: { // 确定按钮
+              enable: true
+            },
+            cancel: { // 取消按钮
+              enable: true
+            },
+            others: [
+              {
+                enable: true,
+                name: '',   // 按钮名称
+                eventName: '', // 按钮触发事件名称
+                close: true // 操作后是否关闭弹窗
+              }
+            ]
+          }
+        }      
+      }
+    }
+  }
+</script>
+```
+
+#### 弹窗内容组件开发规则和示例
+
+```html
+<template>
+</template>
+
+<script>
+  import ncAdminCore from 'ncadmin-core';
+  const { eventHub } = ncAdminCore;
+  
+  export default {
+    // modalId 为弹窗传入的唯一标识
+    props: ["modalId"],
+
+    created() {
+      /* 
+      *  监听modal容器事件，通过eventName区分事件。
+      *  fromModal_${this.modalId} 为modal触发的事件。
+      */
+      eventHub.$on(`fromModal_${this.modalId}`, config => {
+        switch (config.eventName) {
+          // 点击确定按钮
+          case "modalConfirm":
+            // do something;
+            break;
+
+          // 点击自定义按钮的事件（事件名用户自定义，以下仅仅是演示）
+          case "commonEditCancel":
+            // do something;
+            break;
+        }
+      });
+    },
+    mounted() {
+      /*
+      *  toModal_${this.modalId} 为发送给modal容器的事件。
+      */
+      eventHub.$emit(`toModal_${this.modalId}`, {
+        eventName: 'modalCancel' // 触发弹窗的关闭事件
+      });
+    }
+  }
+</script>
+```
+
+## Widgets
+
+### nac-label
+
+```js
+component: {
+  name: 'nac-label',
+  config: {
+    color: ''
+  },
+  value: ''
+}
+```
+
+### nac-image
+
+```js
+component: {
+  name: 'nac-image',
+  config: {
+    maxWidth: ''
+  },
+  value: ''
+}
 ```
 
 ### 组件使用方法
+
 # edit-page.vue
 
 通过配置开发一个新建/编辑的页面
@@ -89,131 +313,4 @@
     }
   }
 </script>
-```
-
-# modal.vue
-
-弹窗组件，可配置顶部title，底部buttons。
-使用者通过遵循modal组件的规则开发一个组件来实现弹窗显示内容
-
-### 示例
-```html
-<template>
-  <modal
-    :visible.sync="visible"
-    :modal-config="modalConfig"
-  >
-  <!-- 
-    弹窗内可显示任意内容。
-    弹窗显示组件并且需要进行交互时，请将modalId传入component内作为弹窗的唯一标识，主要用于事件交互。
-  -->
-  <component 
-    slot-scope="modalProps"
-    :modalId="modalProps.modalId"
-  ></component>
-</modal>
-</template>
-
-<script>
-    import ncAdminCore from 'ncadmin-core';
-    const { modal } = ncAdminCore;
-
-    export default {
-        component: {
-          modal
-        },
-        data: {
-          return {
-            visible: false,
-            modalConfig: {
-              confirm: {
-                enable: true
-              },
-              cancel: {
-                enable: true
-              },
-              others: [
-                {
-                  enable: true,
-                  name: '',   // 按钮名称
-                  eventName: '', // 按钮触发事件名称
-                  close: true // 操作后是否关闭弹窗
-                }
-              ]
-            }
-          }
-        }
-    }
-</script>
-```
-
-### 弹窗内使用的组件 开发示例
-
-```html
-<template>
-  
-</template>
-
-<script>
-  import ncAdminCore from 'ncadmin-core';
-  const { eventHub } = ncAdminCore;
-  
-  export default {
-    // modalId 为弹窗传入的唯一标识
-    props: ["modalId"],
-    created() {
-      // 统一监听事件，通过eventName区分事件。
-      // `fromModal_${this.modalId}` 为modal触发的事件。
-      // `toModal_${this.modalId}` 为modal接收的事件。
-      // modalConfirm 为“确定“按钮触发的事件。
-      // 其中config格式为 
-      // {
-      //   enable: true,
-      //   name: '',   // 按钮名称
-      //   eventName: '', // 按钮触发事件名称
-      //   close: true // 操作后是否关闭弹窗
-      // }
-      eventHub.$on(`fromModal_${this.modalId}`, config => {
-        switch (config.eventName) {
-          // 确定
-          case "modalConfirm":
-            this._submitData(config);
-            break;
-
-          // 自定义事件
-          case "commonEditCancel":
-            this._closeModal();
-            break;
-        }
-      });
-    },
-    mounted() {
-      // 触发弹窗的关闭事件
-      eventHub.$emit(`toModal_${this.modalId}`, {
-        eventName: 'modalCancel'
-      });
-    }
-  }
-</script>
-```
-
-# action-object.vue
-处理行为，比如按钮行为
-
-[文档](http://gitlab.tools.vipshop.com/daniel.xiao/admin-terminator/blob/master/query-list-config.md)
-
-
-# event-hub.js
-
-事件总线，用于事件交互的单一实例。
-使用时建议通过唯一值区分。
-
-```js
-  import ncAdminCore from 'ncadmin-core';
-  const { eventHub } = ncAdminCore;
-
-  // 使用方法与vue实例监听触发事件一致。
-  eventHub.$on();
-  eventHub.$emit();
-  
 ```
