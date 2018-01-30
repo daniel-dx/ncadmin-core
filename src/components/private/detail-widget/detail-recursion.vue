@@ -1,23 +1,23 @@
 <template>
   <el-col class="detail-recursion" :span="columns">
     <!-- 对象 -->
-    <component v-if="config.properties" :is="config.widget?'layout-'+config.widget : defaultWidget.object" :config="config" :value="value">
+    <component v-if="config.properties" :is="config.widget?'layout-'+config.widget : defaultWidget.object" :config="config" :value="value"  :root-data="rootValue">
       <template slot-scope="props">
-        <detail-recursion :config="props.itemConfig" :value="props.itemValue">
+        <detail-recursion :config="props.itemConfig" :value="props.itemValue" :root-data="rootValue">
         </detail-recursion>
       </template>
     </component>
 
     <!-- 数组 -->
-    <component v-else-if="config.items" :is="config.widget?'layout-'+config.widget : defaultWidget.array" :config="config" :value="value">
+    <component v-else-if="config.items" :is="config.widget?'layout-'+config.widget : defaultWidget.array" :config="config" :value="value" :root-data="rootValue">
       <template slot-scope="props">
-        <detail-recursion :config="props.itemConfig" :value="props.itemValue">
+        <detail-recursion :config="props.itemConfig" :value="props.itemValue" :root-data="rootValue">
         </detail-recursion>
       </template>
     </component>
 
     <!-- 具体展示控件 -->
-    <component v-else :is="config.widget?'control-'+config.widget : defaultWidget.label" :config="config" :value="value" />
+    <component v-else :is="config.widget?'control-'+config.widget : defaultWidget.label" :config="config" :value="value" :root-data="rootValue" />
 
   </el-col>
 </template>
@@ -42,6 +42,9 @@ export default {
   computed: {
     columns() {
       return this.config.columns ? this.config.columns * 2 : 24;
+    },
+    rootValue() {
+      return this.rootData || this.value;
     }
   }
 };
