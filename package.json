@@ -1,6 +1,6 @@
 {
   "name": "ncadmin-core",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "",
   "homepage": "",
   "author": {
@@ -27,11 +27,13 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-power-assert": "^1.0.0",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-runtime": "^6.3.19",
     "browser-sync": "^2.9.1",
     "concat": "^1.0.0",
     "css-loader": "^0.23.1",
     "csswring": "^4.0.0",
+    "element-ui": "^2.0.11",
     "eslint": "~2.2.0",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-html": "^1.5.3",
@@ -41,8 +43,12 @@
     "gulp-notify": "^2.2.0",
     "gulp-sequence": "^0.4.6",
     "html-loader": "^0.5.1",
+    "lodash-es": "^4.16.2",
     "map-stream": "0.0.6",
     "mocha": "^4.0.1",
+    "ncform": "^1.0.40",
+    "ncform-common": "^1.0.40",
+    "ncform-theme-elementui": "^1.0.21",
     "node-libs-browser": "^1.0.0",
     "node-sass": "^4.5.3",
     "postcss-loader": "^0.8.0",
@@ -57,18 +63,13 @@
     "vue-html-loader": "^1.1.0",
     "vue-loader": "^8.0.1",
     "vue-style-loader": "^1.0.0",
-    "webpack": "^1.12.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "lodash-es": "^4.16.2",
-    "element-ui": "^2.0.11",
-    "ncform": "^1.0.40",
-    "ncform-common": "^1.0.40",
-    "ncform-theme-elementui": "^1.0.20"
+    "webpack": "^1.12.1"
   },
   "scripts": {
     "dev": "gulp dev",
     "release": "NODE_ENV=production gulp build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "up": "npm update ncform ncform-common ncform-theme-elementui"
   },
   "license": "MIT",
   "dependencies": {

@@ -3,6 +3,9 @@ import ncformCommon from 'ncform-common';
 import ncform from 'ncform';
 import ncformThemeElementui from 'ncform-theme-elementui';
 
+import widgetMixin from './widgets/mixin.js';
+import modalInsideMixin from './widgets/modal-inside-mixin.js';
+
 import eventHub from '../utils/event-hub.js';
 import detail from './detail/index.vue';
 import detailModalInside from './detail-modal-inside/index.vue';
@@ -29,5 +32,7 @@ Vue.component('nca-image', image);
 export default {
   ncformCommon,
   eventHub,
+  widgetMixin,
+  modalInsideMixin,
   // Don't touch me - export
 };
