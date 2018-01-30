@@ -122,7 +122,7 @@
 
   <modal :visible.sync="modal.visible" :modal-config="modal.modalConfig">
     <component slot-scope="modalProps" class="modalComponent" :is="modal.name.replace(/\./g, '_')" :config="modal.config" :value="modal.value"
-      :modalId="modalProps.modalId">
+      :modal-id="modalProps.modalId">
     </component>
   </modal>
 </div>
