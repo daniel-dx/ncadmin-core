@@ -1,5 +1,5 @@
 <template>
-  <el-col class="detail-recursion" :span="columns">
+  <el-col class="detail-recursion" :span="columns" v-if="allShow">
     <!-- 对象 -->
     <component v-if="config.properties" :is="config.widget?'layout-'+config.widget : defaultWidget.object" :config="config" :value="value"  :root-data="rootValue">
       <template slot-scope="props">
@@ -32,6 +32,7 @@ export default {
   mixins: [widgetMixin],
   data() {
     return {
+      allShow: true,
       defaultWidget: {
         object: "layout-object",
         array: "layout-array",
@@ -46,6 +47,34 @@ export default {
     rootValue() {
       return this.rootData || this.value;
     }
+  },
+  methods: {
+    reloadComponent() {
+        this.$data.allShow = false;
+        this.$nextTick(()=>{
+          this.$data.allShow = true;
+        })
+    }
+  },
+  watch: {
+    config: {
+      handler() {
+        this.reloadComponent();
+      },
+      deep: true
+    },
+    value: {
+      handler() {
+        this.reloadComponent();
+      },
+      deep: true
+    },
+    rootData: {
+      handler() {
+        this.reloadComponent();
+      },
+      deep: true
+    },
   }
 };
 </script>

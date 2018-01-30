@@ -121,7 +121,6 @@ export default {
       ).then(res => {
         const resField = formDataConfig.resField;
         this.$data.formValue = resField ? _get(res.data, resField) : res.data;
-        console.log(this.$data.formValue)
       });
     }
   },
