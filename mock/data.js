@@ -91,5 +91,8 @@ module.exports = {
         total: 2
       }
     }
+  },
+  '/api/deleteItem': (param) => {
+    return param;
   }
 };

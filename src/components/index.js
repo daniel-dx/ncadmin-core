@@ -17,8 +17,6 @@ import label from './widgets/label/index.vue';
 import image from './widgets/image/index.vue';
 // Don't touch me - import
 
-Vue.use(ncform, { extComponents: ncformThemeElementui });
-
 Vue.component('nca-detail-modal-inside', detailModalInside);
 Vue.component('nca-edit-modal-inside', editModalInside);
 Vue.component('nca-detail', detail);
@@ -34,5 +32,8 @@ export default {
   eventHub,
   widgetMixin,
   modalInsideMixin,
+  initNcform(extComponents) {
+    Vue.use(ncform, { extComponents: Object.assign(ncformThemeElementui, extComponents) });
+  }
   // Don't touch me - export
 };

@@ -103,7 +103,7 @@ export default {
           ? _get(res.data, `${listField}`)
           : res.data;
         this.$data.pageCount = pageingTotalField
-          ? Math.ceil(_get(res.data, `${pageingTotalField}`, 0)/this.value.pageSize)
+          ? Math.ceil(_get(res.data, `${pageingTotalField}`, 0) / this.value.pageSize)
           : 1;
       });
     },
@@ -119,19 +119,17 @@ export default {
     handleSelectionChange(val) {
       this.$data.multipleSelection = val;
     },
-    eventHandlerConfirm(handler, item = {}, multipleSelection = [], needConfirm){
-      if (needConfirm) {
-        this.$confirm(needConfirm, "提示", {
+    eventHandlerConfirm(handler, item = {}, multipleSelection = [], defConfirmTxt) {
+      if (handler.confirmTxt || defConfirmTxt) {
+        this.$confirm(handler.confirmTxt || defConfirmTxt, "提示", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
-        })
-          .then(() => {
-            this.eventHandler(handler, item, multipleSelection);
-          })
-          .catch(err=>{
-            
-          });
+        }).then(() => {
+          this.eventHandler(handler, item, multipleSelection);
+        });
+      } else {
+        this.eventHandler(handler, item, multipleSelection);
       }
     },
     // Action Object config 实现
@@ -169,18 +167,19 @@ export default {
           const path = ncformUtils.smartAnalyze(options.route, {
             data: handlerData
           });
-          this.$emit('pathChange', path);
+          if (path.search(/^(http)?[s]?[:]?\/\//) >= 0) { // 普通的链接，非SPA路由
+            window.open(path);
+          } else {
+            this.$emit('pathChange', path);
+          }
           break;
         case "modal":
-          const newValue = {};
-          for (let key in options.component.value) {
-            newValue[key] = ncformUtils.smartAnalyze(
-              options.component.value[key],
-              {
-                data: handlerData
-              }
-            );
-          }
+          const newValue = ncformUtils.smartAnalyze(
+            options.component.value,
+            {
+              data: handlerData
+            }
+          );
 
           this.$data.modal = Object.assign(
             {},
@@ -220,7 +219,7 @@ export default {
   },
   watch: {
     value: {
-      handler: function(newVal) {
+      handler: function (newVal) {
         this.$emit("input", newVal);
       },
       deep: true
