@@ -4,7 +4,7 @@
   <el-row type="flex" align="top" class='mbSpace' v-if="seachBarVisible">
     <div class="search-condition-area">
       <!-- 普通搜索配置 -->
-      <ncform :form-schema="config.query.normal" v-model="normalQueryValue" form-name="normalQuery"></ncform>
+      <ncform :form-schema="config.query.normal" v-model="normalQueryValue" form-name="normalQuery" @submit="search"></ncform>
       <!-- 高级搜索配置 -->
       <ncform v-if="advSearchBarVisible" v-show="showAdvSearch" :form-schema="config.query.adv" v-model="advQueryValue" form-name="advQuery"></ncform>
     </div>
