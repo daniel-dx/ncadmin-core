@@ -1,3 +1,4 @@
 import Vue from 'vue';
-const eventHub = new Vue();
-export default eventHub;
+if (!window.ncadmin_eventHub)
+  window.ncadmin_eventHub = new Vue();
+export default window.ncadmin_eventHub;

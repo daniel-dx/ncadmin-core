@@ -1,14 +1,14 @@
 <div class="modal">
   <!-- 弹窗 -->
   <el-dialog :visible.sync="visibleData" :title="mdConfig.title">
-    <slot v-if="visibleData" :modalId="modalId"></slot>
+    <slot v-if="visibleData" :modal-id="modalId"></slot>
     <el-row type="flex" style="margin-top:10px;">
       <el-col></el-col>
-      <el-button v-if="mdConfig.buttons.confirm.enable" @click="_modalButtonEvent(mdConfig.buttons.confirm)" type="success" plain>
+      <el-button v-if="mdConfig.buttons.confirm.enable" @click="modalButtonEvent(mdConfig.buttons.confirm)" type="success" plain>
         {{mdConfig.buttons.confirm.name}}
       </el-button>
       <template v-for="(item, index) in mdConfig.buttons.others">
-        <el-button v-if="item.enable" @click="_modalButtonEvent(item)" type="primary" plain>
+        <el-button v-if="item.enable" @click="modalButtonEvent(item)" type="primary" plain>
           {{item.name}}
         </el-button>
       </template>

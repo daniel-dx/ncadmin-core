@@ -1,15 +1,19 @@
 <template>
   <div class="action-object">
-    <component v-if="config.handler.type === 'component'" :is="config.handler.options.component.name.replace(/\./g, '_')" :config="config.handler.options.component.config" :value="componentValue">
-    </component>
+    <nc-component v-if="config.handler.type === 'component'" :comp-name="config.handler.options.component.name.replace(/\./g, '_')" :value="config.handler.options.component.value" :config="config.handler.options.component.config" :smart-data="{$item: item, $selected: selected}">
+    </nc-component>
     <slot v-else></slot>
   </div>
 </template>
 
 <script>
 import { ncformUtils } from "ncform-common";
+import ncComponent from "./nc-component.vue";
 
 export default {
+  components: {
+    ncComponent,
+  },
   props: {
     config: {
       type: Object,
@@ -22,38 +26,6 @@ export default {
     selected: {
       type: [Object, Array],
       default: () => []
-    }
-  },
-  created() {
-    this.dealComponentValue();
-  },
-  data() {
-    return {
-      componentValue: {}
-    };
-  },
-  methods: {
-    dealComponentValue() {
-      if (this.config.handler.type === "component") {
-        const values = this.config.handler.options.component.value;
-        for (let key in values) {
-          this.$data.componentValue[key] = ncformUtils.smartAnalyze(
-            values[key],
-            {
-              data: [
-                {
-                  symbol: "$item",
-                  value: this.item
-                },
-                {
-                  symbol: "$selected",
-                  value: this.selected
-                }
-              ]
-            }
-          );
-        }
-      }
     }
   }
 };

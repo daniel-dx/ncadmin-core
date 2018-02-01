@@ -1,16 +1,41 @@
-.mbSpace {
+.nca-list {
+  .mbSpace {
     margin-bottom: 20px;
   }
-  .searchBtnArea {
-    width: 90px;
-    margin-left: 20px;
+  .search-condition-area {
+    flex: 1
   }
-  .el-button.searchBtn {
+  .searchBtnArea {
+    width: 120px;
+    top: 16px;
+    position: relative;
+  }
+  .searchBtn {
     height: 40px;
     margin: 0;
     margin-left: 0;
   }
-  .el-button.mgb10 {
-    margin-bottom: 10px;
+  .advSearchBtn {
+    margin-top: 10px;
+    margin-bottom: 30px;
     margin-left: 0;
+    width: 111px
   }
+  .toolbar-area {
+  }
+  .item-op-btn {
+    margin-top: 4px;
+  }
+  .batch-btn {
+    margin-left: 6px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  .toolbar-btn {
+    margin-left: 6px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

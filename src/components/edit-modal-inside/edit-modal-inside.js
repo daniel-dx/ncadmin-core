@@ -2,16 +2,30 @@ import _get from "lodash-es/get";
 import { ncformUtils } from "ncform-common";
 import eventHub from '../../utils/event-hub.js'
 import axios from 'axios';
+import modalInsideMixins from '../widgets/modal-inside-mixin.js';
 
 export default {
 
-  components: {},
+  mixins: [modalInsideMixins],
 
   props: {
-
-    config: {
+    value: {
       type: Object,
-      default: () => ({
+      default: () => ({})
+    },
+  },
+
+  created() {
+    this.$axios = !this.$axios ? axios : this.$axios;
+    this._initData();
+  },
+
+  data() {
+    return {
+      formName: 'edit-modal-inside_' + ncformUtils.genRandomId(),
+      onlyId: "",
+      formValue: {},
+      defaultConfig: {
         idField: 'id', // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
         formData: { // 当编辑模式时取表单数据用
           // 是否远程读取，默认是。如果不是，则从value属性中直接读取
@@ -21,8 +35,8 @@ export default {
           method: 'get', // get/post default:get
           params: [
             {
-              name: 'userid',
-              value: 'dx: {{$item.id}}'    // $item.id 为表单记录的唯一标识
+              name: 'id',
+              value: 'dx: {{$id}}'    // $item.id 为表单记录的唯一标识
             }
           ],
           resField: '' // 返回数据的实际字段
@@ -32,67 +46,19 @@ export default {
         buttons: {
           submit: { // 提交
             apiUrl: '', // 提交的Url
-            method: 'get', // get/post default:get
-            idField: '',
+            method: 'post', // get/post default:get
             valueField: '', // 当为空时，即表单的每个一级字段即为参数名
           }
         }
-      })
-    },
-
-    value: {
-      type: Object,
-      default: () => ({})
-    },
-
-    // 与弹窗通信的事件名。由弹窗随机生成。
-    modalId: {
-      type: String
-    }
-  },
-
-  created() {
-    this.$axios = !this.$axios ? axios : this.$axios;
-    this._initData();
-
-    // 统一监听事件，通过eventName区分事件。
-    // `fromModal_${this.modalId}` 为modal触发的事件。
-    // `toModal_${this.modalId}` 为modal接收的事件。
-    eventHub.$on(`fromModal_${this.modalId}`, config => {
-      switch (config.eventName) {
-        case "modalConfirm":
-          this._submitData(config);
-          break;
-
-        case "commonEditCancel":
-          this._closeModal();
-          break;
       }
-    });
-  },
-
-  data() {
-    return {
-      onlyId: "",
-      formValue: {}
     };
-  },
-
-  computed: {
-    isEdit() {
-      return this.$data.onlyId !== "0";
-    }
-  },
-
-  destroyed() {
-    eventHub.$off(`fromModal_${this.modalId}`);
   },
 
   methods: {
 
     _initData() {
       this.$data.formValue = {};
-      this.$data.onlyId = this.value[this.config.idField];
+      this.$data.onlyId = this.value[this.$data.mergeConfig.idField];
       if (this.$data.onlyId && this.$data.onlyId != "0") {
         this._loadFormData();
       }
@@ -101,12 +67,12 @@ export default {
     _loadFormData() {
 
       // 如果指定数据从本地数据源获取，则直接将value当数据源
-      if (this.config.formData.isRemote === false) {
+      if (this.$data.mergeConfig.formData.isRemote === false) {
         this.$data.formValue = this.value;
         return;
       }
 
-      const formDataConfig = this.config.formData;
+      const formDataConfig = this.$data.mergeConfig.formData;
       const data = {};
       formDataConfig.params.forEach(item => {
         data[item.name] = ncformUtils.smartAnalyze(item.value, {
@@ -125,33 +91,31 @@ export default {
       });
     },
 
-    _submitData(config) {
-      const submitConfig = this.config.buttons.submit;
-      let data = {};
-      if (submitConfig.valueField) {
-        data[submitConfig.valueField] = this.$data.formValue;
-      } else {
-        data = Object.assign({}, this.$data.formValue);
-      }
+    _confirmHandler(done) {
 
-      data[submitConfig.idField || "id"] = this.$data.onlyId;
-      this.$axios.post(submitConfig.apiUrl, data).then(res => {
-        this.$message({
-          type: "success",
-          message: "保存成功"
-        });
-        if (config.close) {
-          this._closeModal();
+      this.$ncformValidate(this.$data.formName).then(data => {
+        if (data.result) {
+          let data = {};
+          const submitConfig = this.$data.mergeConfig.buttons.submit;
+          if (submitConfig.valueField) {
+            data[submitConfig.valueField] = this.$data.formValue;
+          } else {
+            data = Object.assign({}, this.$data.formValue);
+          }
+
+          data[this.$data.mergeConfig.idField] = this.$data.onlyId;
+          this.$axios.post(submitConfig.apiUrl, data).then(res => {
+            this.$message({
+              type: "success",
+              message: "保存成功"
+            });
+            done();
+          });
         }
       });
     },
-
-    _closeModal() {
-      eventHub.$emit(`toModal_${this.modalId}`, {
-        eventName: "modalCancel"
-      });
-    }
   },
+
   watch: {
     value: {
       handler() {

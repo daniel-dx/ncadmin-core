@@ -1,7 +1,7 @@
-<div class="edit">
+<div class="nca-edit-modal-inside">
   <el-row>
     <el-col>
-      <ncform :form-schema="config.formSchema" v-model="formValue" form-name="editform"></ncform>
+      <ncform :form-schema="mergeConfig.formSchema" v-model="formValue" :form-name="formName"></ncform>
     </el-col>
   </el-row>
 </div>

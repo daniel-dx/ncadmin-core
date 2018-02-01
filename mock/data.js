@@ -65,6 +65,7 @@ module.exports = {
   '/api/getInfo': (param) => {
     return {
       data: {
+        id: 1,
         name: 'helloworld'
       }
     };
@@ -91,5 +92,11 @@ module.exports = {
         total: 2
       }
     }
+  },
+  '/api/deleteItem': (param) => {
+    return param;
+  },
+  '/api/saveItem': (param) => {
+    return param;
   }
 };
