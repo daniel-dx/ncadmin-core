@@ -83,7 +83,7 @@
               </nc-component>
             </template>
             <template v-else>
-              <nc-component :comp-name="item.component.name.replace(/\./g, '_')" :config="item.component.mergeConfig" :value="item.component.value"
+              <nc-component :comp-name="item.component.name.replace(/\./g, '_')" :config="item.component.config" :value="item.component.value"
                 :smart-data="{$item:scope.row}">
               </nc-component>
             </template>

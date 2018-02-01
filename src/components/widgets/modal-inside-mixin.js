@@ -35,7 +35,7 @@ export default {
      * 确认按钮事件处理。通过覆盖该方法可自行处理确认按钮事件
      * @param {Function} done 请务必在执行确认操作后调用done方法，否则后果自负
      */
-    _confirmHandler(submitConfig, done) { },
+    _confirmHandler(done) { },
 
     /**
      * [可覆盖]
