@@ -1,10 +1,10 @@
-<div class="detail">
+<div class="nca-detail">
   <el-row>
-    <el-col>{{config.title}}</el-col>
+    <el-col>{{mergeConfig.title}}</el-col>
   </el-row>
 
   <el-row>
-    <detail-recursion :config="config.detail" :value="formValue"></detail-recursion>
+    <detail-recursion :config="mergeConfig.detail" :value="formValue"></detail-recursion>
   </el-row>
 
   <el-row class="btn-area" type="flex">

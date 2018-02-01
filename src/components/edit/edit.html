@@ -1,10 +1,10 @@
-<div class="edit-page">
+<div class="nca-edit">
   <el-row>
-    <el-col>{{value.id != '0' ? '编辑' : '新建'}}{{config.title}}</el-col>
+    <el-col>{{value.id != '0' ? '编辑' : '新建'}}{{mergeConfig.title}}</el-col>
   </el-row>
   <el-row>
     <el-col>
-      <ncform :form-schema="config.formSchema" v-model="formValue" form-name="editform"></ncform>
+      <ncform :form-schema="mergeConfig.formSchema" v-model="formValue" form-name="editform"></ncform>
     </el-col>
   </el-row>
   <el-row class="btn-area" type="flex">

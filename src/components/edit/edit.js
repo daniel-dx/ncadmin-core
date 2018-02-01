@@ -2,48 +2,81 @@ import _get from "lodash-es/get";
 import { ncformUtils } from "ncform-common";
 import { axiosOptions } from "../../utils/helper.js";
 import axios from 'axios';
+import widgetMixin from '../widgets/mixin.js';
 
 export default {
-  components: {},
+
+  mixins: [widgetMixin],
+
   created() {
     this.$axios = !this.$axios ? axios : this.$axios;
     this.initData();
   },
+
   props: {
-    config: {
-      type: Object,
-      default: {}
-    },
     value: {
       type: Object,
       default: {}
     }
   },
+
   data() {
     return {
       onlyId: "",
-      formValue: {}
+      formValue: {},
+      defaultConfig: {
+        title: '', // 标题，editMode不同，显示也不同。比如这里写“商品”，编辑模式下显示为编辑商品，新建模式下显示新建商品
+        idField: 'id', // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+        formData: { // 当编辑模式时取表单数据用
+          apiUrl: '', // 取表单数据的Url
+          method: 'get', // get/post default:get
+          params: [
+            {
+              name: 'id',
+              value: 'dx: {{$id}}'
+            }
+          ],
+          resField: '' // 返回数据的实际字段
+        },
+        formSchema: { // ncform 配置
+        },
+        buttons: {
+          submit: { // 提交
+            apiUrl: '', // 提交的Url
+            method: 'post', // get/post default: post
+            valueField: '', // 当为空时，即表单的每个一级字段即为参数名
+          },
+          back: { // 返回
+            enable: true
+          }
+        }
+      }
     };
   },
+
   computed: {
     isEdit() {
       return this.$data.onlyId !== "0";
     }
   },
+
   methods: {
+
     goBack() {
       this.$emit("goBack");
     },
+
     initData() {
       this.$data.formValue = {};
 
-      this.$data.onlyId = this.value[this.config.idField];
+      this.$data.onlyId = this.value[this.$data.mergeConfig.idField];
       if (this.$data.onlyId != "0") {
         this.loadFormData();
       }
     },
+
     loadFormData() {
-      const formDataConfig = this.config.formData;
+      const formDataConfig = this.$data.mergeConfig.formData;
       const data = {};
       formDataConfig.params.forEach(item => {
         data[item.name] = ncformUtils.smartAnalyze(item.value, {
@@ -64,8 +97,9 @@ export default {
         this.$data.formValue = resField ? _get(res.data, resField) : res.data;
       });
     },
+
     submitData() {
-      const submitConfig = this.config.buttons.submit;
+      const submitConfig = this.$data.mergeConfig.buttons.submit;
       let data = {};
       if (submitConfig.valueField) {
         data[submitConfig.valueField] = this.$data.formValue;
@@ -73,7 +107,7 @@ export default {
         data = Object.assign({}, this.$data.formValue);
       }
 
-      data[submitConfig.idField || "id"] = this.$data.onlyId;
+      data[this.$data.mergeConfig.idField] = this.$data.onlyId;
 
       this.$axios(
         submitConfig.apiUrl,
@@ -87,6 +121,7 @@ export default {
       });
     }
   },
+
   watch: {
     value: {
       handler() {

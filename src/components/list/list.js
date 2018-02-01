@@ -5,18 +5,19 @@ import ncComponent from "../private/nc-component.vue";
 import modal from "../modal/index-link.vue";
 import { axiosOptions } from "../../utils/helper";
 import axios from 'axios';
+import widgetMixin from '../widgets/mixin.js';
 
 export default {
+
+  mixins: [widgetMixin],
+
   components: {
     ncComponent,
     actionObject,
     modal
   },
+
   props: {
-    config: {
-      type: Object,
-      default: () => ({})
-    },
     value: {
       type: Object,
       default: () => ({
@@ -26,12 +27,14 @@ export default {
       })
     }
   },
+
   created() {
     this.$axios = !this.$axios ? axios : this.$axios;
     // 初始化搜索内容
     this.$data.normalQueryValue = JSON.parse(JSON.stringify(this.value.query));
     this.$data.advQueryValue = JSON.parse(JSON.stringify(this.value.query));
   },
+
   mounted() {
     // 加载数据
     this.loadTableData();
@@ -51,32 +54,40 @@ export default {
         config: {},
         value: {},
         modalConfig: {}
+      },
+      defaultConfig: {
+        
       }
     };
   },
+
   computed: {
     // 搜索栏 是否显示
     seachBarVisible() {
-      return this.config.query && this.config.query.normal;
+      return this.$data.mergeConfig.query && this.$data.mergeConfig.query.normal;
     },
+
     // 高级搜索 是否显示
     advSearchBarVisible() {
       return (
-        this.config.query && this.config.query.normal && this.config.query.adv
+        this.$data.mergeConfig.query && this.$data.mergeConfig.query.normal && this.$data.mergeConfig.query.adv
       );
     },
+
     batchActionsVisible() {
       return (
-        this.config.list.selectAll &&
-        this.config.toolbar &&
-        this.config.toolbar.batchActions
+        this.$data.mergeConfig.list.selectAll &&
+        this.$data.mergeConfig.toolbar &&
+        this.$data.mergeConfig.toolbar.batchActions
       );
     },
+
     toolsVisible() {
-      return this.config.toolbar && this.config.toolbar.tools;
+      return this.$data.mergeConfig.toolbar && this.$data.mergeConfig.toolbar.tools;
     },
+
     pagingVisible() {
-      return !this.config.paging || this.config.paging.enable;
+      return !this.$data.mergeConfig.paging || this.$data.mergeConfig.paging.enable;
     }
   },
   methods: {
@@ -199,7 +210,7 @@ export default {
 
     // 加载表格数据 - 不重置pageNum和查询条件
     loadTableData() {
-      const dataSource = this.config.list.datasource;
+      const dataSource = this.$data.mergeConfig.list.datasource;
 
       let postData = {};
       postData[dataSource.paramFields.pageSize] = this.value.pageSize;
@@ -243,6 +254,7 @@ export default {
       }
     }
   },
+
   watch: {
     value: {
       handler: function (newVal) {

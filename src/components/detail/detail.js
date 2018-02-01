@@ -3,105 +3,83 @@ import _get from "lodash-es/get";
 import { ncformUtils } from "ncform-common";
 import { axiosOptions } from "../../utils/helper.js";
 import axios from 'axios';
+import widgetMixin from '../widgets/mixin.js';
 
 export default {
+
+  mixins: [widgetMixin],
+
   components: {
     detailRecursion
   },
+
   props: {
-    config: {
-      type: Object,
-      default: () => ({})
-    },
     value: {
       type: Object,
       default: () => ({})
     }
   },
+
   created() {
     this.$axios = !this.$axios ? axios : this.$axios;
     this.initData();
   },
-  mounted() {
-  },
+
   data() {
     return {
       onlyId: "",
-      formValue: {
-        username: "apple",
-        attribute: {
-          weight: "300g",
-          color: "red"
+      formValue: {},
+      defaultConfig: {
+        title: '', // 详情页的标题
+        idField: 'id', // 作为该详情信息的唯一标识
+        source: { // 详细页的数据源
+          apiUrl: '', // 数据源api
+          method: 'get', // get/post default:get
+          params: [{ // 请求参数
+            name: 'id',
+            value: 'dx: {{$id}}'
+          }],
+          resField: 'data' // 返回结果数据字段
         },
-        tag: ["red", "sweet"],
-        attributes: [
-          {
-            weight: "11g",
-            color: "purple"
-          },
-          {
-            weight: "22g",
-            color: "green"
-          }
-        ],
-        attributes3: [
-          {
-            weight: {
-              value1: "12g",
-              value2: "22g"
-            },
-            color: {
-              value1: "purple1",
-              value2: "purple2"
-            }
-          },
-          {
-            weight: {
-              value1: "78g",
-              value2: "88g"
-            },
-            color: {
-              value1: "purple3",
-              value2: "purple4"
-            }
-          }
-        ],
-        obj: {
-          a: {
-            a: 1,
-            b: 2
-          },
-          b: {
-            a: 3,
-            b: 4
+        detail: {
+          properties: []
+        },
+        buttons: { // 操作按钮
+          back: { // 后退
+            enable: true // 可用状态，默认为true
           }
         }
       }
     };
   },
+
   methods: {
     goEdit() {
       this.$emit("goEdit");
     },
+
     goBack() {
       this.$emit("goBack");
     },
+
     buttonBack() {
-      return _get(this.config, 'buttons.back.enable', true);
+      return _get(this.$data.mergeConfig, 'buttons.back.enable', true);
     },
+
     initData() {
-      this.$data.onlyId = this.value[this.config.idField];
+      this.$data.onlyId = this.value[this.$data.mergeConfig.idField];
       this.loadFormData();
     },
+
     loadFormData() {
-      const formDataConfig = this.config.source;
+      const formDataConfig = this.$data.mergeConfig.source;
       const data = {};
       formDataConfig.params.forEach(item => {
         data[item.name] = ncformUtils.smartAnalyze(item.value, {
           data: [
             {
               symbol: "$id",
-              value: this.$data.onlyId   
+              value: this.$data.onlyId
             }
           ]
         });
@@ -116,6 +94,7 @@ export default {
       });
     }
   },
+
   watch: {
     value: {
       handler() {
