@@ -28,13 +28,13 @@
   </script>
 
   <script type="text/javascript" src="../../../dist/list.js"></script>
-  <script type="text/javascript" src="../../../dist/detailModalInside.js"></script>
+  <script type="text/javascript" src="../../../dist/editModalInside.js"></script>
   <script type="text/javascript" src="../../../dist/label.js"></script>
   <script type="text/javascript" src="../../../dist/image.js"></script>
   <script type="text/javascript">
     Vue.component('nca-label', label);
     Vue.component('nca-image', image);
-    Vue.component('nca-detail-modal-inside', detailModalInside);
+    Vue.component('nca-edit-modal-inside', editModalInside);
 
     // Bootstrap the app
     new Vue({
@@ -156,7 +156,7 @@
                       }
                     ]
                   },
-                  refresh: true // 操作后是否刷新数据
+                  refresh: 'current' // 操作后是否刷新数据
                 }
               },
               others: [
@@ -176,7 +176,7 @@
                         }
                       ]
                     },
-                    refresh: true // 操作后是否刷新数据
+                    refresh: 'current' // 操作后是否刷新数据
                   }
                 }
               ]
@@ -184,11 +184,39 @@
             tools: {
               new: {
                 handler: {
-                  type: "page", // ajax / page / modal / component
+                  type: "modal",
                   options: {
-                    // type = 'page'
-                    route: "dx: '/demo/edit/0'"
-                  }
+                    component: {
+                      name: "nca-edit-modal-inside",
+                      config: {
+                        idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+                        formData: {
+                          isRemote: false,
+                        },
+                        formSchema: {
+                          type: "object",
+                          properties: {
+                            name: {
+                              type: "string",
+                              rules: {
+                                required: true
+                              }
+                            }
+                          }
+                        },
+                        buttons: {
+                          submit: {
+                            // 提交
+                            apiUrl: "/api/saveItem", // 提交的Url
+                          }
+                        }
+                      },
+                    },
+                    modalConfig: {
+                      title: "新建"
+                    }
+                  },
+                  refresh: 'resetPage'
                 }
               },
               others: [
@@ -265,41 +293,49 @@
               }
             ],
             actions: {
-              // 删除
+              // 删除 ajax类型的演示
               delete: {
                 handler: {
                   type: "ajax",
                   options: {
                     apiUrl: '/api/deleteItem',
-                    method: 'post', // get/post default:get
+                    method: 'post',
                     params: [{
                       name: 'id',
                       value: 'dx: {{$item.id}}'
                     }],
-                  }
+                  },
+                  refresh: 'current'
                 }
               },
-              // 查看
-              view: {
+              // 查看 modal类型的演示
+              edit: {
                 handler: {
                   type: "modal",
                   options: {
                     component: {
-                      name: "nca-detail-modal-inside",
+                      name: "nca-edit-modal-inside",
                       config: {
-                        idField: "id",
-                        source: {
-                          isRemote: false
+                        idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+                        formData: {
+                          isRemote: false,
                         },
-                        detail: {
-                          label: "",
-                          value: "dx: {{$root}}",
-                          properties: [
-                            {
-                              label: "姓名",
-                              value: "dx: {{$root.name}}",
+                        formSchema: {
+                          type: "object",
+                          properties: {
+                            name: {
+                              type: "string",
+                              rules: {
+                                required: true
+                              }
                             }
-                          ],
+                          }
+                        },
+                        buttons: {
+                          submit: {
+                            // 提交
+                            apiUrl: "/api/saveItem", // 提交的Url
+                          }
                         }
                       },
                       value: "dx: {{$item}}"
@@ -307,11 +343,12 @@
                     modalConfig: {
                       title: "查看详情"
                     }
-                  }
+                  },
+                  refresh: 'current'
                 }
               },
               // 编辑
-              edit: {
+              view: {
                 handler: {
                   type: "page",
                   options: {

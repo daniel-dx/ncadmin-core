@@ -63,8 +63,8 @@
               resField: "data",
               params: [
                 {
-                  name: "userid",
-                  value: "123"
+                  name: "id",
+                  value: "$id"
                 }
               ]
             },
@@ -72,15 +72,17 @@
               type: "object",
               properties: {
                 name: {
-                  type: "string"
+                  type: "string",
+                  rules: {
+                    required: true
+                  }
                 }
               }
             },
             buttons: {
               submit: {
                 // 提交
-                apiUrl: "/api/getListData", // 提交的Url
-                idField: "userxx",
+                apiUrl: "/api/saveItem", // 提交的Url
                 valueField: "" // 当为空时，即表单的每个一级字段即为参数名
               }
             }
@@ -104,15 +106,17 @@
               type: "object",
               properties: {
                 name: {
-                  type: "string"
+                  type: "string",
+                  rules: {
+                    required: true
+                  }
                 }
               }
             },
             buttons: {
               submit: {
                 // 提交
-                apiUrl: "/api/getListData", // 提交的Url
-                idField: "userxx",
+                apiUrl: "/api/saveItem", // 提交的Url
                 valueField: "" // 当为空时，即表单的每个一级字段即为参数名
               }
             }
@@ -137,15 +141,17 @@
               type: "object",
               properties: {
                 name: {
-                  type: "string"
-                }
+                  type: "string",
+                  rules: {
+                    required: true
+                  }
+                },
               }
             },
             buttons: {
               submit: {
                 // 提交
-                apiUrl: "/api/getListData", // 提交的Url
-                idField: "userxx",
+                apiUrl: "/api/saveItem", // 提交的Url
                 valueField: "" // 当为空时，即表单的每个一级字段即为参数名
               }
             }

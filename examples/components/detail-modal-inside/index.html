@@ -46,13 +46,21 @@
         config1: {
           visible: false,
           modalConfig: {
-            title: '详情信息', // 弹窗标题
+            title: '详情信息',
+            buttons: {
+              confirm: {
+                enable: false
+              },
+              cancel: {
+                name: '关闭'
+              }
+            }
           },
           config: {
             idField: "id",
             source: {
               apiUrl: "/api/getDetail",
-              method: "get", // get/post default:get
+              method: "get",
               params: [
                 {
                   name: "id",
@@ -237,7 +245,15 @@
         config2: {
           visible: false,
           modalConfig: {
-            title: '详情信息', // 弹窗标题
+            title: '详情信息',
+            buttons: {
+              confirm: {
+                enable: false
+              },
+              cancel: {
+                name: '关闭'
+              }
+            }
           },
           config: {
             idField: "id",

@@ -123,7 +123,7 @@
     </el-col>
   </el-row>
 
-  <modal :visible.sync="modal.visible" :modal-config="modal.modalConfig">
+  <modal :visible.sync="modal.visible" :modal-config="modal.modalConfig" @confirm="onModalClose()">
     <component slot-scope="modalProps" class="modalComponent" :is="modal.name.replace(/\./g, '_')" :config="modal.config" :value="modal.value"
       :modal-id="modalProps.modalId">
     </component>
