@@ -31,8 +31,8 @@ import {
 事件总线，用于全局触发和监听事件
 
 ```js
-  import ncAdminCore from 'ncadmin-core';
-  const { eventHub } = ncAdminCore;
+  import ncadminCore from 'ncadmin-core';
+  const { eventHub } = ncadminCore;
 
   eventHub.$on(); // 监听事件
   eventHub.$emit(); // 触发事件 
@@ -185,8 +185,8 @@ ncform的通用类库，请参考ncform-common项目的文档
 </template>
 
 <script>
-  import ncAdminCore from 'ncadmin-core';
-  const { eventHub } = ncAdminCore;
+  import ncadminCore from 'ncadmin-core';
+  const { eventHub } = ncadminCore;
   
   export default {
     // modalId 为弹窗传入的唯一标识
@@ -264,8 +264,8 @@ component: {
 </template>
 
 <script>
-  import ncAdminCore from 'ncadmin-core';
-  const editPage = ncAdminCore.edit;
+  import ncadminCore from 'ncadmin-core';
+  const editPage = ncadminCore.edit;
 
   export default {
     component: {
@@ -293,8 +293,8 @@ component: {
 </template>
 
 <script>
-  import ncAdminCore from 'ncadmin-core';
-  const listPage = ncAdminCore.list;
+  import ncadminCore from 'ncadmin-core';
+  const listPage = ncadminCore.list;
 
   export default {
     component: {

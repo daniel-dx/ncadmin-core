@@ -6,6 +6,7 @@ import modal from "../modal/index-link.vue";
 import { axiosOptions } from "../../utils/helper";
 import axios from 'axios';
 import widgetMixin from '../widgets/mixin.js';
+import eventHub from '../../utils/event-hub.js';
 
 export default {
 
@@ -33,6 +34,8 @@ export default {
     // 初始化搜索内容
     this.$data.normalQueryValue = JSON.parse(JSON.stringify(this.value.query));
     this.$data.advQueryValue = JSON.parse(JSON.stringify(this.value.query));
+
+    eventHub.$on('nca-component-notify-submit', this.loadTableData);
   },
 
   mounted() {

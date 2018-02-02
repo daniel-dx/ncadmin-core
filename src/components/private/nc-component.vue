@@ -1,18 +1,22 @@
 <template>
-  <component v-bind:is="compName" :config="configVal" :value="compVal">
+  <component v-bind:is="compName" :config="configVal" :value="compVal" @notify-submit="notifySubmit">
   </component>
 </template>
 
 <script>
 import { ncformUtils } from "ncform-common";
+import eventHub from '../../utils/event-hub.js'
 
 export default {
   props: {
+
     compName: {
       type: String,
       required: true
     },
+
     config: Object,
+
     value: [String, Number, Boolean, Object, Array],
 
     smartData: {
@@ -24,7 +28,9 @@ export default {
       }
     }
   },
+
   computed: {
+
     compVal() {
       return ncformUtils.smartAnalyze(this.value, {
         data: Object.keys(this.smartData).map(key => {
@@ -35,6 +41,7 @@ export default {
         })
       });
     },
+
     configVal() {
       if (this.config) {
         let newConfig = {};
@@ -51,6 +58,13 @@ export default {
         return newConfig;
       }
     }
+  },
+
+  methods: {
+    notifySubmit() {
+      eventHub.$emit('nca-component-notify-submit');
+    }
   }
+
 };
 </script>

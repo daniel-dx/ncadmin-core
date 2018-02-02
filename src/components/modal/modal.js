@@ -1,4 +1,4 @@
-import eventHub from '../../utils/event-hub.js'
+import eventHub from '../../utils/event-hub.js';
 
 // modal内接收的事件由开发者自己定义，在modalConfig中配置即可。
 export default {
