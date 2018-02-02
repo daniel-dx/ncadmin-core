@@ -1,7 +1,7 @@
 <template>
   <el-col class="detail-recursion" :span="columns" v-if="allShow">
     <!-- 对象 -->
-    <component v-if="config.properties" :is="config.widget?'layout-'+config.widget : defaultWidget.object" :config="config" :value="value"  :root-data="rootValue">
+    <component v-if="config.properties" :is="config.widget ? 'layout-'+config.widget : defaultWidget.object" :config="config" :value="value" :root-data="rootValue">
       <template slot-scope="props">
         <detail-recursion :config="props.itemConfig" :value="props.itemValue" :root-data="rootValue">
         </detail-recursion>
@@ -9,7 +9,7 @@
     </component>
 
     <!-- 数组 -->
-    <component v-else-if="config.items" :is="config.widget?'layout-'+config.widget : defaultWidget.array" :config="config" :value="value" :root-data="rootValue">
+    <component v-else-if="config.items" :is="config.widget ? 'layout-'+config.widget : defaultWidget.array" :config="config" :value="value" :root-data="rootValue">
       <template slot-scope="props">
         <detail-recursion :config="props.itemConfig" :value="props.itemValue" :root-data="rootValue">
         </detail-recursion>
@@ -17,16 +17,18 @@
     </component>
 
     <!-- 具体展示控件 -->
-    <component v-else :is="config.widget?'control-'+config.widget : defaultWidget.label" :config="config" :value="value" :root-data="rootValue" />
+    <nc-component v-else :comp-name="(config.widget || defaultWidget.label).replace(/\./g, '_')" :config="config.widgetConfig" :value="config.value" :smart-data="{$parent:value, $item:value, $root:rootValue}"></nc-component>
 
   </el-col>
 </template>
 <script>
 import widgetMixin from "./mixin.js";
 import widgets from "./widget.js";
+import ncComponent from '../nc-component.vue';
 export default {
   name: "detail-recursion",
   components: {
+    ncComponent,
     ...widgets
   },
   mixins: [widgetMixin],
@@ -36,7 +38,7 @@ export default {
       defaultWidget: {
         object: "layout-object",
         array: "layout-array",
-        label: "control-label"
+        label: "nca-label"
       }
     };
   },
@@ -50,10 +52,10 @@ export default {
   },
   methods: {
     reloadComponent() {
-        this.$data.allShow = false;
-        this.$nextTick(()=>{
-          this.$data.allShow = true;
-        })
+      this.$data.allShow = false;
+      this.$nextTick(() => {
+        this.$data.allShow = true;
+      })
     }
   },
   watch: {

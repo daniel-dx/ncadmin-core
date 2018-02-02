@@ -20,7 +20,12 @@
   <!-- 引入组件库 -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <script type="text/javascript" src="../../../dist/detail.js"></script>
+  <script type="text/javascript" src="../../../dist/image.js"></script>
+  <script type="text/javascript" src="../../../dist/label.js"></script>
   <script type="text/javascript">
+
+    Vue.component('nca-image', image);
+    Vue.component('nca-label', label);
 
     // Bootstrap the app
     new Vue({
@@ -52,8 +57,6 @@
                 label: "水果名称", // 标签
                 value: "dx: {{$root.username}}", // 或填写字段名或dx表达式，比如 "dx: {{$root.firstname}} + ' ' + {{$root.lastname}}"
                 columns: 6, // 所占的列数
-                widget: "label", // 使用的widget，默认是label，即只显示只读文本
-                widgetConfig: {}
               },
 
               // 对象内含label， widget: object
@@ -66,8 +69,12 @@
                     columns: 6
                   },
                   {
-                    label: "重量",
-                    value: "dx: {{$root.username}}",
+                    label: "头像",
+                    value: "dx: {{$root.photo}}",
+                    widget: 'nca-image',
+                    widgetConfig: {
+                      maxWidth: '80px'
+                    },
                     columns: 6
                   }
                 ],

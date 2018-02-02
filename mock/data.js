@@ -12,6 +12,7 @@ module.exports = {
       data: {
         id: 1,
         username: "apple remote",
+        photo: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1517549586&di=fc30a4ae128f3db75ef6518c4eb1abd7&src=http://img.zcool.cn/community/0104c958b69c23a801219c77ba5da2.png',
         attribute: {
           weight: "300g",
           color: "red"
