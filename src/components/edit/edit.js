@@ -114,8 +114,6 @@ export default {
       if (submitConfig.valueField) data[submitConfig.valueField] = submitData;
       else data = submitData;
 
-      data[this.$data.mergeConfig.idField] = this.$data.onlyId;
-
       this.$axios(
         submitConfig.apiUrl,
         axiosOptions(submitConfig.method, data)

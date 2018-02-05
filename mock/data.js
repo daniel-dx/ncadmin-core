@@ -72,6 +72,17 @@ module.exports = {
       }
     };
   },
+  '/api/getInfov1': (param) => {
+    return {
+      data: {
+        id: 1,
+        info: {
+          name: 'helloworld',
+          notInFormField: '[remote] i do not in the form'
+        }
+      }
+    };
+  },
   '/api/getListData': (param) => {
     return {
       data: [

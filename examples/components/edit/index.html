@@ -124,11 +124,11 @@
           config: {
             title: "商品", // 标题，editMode不同，显示也不同。比如这里写“商品”，编辑模式下显示为编辑商品，新建模式下显示新建商品
             idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
-            formField: 'data',
+            formField: 'info',
             formData: {
               // 当编辑模式时取表单数据用
-              apiUrl: "/api/getInfo", // 取表单数据的Url
-              resField: "",
+              apiUrl: "/api/getInfov1", // 取表单数据的Url
+              resField: "data",
               params: [
                 {
                   name: "id",
