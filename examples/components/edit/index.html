@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Component Example</title>
+  <meta charset="UTF-8">
+  <title>Component Example</title>
 </head>
+
 <body>
 
   <!--演示区域-->
   <div id="demo">
-    <edit :config="config" :value="value"></edit>
+    <p>编辑</p>
+    <edit :config="config1.config" :value="config1.value"></edit>
+
+    <p>新建</p>
+    <edit :config="config2.config" :value="config2.value"></edit>
+
+    <p>编辑 - 表单数据只是返回数据的一个字段的</p>
+    <edit :config="config3.config" :value="config3.value"></edit>
   </div>
 
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
@@ -34,45 +43,127 @@
         edit: edit
       },
       data: {
-        config: {
-          title: "商品", // 标题，editMode不同，显示也不同。比如这里写“商品”，编辑模式下显示为编辑商品，新建模式下显示新建商品
-          idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
-          formData: {
-            // 当编辑模式时取表单数据用
-            apiUrl: "/api/getInfo", // 取表单数据的Url
-            resField: "data",
-            params: [
-              {
-                name: "id",
-                value: "dx: {{$id}}"
-              }
-            ]
-          },
-          formSchema: {
-            type: "object",
-            properties: {
-              name: {
-                type: "string"
-              }
-            }
-          },
-          buttons: {
-            submit: {
-              // 提交
-              apiUrl: "/api/saveItem", // 提交的Url
-              valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+        config1: {
+          config: {
+            title: "商品", // 标题，editMode不同，显示也不同。比如这里写“商品”，编辑模式下显示为编辑商品，新建模式下显示新建商品
+            idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+            formData: {
+              // 当编辑模式时取表单数据用
+              apiUrl: "/api/getInfo", // 取表单数据的Url
+              resField: "data",
+              params: [
+                {
+                  name: "id",
+                  value: "dx: {{$id}}"
+                }
+              ]
             },
-            back: {
-              // 返回
-              enable: true
+            formSchema: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string"
+                }
+              }
+            },
+            buttons: {
+              submit: {
+                // 提交
+                apiUrl: "/api/saveItem", // 提交的Url
+                valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+              },
+              back: {
+                // 返回
+                enable: true
+              }
             }
+          },
+          value: {
+            id: 1
           }
         },
-        value: {
-          id: 1
+        config2: {
+          config: {
+            title: "商品", // 标题，editMode不同，显示也不同。比如这里写“商品”，编辑模式下显示为编辑商品，新建模式下显示新建商品
+            idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+            formData: {
+              // 当编辑模式时取表单数据用
+              apiUrl: "/api/getInfo", // 取表单数据的Url
+              resField: "data",
+              params: [
+                {
+                  name: "id",
+                  value: "dx: {{$id}}"
+                }
+              ]
+            },
+            formSchema: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string"
+                }
+              }
+            },
+            buttons: {
+              submit: {
+                // 提交
+                apiUrl: "/api/saveItem", // 提交的Url
+                valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+              },
+              back: {
+                // 返回
+                enable: true
+              }
+            }
+          },
+          value: {
+          }
+        },
+        config3: {
+          config: {
+            title: "商品", // 标题，editMode不同，显示也不同。比如这里写“商品”，编辑模式下显示为编辑商品，新建模式下显示新建商品
+            idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+            formField: 'info',
+            formData: {
+              // 当编辑模式时取表单数据用
+              apiUrl: "/api/getInfov1", // 取表单数据的Url
+              resField: "data",
+              params: [
+                {
+                  name: "id",
+                  value: "dx: {{$id}}"
+                }
+              ]
+            },
+            formSchema: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string"
+                }
+              }
+            },
+            buttons: {
+              submit: {
+                // 提交
+                apiUrl: "/api/saveItem", // 提交的Url
+                valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+              },
+              back: {
+                // 返回
+                enable: true
+              }
+            }
+          },
+          value: {
+            id: 1
+          }
         }
+
       }
     });
   </script>
 </body>
+
 </html>

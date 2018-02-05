@@ -70,7 +70,7 @@ export default {
       this.$data.formValue = {};
 
       this.$data.onlyId = this.value[this.$data.mergeConfig.idField];
-      if (this.$data.onlyId != "0") {
+      if (this.$data.onlyId && this.$data.onlyId != "0") {
         this.loadFormData();
       }
     },
@@ -94,20 +94,25 @@ export default {
         axiosOptions(formDataConfig.method, data)
       ).then(res => {
         const resField = formDataConfig.resField;
-        this.$data.formValue = resField ? _get(res.data, resField) : res.data;
+        let resData = this.$options.remoteData = resField ? _get(res.data, resField) : res.data;
+        this.$data.formValue = this.$data.mergeConfig.formField ? resData[this.$data.mergeConfig.formField] : resData;
       });
     },
 
     submitData() {
       const submitConfig = this.$data.mergeConfig.buttons.submit;
-      let data = {};
-      if (submitConfig.valueField) {
-        data[submitConfig.valueField] = this.$data.formValue;
+      let data = {}, submitData;
+
+      // 保证取回什么样的数据格式，就提交什么样的数据格式
+      if (this.$data.mergeConfig.formField) {
+        submitData = Object.assign({}, this.$options.remoteData || this.value);
+        submitData[this.$data.mergeConfig.formField] = Object.assign(submitData[this.$data.mergeConfig.formField], this.$data.formValue);
       } else {
-        data = Object.assign({}, this.$data.formValue);
+        submitData = Object.assign({}, this.$options.remoteData || this.value, this.$data.formValue);
       }
 
-      data[this.$data.mergeConfig.idField] = this.$data.onlyId;
+      if (submitConfig.valueField) data[submitConfig.valueField] = submitData;
+      else data = submitData;
 
       this.$axios(
         submitConfig.apiUrl,

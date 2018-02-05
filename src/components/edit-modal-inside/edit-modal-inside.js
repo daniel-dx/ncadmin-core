@@ -27,6 +27,7 @@ export default {
       formValue: {},
       defaultConfig: {
         idField: 'id', // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+        formField: '', // 数据源中哪个字段作为form的数据
         formData: { // 当编辑模式时取表单数据用
           // 是否远程读取，默认是。如果不是，则从value属性中直接读取
           isRemote: true,
@@ -68,7 +69,7 @@ export default {
 
       // 如果指定数据从本地数据源获取，则直接将value当数据源
       if (this.$data.mergeConfig.formData.isRemote === false) {
-        this.$data.formValue = this.value;
+        this.$data.formValue = this.$data.mergeConfig.formField ? this.value[this.$data.mergeConfig.formField] : this.value;
         return;
       }
 
@@ -87,7 +88,8 @@ export default {
 
       this.$axios.post(formDataConfig.apiUrl, data).then(res => {
         const resField = formDataConfig.resField;
-        this.$data.formValue = resField ? _get(res.data, resField) : res.data;
+        let resData = this.$options.remoteData = resField ? _get(res.data, resField) : res.data;
+        this.$data.formValue = this.$data.mergeConfig.formField ? resData[this.$data.mergeConfig.formField] : resData;
       });
     },
 
@@ -95,13 +97,19 @@ export default {
 
       this.$ncformValidate(this.$data.formName).then(data => {
         if (data.result) {
-          let data = {};
+          let data = {}, submitData;
           const submitConfig = this.$data.mergeConfig.buttons.submit;
-          if (submitConfig.valueField) {
-            data[submitConfig.valueField] = this.$data.formValue;
+
+          // 保证取回什么样的数据格式，就提交什么样的数据格式
+          if (this.$data.mergeConfig.formField) {
+            submitData = Object.assign({}, this.$options.remoteData || this.value);
+            submitData[this.$data.mergeConfig.formField] = Object.assign(submitData[this.$data.mergeConfig.formField], this.$data.formValue);
           } else {
-            data = Object.assign({}, this.$data.formValue);
+            submitData = Object.assign({}, this.$options.remoteData || this.value, this.$data.formValue);
           }
+
+          if (submitConfig.valueField) data[submitConfig.valueField] = submitData;
+          else data = submitData;
 
           data[this.$data.mergeConfig.idField] = this.$data.onlyId;
           this.$axios.post(submitConfig.apiUrl, data).then(res => {

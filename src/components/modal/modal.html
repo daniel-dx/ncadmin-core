@@ -1,6 +1,6 @@
 <div class="nca-modal">
   <!-- 弹窗 -->
-  <el-dialog :visible.sync="visibleData" :title="mdConfig.title">
+  <el-dialog :visible.sync="visibleData" :title="mdConfig.title" :close-on-click-modal="false">
     <slot v-if="visibleData" :modal-id="modalId"></slot>
     <el-row type="flex" style="margin-top:10px;">
       <el-col></el-col>

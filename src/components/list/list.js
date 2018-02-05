@@ -35,19 +35,19 @@ export default {
     this.$data.normalQueryValue = JSON.parse(JSON.stringify(this.value.query));
     this.$data.advQueryValue = JSON.parse(JSON.stringify(this.value.query));
     // 获取列配置信息
-    this.$data.columnFilters = this.$data.mergeConfig.list.columns.map((item, index) => ({text:item.header, value:index}));
+    this.$data.columnFilters = this.$data.mergeConfig.list.columns.map((item, index) => ({ text: item.header, value: index }));
     // 存储列配置信息（根据mergeConfig）
-    this.$data.mergeConfig.list.columns.forEach((item, index)=>{
-      if(item.defShow!==false){
+    this.$data.mergeConfig.list.columns.forEach((item, index) => {
+      if (item.defShow !== false) {
         this.$data.configColumnShow.push(index);
       }
     });
 
     // 判断是否从localStorage读取列配置
-    if(window.localStorage['columnConfig:'+window.location.href]){
+    if (window.localStorage['columnConfig:' + window.location.href]) {
       this._getLocalColumnConfig();
       console.log('取本地');
-    }else{
+    } else {
       this._resetColumnConfig();
       console.log('取配置');
     }
@@ -84,7 +84,7 @@ export default {
         modalConfig: {}
       },
       defaultConfig: {
-        
+
       }
     };
   },
@@ -121,12 +121,12 @@ export default {
   methods: {
 
     // 是否展示该列
-    isColumnShow(index){
+    isColumnShow(index) {
       return this.$data.columnShow.indexOf(index) !== -1;
     },
-    
+
     clearColumnConfig() {
-      window.localStorage.removeItem('columnConfig:'+window.location.href);
+      window.localStorage.removeItem('columnConfig:' + window.location.href);
       this._resetColumnConfig();
       console.log("清空本地");
     },
@@ -138,14 +138,14 @@ export default {
 
     // 获取本地列配置
     _getLocalColumnConfig() {
-      this.$data.columnShow = JSON.parse(window.localStorage['columnConfig:'+window.location.href]);
+      this.$data.columnShow = JSON.parse(window.localStorage['columnConfig:' + window.location.href]);
     },
 
     // 存储列配置到本地
     _saveLocalColumnConfig(newVal) {
-      if(JSON.stringify(newVal) !== JSON.stringify(this.$data.configColumnShow)){
-        window.localStorage.setItem('columnConfig:'+window.location.href, JSON.stringify(newVal));
-        console.log('存本地');  
+      if (JSON.stringify(newVal) !== JSON.stringify(this.$data.configColumnShow)) {
+        window.localStorage.setItem('columnConfig:' + window.location.href, JSON.stringify(newVal));
+        console.log('存本地');
       }
     },
 
@@ -320,7 +320,7 @@ export default {
       deep: true
     },
     columnShow: {
-      handler: function(newVal) {
+      handler: function (newVal) {
         this._saveLocalColumnConfig(newVal);
       },
       deep: true
