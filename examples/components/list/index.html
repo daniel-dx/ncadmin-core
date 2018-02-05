@@ -239,6 +239,7 @@
           // 显示列表
           list: {
             selectAll: true, // 是否全选
+            columnsConfigurable: true,
             datasource: {
               // 数据源
               apiUrl: "/api/getListData", // 请求url
@@ -261,7 +262,8 @@
               //
               {
                 header: "日期", // 表头
-                dataField: "date" // 数据源的字段
+                dataField: "date", // 数据源的字段
+                defShow: false,
               },
               {
                 header: "姓名", // 表头
