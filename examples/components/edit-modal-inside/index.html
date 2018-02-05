@@ -29,6 +29,20 @@
     <nca-modal :visible.sync="config3.visible" :modal-config="config3.modalConfig">
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config3.config" :value="config3.value"></nca-edit-modal-inside>
     </nca-modal>
+
+    <p></p>
+
+    <el-button @click="config4.visible = true">4: 远程获取数据 - 表单数据只是返回数据的一个字段的值</el-button>
+    <nca-modal :visible.sync="config4.visible" :modal-config="config4.modalConfig">
+      <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config4.config" :value="config4.value"></nca-edit-modal-inside>
+    </nca-modal>
+
+    <p></p>
+
+    <el-button @click="config5.visible = true">5: 本地提供数据 - 表单数据只是返回数据的一个字段的值</el-button>
+    <nca-modal :visible.sync="config5.visible" :modal-config="config5.modalConfig">
+      <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config5.config" :value="config5.value"></nca-edit-modal-inside>
+    </nca-modal>
   </div>
 
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
@@ -123,7 +137,8 @@
           },
           value: {
             id: 1,
-            name: 'hello daniel'
+            name: 'hello daniel',
+            notInFormField: 'i do not in the form',
           }
         },
 
@@ -157,6 +172,88 @@
             }
           },
           value: {
+          }
+        },
+
+        config4: {
+          visible: false,
+          modalConfig: {
+            title: '编辑用户', // 弹窗标题
+          },
+          config: {
+            idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+            formField: 'data',
+            formData: {
+              // 当编辑模式时取表单数据用
+              apiUrl: "/api/getInfo", // 取表单数据的Url
+              resField: "",
+              params: [
+                {
+                  name: "id",
+                  value: "$id"
+                }
+              ]
+            },
+            formSchema: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string",
+                  rules: {
+                    required: true
+                  }
+                }
+              }
+            },
+            buttons: {
+              submit: {
+                // 提交
+                apiUrl: "/api/saveItem", // 提交的Url
+                valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+              }
+            }
+          },
+          value: {
+            id: 1
+          }
+        },
+
+        config5: {
+          visible: false,
+          modalConfig: {
+            title: '编辑用户', // 弹窗标题
+          },
+          config: {
+            idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+            formField: 'data',
+            formData: {
+              isRemote: false,
+            },
+            formSchema: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string",
+                  rules: {
+                    required: true
+                  }
+                }
+              }
+            },
+            buttons: {
+              submit: {
+                // 提交
+                apiUrl: "/api/saveItem", // 提交的Url
+                valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+              }
+            }
+          },
+          value: {
+            data: {
+              name: 'hello daniel',
+              notInFormField: 'i do not in the form',
+            },
+            id: 1,
           }
         },
       }
