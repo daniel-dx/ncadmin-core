@@ -70,7 +70,7 @@
   </el-row>
 
   <div style="position:relative">
-    <div class="columnConfigButton" style="position:absolute; right:0; top:10px; z-index:10;">
+    <div class="columnConfigButton" style="position:absolute; right:0; top:10px; z-index:10;" v-if="mergeConfig.list.columnsConfigurable === true">
       <el-popover ref="columnpop" placement="left" trigger="click">
         <el-checkbox v-model="columnSelectAll" @change="handleCheckAllChange">全选</el-checkbox>
         <el-checkbox-group v-model="columnShow" @change="handleCheckedCitiesChange">
