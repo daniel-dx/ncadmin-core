@@ -72,16 +72,18 @@
   <div style="position:relative">
     <div class="columnConfigButton" style="position:absolute; right:0; top:10px; z-index:10;">
       <el-popover ref="columnpop" placement="left" trigger="click">
-        <el-checkbox-group v-model="columnShow">
-          <div v-for="item in columnFilters">
+        <el-checkbox v-model="columnSelectAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">全选</el-checkbox>
+        <el-checkbox-group v-model="columnShow" @change="handleCheckedCitiesChange">
+          <div v-for="item in columnFilters" style="margin-top:10px;">
             <el-checkbox :label="item.value">{{item.text}}</el-checkbox>
           </div>
         </el-checkbox-group>
-        <el-button type="mini" style="margin-top:10px" @click="clearColumnConfig">还原配置</el-button>
-
+        <el-button type="mini" style="margin-top:10px" @click="clearColumnConfig">重置
+          <i class="el-icon-refresh"></i>
+        </el-button>
       </el-popover>
 
-      <el-button type="mini" v-popover:columnpop>配置</el-button>
+      <el-button type="mini" v-popover:columnpop>列配置</el-button>
     </div>
     <!--列表数据区域-->
     <el-row>
@@ -137,7 +139,7 @@
   </div>
 
   <!--分页区域-->
-  <el-row v-if="pagingVisible" style="margin-top:30px;">
+  <el-row v-if="pagingVisible" class="mgt30">
     <el-col align="right">
       <el-pagination background @size-change="handleSizeChange" @current-change="currentChange" layout="sizes, prev, pager, next"
         :page-count="pageCount" :current-page="value.pageNum " :page-sizes="[20, 40, 60, 80, 100]">

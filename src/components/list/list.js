@@ -50,6 +50,8 @@ export default {
       this._resetColumnConfig();
     }
 
+    this.$data.columnSelectAll = this.$data.columnFilters.length == this.$data.columnShow.length;
+
     eventHub.$on('nca-component-notify-submit', this.loadTableData);
   },
 
@@ -60,6 +62,8 @@ export default {
 
   data() {
     return {
+      columnSelectAll: false,
+      isIndeterminate: false,
       // 列的选项
       columnFilters: [],
       // ‘显示的列’的index
@@ -117,6 +121,16 @@ export default {
     }
   },
   methods: {
+    handleCheckAllChange(val) {
+      this.$data.columnShow = val ? this.$data.columnFilters.map(item => item.value) : [];
+    },
+
+    handleCheckedCitiesChange(value) {
+      let checkedCount = value.length;
+      let allCount = this.$data.columnFilters.length;
+      this.columnSelectAll = checkedCount === allCount;
+      this.isIndeterminate = checkedCount > 0 && checkedCount < allCount;
+    },
 
     // 是否展示该列
     isColumnShow(index) {
