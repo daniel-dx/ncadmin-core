@@ -72,7 +72,7 @@
   <div style="position:relative">
     <div class="columnConfigButton" style="position:absolute; right:0; top:10px; z-index:10;">
       <el-popover ref="columnpop" placement="left" trigger="click">
-        <el-checkbox v-model="columnSelectAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">全选</el-checkbox>
+        <el-checkbox v-model="columnSelectAll" @change="handleCheckAllChange">全选</el-checkbox>
         <el-checkbox-group v-model="columnShow" @change="handleCheckedCitiesChange">
           <div v-for="item in columnFilters" style="margin-top:10px;">
             <el-checkbox :label="item.value">{{item.text}}</el-checkbox>
