@@ -46,10 +46,8 @@ export default {
     // 判断是否从localStorage读取列配置
     if (window.localStorage['columnConfig:' + window.location.href]) {
       this._getLocalColumnConfig();
-      console.log('取本地');
     } else {
       this._resetColumnConfig();
-      console.log('取配置');
     }
 
     eventHub.$on('nca-component-notify-submit', this.loadTableData);
@@ -128,7 +126,6 @@ export default {
     clearColumnConfig() {
       window.localStorage.removeItem('columnConfig:' + window.location.href);
       this._resetColumnConfig();
-      console.log("清空本地");
     },
 
     // 重置列配置信息
@@ -143,9 +140,11 @@ export default {
 
     // 存储列配置到本地
     _saveLocalColumnConfig(newVal) {
-      if (JSON.stringify(newVal) !== JSON.stringify(this.$data.configColumnShow)) {
+      // 配置信息与本地存储以及与config不同时，才保存到本地
+      if (JSON.stringify(newVal) !== JSON.stringify(this.$data.configColumnShow) &&
+        JSON.stringify(newVal) !== window.localStorage['columnConfig:' + window.location.href]
+      ) {
         window.localStorage.setItem('columnConfig:' + window.location.href, JSON.stringify(newVal));
-        console.log('存本地');
       }
     },
 
