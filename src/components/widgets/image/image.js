@@ -47,7 +47,7 @@ export default {
 
   methods: {
     goPreview() {
-      if(this.config.preview === true){
+      if(this.mergeConfig.preview === true){
         this.$data.dialogVisible = true;
       }
     }

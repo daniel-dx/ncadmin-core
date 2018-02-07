@@ -1,2 +1,23 @@
 .nca-image {
+    .img-area{
+        position: relative;
+        float: left;
+        .small-image{
+            display: block;
+        }
+        .zoom-icon{
+            position: absolute;
+            right: 2px;
+            bottom: 2px;
+            z-index: 5;
+            font-size: 20px;
+            color: #222;
+        }
+    }
+    &:after{
+        content: '';
+        display: block;
+        clear: both;
+        float: none;
+    }
 }
