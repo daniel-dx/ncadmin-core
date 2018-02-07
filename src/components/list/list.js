@@ -293,7 +293,9 @@ export default {
       } else {
         postData = Object.assign(postData, this.value.query);
       }
-
+      
+      postData = Object.assign(postData, dataSource.otherParams);
+      
       this.$axios(
         dataSource.apiUrl,
         axiosOptions(dataSource.method, postData)
