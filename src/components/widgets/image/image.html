@@ -1,3 +1,6 @@
 <div class="nca-image">
-  <img :src="value" :style="{'max-width': mergeConfig.maxWidth}">
+  <img :src="value" :style="{'max-width': mergeConfig.maxWidth}" @click="goPreview">
+  <el-dialog title="图片预览" :visible.sync="dialogVisible" v-if="config.preview === true">
+    <img :src="value" style="display: block; margin: 0 auto; max-width: 800px;">
+  </el-dialog>
 </div>
