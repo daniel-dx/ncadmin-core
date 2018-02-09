@@ -1,3 +1,9 @@
 <div class="nca-image">
-  <img :src="value" :style="{'max-width': mergeConfig.maxWidth}">
+  <div class="img-area"  @click="goPreview" :style="{'cursor': mergeConfig.preview === true ? 'pointer' : 'default'}">
+    <img class="small-image" :src="value" :style="{'max-width': mergeConfig.maxWidth,'max-height': mergeConfig.maxHeight}">
+    <i class="zoom-icon el-icon-zoom-in" v-if="mergeConfig.preview === true"></i>
+  </div>
+  <el-dialog title="图片预览" :visible.sync="dialogVisible" width="80%">
+    <img :src="value" style="display: block; margin: 0 auto; max-width: 100%;">
+  </el-dialog>
 </div>

@@ -38,14 +38,19 @@ export default {
 
   data() {
     return {
-      maxWidth: ''
+      maxWidth: '',
+      dialogVisible: false,
     }
   },
 
   /* ====================== 事件处理 ====================== */
 
   methods: {
-
+    goPreview() {
+      if(this.mergeConfig.preview === true){
+        this.$data.dialogVisible = true;
+      }
+    }
   },
 
   watch: {

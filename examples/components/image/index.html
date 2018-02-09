@@ -3,22 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Component Example</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
 
   <!--演示区域-->
   <div id="demo">
-    <image></image>
+    <widget-image :value="value" :config="config"></widget-image>
   </div>
-
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform/dist/vueNcform.min.js"></script>
+
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script type="text/javascript" src="../../../node_modules/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+
+  <script>
+    // Vue.use(vueNcform, { extComponents: ncformStdComps.default });
+  </script>
   <script type="text/javascript" src="../../../dist/image.js"></script>
   <script type="text/javascript">
     // Bootstrap the app
     new Vue({
       el: '#demo',
       components: {
-        image: image
+        widgetImage: image
+      },
+      data: {
+        config: {
+          maxWidth: '100px',
+          maxHeight: '200px',
+          preview: true
+        },
+        value: 'http://b.appsimg.com/upload/fancy/2018/02/05/74/d22247d594095b74d0f3b6584a0371a6.jpg'
       }
     });
   </script>
