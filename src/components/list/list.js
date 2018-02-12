@@ -183,7 +183,14 @@ export default {
         this.eventHandler(handler, item, multipleSelection);
       }
     },
-
+    _actionObjectEvent(options, data) {
+      if(options && options.name){
+        const emitData = ncformUtils.smartAnalyze(options.data, {
+          data
+        });
+        this.$emit(options.name, emitData);
+      }
+    },
     // Action Object config 实现
     eventHandler(handler, item = {}, multipleSelection = []) {
       const { type, options } = handler;
@@ -197,6 +204,9 @@ export default {
           value: multipleSelection
         }
       ];
+
+      this._actionObjectEvent(options.event, handlerData);
+
       switch (type) {
         case "ajax":
           const params = {};

@@ -13,7 +13,7 @@
 
   <!--演示区域-->
   <div id="demo">
-    <list :config="config" v-model="valueData"></list>
+    <list :config="config" v-model="valueData" @item-edit="listEventHandler"></list>
   </div>
 
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
@@ -41,6 +41,11 @@
       el: '#demo',
       components: {
         list: list,
+      },
+      methods: {
+        listEventHandler(data) {
+          console.log(data);
+        }
       },
       data: {
         valueData: {
@@ -316,6 +321,10 @@
                 handler: {
                   type: "modal",
                   options: {
+                    event: {
+                      name: 'item-edit',
+                      data: 'dx: {{$item}}'
+                    },
                     component: {
                       name: "nca-edit-modal-inside",
                       config: {
