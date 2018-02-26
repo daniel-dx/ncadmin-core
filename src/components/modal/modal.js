@@ -13,6 +13,11 @@ export default {
     modalConfig: {
       type: Object,
       default: ()=>({})
+    },
+
+    appendToBody: {
+      type: Boolean,
+      default: false
     }
   },
 
