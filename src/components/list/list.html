@@ -50,12 +50,6 @@
 
         <!-- 其它操作区域，如新建等 -->
         <template v-if="toolsVisible">
-          <action-object v-if="mergeConfig.toolbar.tools.new" :config="mergeConfig.toolbar.tools.new">
-            <el-button class="toolbar-btn" v-if="mergeConfig.toolbar.tools.new.enable !== false" type="primary" icon="el-icon-document"
-              @click="eventHandlerConfirm(mergeConfig.toolbar.tools.new.handler)">
-              {{mergeConfig.toolbar.tools.new.name || '新建'}}
-            </el-button>
-          </action-object>
           <template v-if="mergeConfig.toolbar.tools.others">
             <action-object class="toolbar-btn" v-for="(item, key) in mergeConfig.toolbar.tools.others" :key="key" :config="item">
               <el-button v-if="item.enable !== false" @click="eventHandlerConfirm(item.handler)">
@@ -63,6 +57,12 @@
               </el-button>
             </action-object>
           </template>
+          <action-object v-if="mergeConfig.toolbar.tools.new" :config="mergeConfig.toolbar.tools.new">
+            <el-button class="toolbar-btn" v-if="mergeConfig.toolbar.tools.new.enable !== false" type="primary" icon="el-icon-document"
+              @click="eventHandlerConfirm(mergeConfig.toolbar.tools.new.handler)">
+              {{mergeConfig.toolbar.tools.new.name || '新建'}}
+            </el-button>
+          </action-object>
         </template>
 
       </el-row>
