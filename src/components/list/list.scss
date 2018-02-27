@@ -39,9 +39,9 @@
     }
   }
   .toolbar-btn {
-    margin-left: 6px;
-    &:first-child {
-      margin-left: 0;
+    margin-right: 6px;
+    &:last-child {
+      margin-right: 0;
     }
   }
 }
