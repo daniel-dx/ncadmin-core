@@ -32,8 +32,11 @@ export default {
   eventHub,
   widgetMixin,
   modalInsideMixin,
-  initNcform(extComponents) {
-    Vue.use(ncform, { extComponents: Object.assign(ncformThemeElementui, extComponents) });
+  initNcform(extComponents, extRules) {
+    Vue.use(ncform, { 
+      extComponents: Object.assign(ncformThemeElementui, extComponents),
+      extRules
+    });
   }
   // Don't touch me - export
 };
