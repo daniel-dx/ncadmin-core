@@ -303,6 +303,7 @@
             actions: {
               // 删除 ajax类型的演示
               delete: {
+                enable: 'dx: {{$item.name}} === "daniel"',
                 handler: {
                   type: "ajax",
                   options: {

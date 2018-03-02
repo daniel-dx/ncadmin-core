@@ -183,6 +183,25 @@ export default {
         this.eventHandler(handler, item, multipleSelection);
       }
     },
+
+    actionObjectEnable(enable, item={}, multipleSelection = []){
+      const handlerData = [
+        {
+          symbol: "$item",
+          value: item
+        },
+        {
+          symbol: "$selected",
+          value: multipleSelection
+        }
+      ];
+
+      return ncformUtils.smartAnalyze(enable, {
+        data: handlerData
+      });
+
+    },
+
     _actionObjectEvent(options, data) {
       if(options && options.name){
         const emitData = ncformUtils.smartAnalyze(options.data, {

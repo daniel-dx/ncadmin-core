@@ -114,18 +114,18 @@
           <el-table-column align="left" label="操作">
             <template slot-scope="scope">
               <action-object class="item-op-btn" v-if="mergeConfig.list.actions.view" :config="mergeConfig.list.actions.view" :item="scope.row">
-                <el-button v-if="mergeConfig.list.actions.view.enable !== false" type="success" size="mini" @click="eventHandlerConfirm(mergeConfig.list.actions.view.handler, scope.row)">{{mergeConfig.list.actions.view.name || '查看'}}</el-button>
+                <el-button v-if="actionObjectEnable(mergeConfig.list.actions.view.enable, scope.row) !== false" type="success" size="mini" @click="eventHandlerConfirm(mergeConfig.list.actions.view.handler, scope.row)">{{mergeConfig.list.actions.view.name || '查看'}}</el-button>
               </action-object>
               <action-object class="item-op-btn" v-if="mergeConfig.list.actions.edit" :config="mergeConfig.list.actions.edit" :item="scope.row">
-                <el-button v-if="mergeConfig.list.actions.edit.enable !== false" type="primary" size="mini" @click="eventHandlerConfirm(mergeConfig.list.actions.edit.handler, scope.row)">{{mergeConfig.list.actions.edit.name || '编辑'}}</el-button>
+                <el-button v-if="actionObjectEnable(mergeConfig.list.actions.edit.enable, scope.row) !== false" type="primary" size="mini" @click="eventHandlerConfirm(mergeConfig.list.actions.edit.handler, scope.row)">{{mergeConfig.list.actions.edit.name || '编辑'}}</el-button>
               </action-object>
               <action-object class="item-op-btn" v-if="mergeConfig.list.actions.delete" :config="mergeConfig.list.actions.delete" :item="scope.row">
-                <el-button v-if="mergeConfig.list.actions.delete.enable !== false" type="danger" size="mini" @click="eventHandlerConfirm(mergeConfig.list.actions.delete.handler, scope.row, null, '确定删除该条数据吗？')">{{mergeConfig.list.actions.delete.name || '删除'}}</el-button>
+                <el-button v-if="actionObjectEnable(mergeConfig.list.actions.delete.enable, scope.row) !== false" type="danger" size="mini" @click="eventHandlerConfirm(mergeConfig.list.actions.delete.handler, scope.row, null, '确定删除该条数据吗？')">{{mergeConfig.list.actions.delete.name || '删除'}}</el-button>
               </action-object>
               <template v-if="mergeConfig.list.actions.others">
                 <action-object class="item-op-btn other-op-btn" v-for="(item, index) in mergeConfig.list.actions.others" :config="item" :item="scope.row"
                   :key="index">
-                  <el-button v-if="item.enable !== false" size="mini" :type="item.btnType" @click="eventHandlerConfirm(item.handler, scope.row)">{{item.name}}</el-button>
+                  <el-button v-if="actionObjectEnable(item.enable, scope.row) !== false" size="mini" :type="item.btnType" @click="eventHandlerConfirm(item.handler, scope.row)">{{item.name}}</el-button>
                 </action-object>
               </template>
             </template>
