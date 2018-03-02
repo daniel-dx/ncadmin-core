@@ -14,11 +14,6 @@ export default {
       type: Object,
       default: ()=>({})
     },
-
-    appendToBody: {
-      type: Boolean,
-      default: false
-    }
   },
 
   created() {
