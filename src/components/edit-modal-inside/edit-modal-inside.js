@@ -3,6 +3,7 @@ import { ncformUtils } from "ncform-common";
 import eventHub from '../../utils/event-hub.js'
 import axios from 'axios';
 import modalInsideMixins from '../widgets/modal-inside-mixin.js';
+import { axiosOptions } from "../../utils/helper.js";
 
 export default {
 
@@ -86,7 +87,7 @@ export default {
         });
       });
 
-      this.$axios.post(formDataConfig.apiUrl, data).then(res => {
+      this.$axios(formDataConfig.apiUrl, axiosOptions(formDataConfig.method, data)).then(res => {
         const resField = formDataConfig.resField;
         let resData = this.$options.remoteData = resField ? _get(res.data, resField) : res.data;
         this.$data.formValue = this.$data.mergeConfig.formField ? resData[this.$data.mergeConfig.formField] : resData;
@@ -112,7 +113,7 @@ export default {
           else data = submitData;
 
           data[this.$data.mergeConfig.idField] = this.$data.onlyId;
-          this.$axios.post(submitConfig.apiUrl, data).then(res => {
+          this.$axios(submitConfig.apiUrl, axiosOptions(submitConfig.method, data)).then(res => {
             this.$message({
               type: "success",
               message: "保存成功"
