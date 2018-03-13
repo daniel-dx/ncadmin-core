@@ -1,5 +1,5 @@
 <div class="nca-edit">
-  <el-row>
+  <el-row v-if="mergeConfig.title">
     <el-col>{{value.id != '0' ? '编辑' : '新建'}}{{mergeConfig.title}}</el-col>
   </el-row>
   <el-row>
@@ -11,6 +11,6 @@
     <el-col>
     </el-col>
     <el-button type="success" @click="submitData()" plain>{{value.id != '0' ? '保存' : '新建'}}</el-button>
-    <el-button type="info" @click="goBack()" plain>返回</el-button>
+    <el-button v-if="mergeConfig.buttons.back.enable" type="info" @click="goBack()" plain>返回</el-button>
   </el-row>
 </div>
