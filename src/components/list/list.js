@@ -32,8 +32,12 @@ export default {
   created() {
     this.$axios = !this.$axios ? axios : this.$axios;
     // 初始化搜索内容
-    this.$data.normalQueryValue = JSON.parse(JSON.stringify(this.value.query));
-    this.$data.advQueryValue = JSON.parse(JSON.stringify(this.value.query));
+    if(this.seachBarVisible){
+      this.$data.normalQueryValue = JSON.parse(JSON.stringify(this.value.query));
+    }
+    if(this.advSearchBarVisible){
+      this.$data.advQueryValue = JSON.parse(JSON.stringify(this.value.query));
+    }
     // 获取列配置信息
     this.$data.columnFilters = this.$data.mergeConfig.list.columns.map((item, index) => ({ text: item.header, value: index }));
     // 存储列配置信息（根据mergeConfig）
