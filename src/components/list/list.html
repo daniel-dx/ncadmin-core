@@ -95,7 +95,7 @@
 
           <!-- 列表数据 -->
           <template v-for="(item, index) in mergeConfig.list.columns">
-            <el-table-column :label="item.header" v-if="isColumnShow(index)" :key="index">
+            <el-table-column :label="item.header" v-if="isColumnShow(index)" :key="index" :width="item.width">
               <template slot-scope="scope">
                 <template v-if="!item.component">
                   <nc-component comp-name="nca-label" :value="scope.row[item.dataField]" :smart-data="{$item:scope.row}">
