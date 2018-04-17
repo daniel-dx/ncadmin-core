@@ -40,7 +40,8 @@ export default {
   data() {
     return {
       defaultConfig: {
-        color: ''
+        color: '',
+        class: ''
       }
     }
   },
