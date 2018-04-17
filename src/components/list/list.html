@@ -123,9 +123,9 @@
                 <el-button v-if="actionObjectEnable(mergeConfig.list.actions.delete.enable, scope.row) !== false" type="danger" size="mini" @click="eventHandlerConfirm(mergeConfig.list.actions.delete.handler, scope.row, null, '确定删除该条数据吗？')">{{mergeConfig.list.actions.delete.name || '删除'}}</el-button>
               </action-object>
               <template v-if="mergeConfig.list.actions.others">
-                <action-object class="item-op-btn other-op-btn" v-for="(item, index) in mergeConfig.list.actions.others" :config="item" :item="scope.row"
+                <action-object v-if="actionObjectEnable(item.enable, scope.row) !== false" class="item-op-btn other-op-btn" v-for="(item, index) in mergeConfig.list.actions.others" :config="item" :item="scope.row"
                   :key="index">
-                  <el-button v-if="actionObjectEnable(item.enable, scope.row) !== false" size="mini" :type="item.btnType" @click="eventHandlerConfirm(item.handler, scope.row)">{{item.name}}</el-button>
+                  <el-button size="mini" :type="item.btnType" @click="eventHandlerConfirm(item.handler, scope.row)">{{item.name}}</el-button>
                 </action-object>
               </template>
             </template>
