@@ -75,6 +75,9 @@ export default {
       // 根据配置计算出的 ‘显示的列’的index
       configColumnShow: [],
 
+      sortField: '',
+      sortOrder: '',
+
       pageCount: 1, // 页码总数
       tableData: [], // 表单数据
       multipleSelection: [], // 多选的选中项
@@ -172,6 +175,15 @@ export default {
     // 多选改变时触发
     handleSelectionChange(val) {
       this.$data.multipleSelection = val;
+    },
+
+    // 表头排序时触发
+    handelSortChange(data) {
+      let sortField = _get(data, 'column.sortBy');
+      let order = data.order;
+      this.$data.sortField  = sortField;
+      this.$data.sortOrder = order;
+      this.search();
     },
 
     eventHandlerConfirm(handler, item = {}, multipleSelection = [], defConfirmTxt) {
@@ -319,8 +331,20 @@ export default {
       const dataSource = this.$data.mergeConfig.list.datasource;
 
       let postData = {};
-      postData[dataSource.paramFields.pageSize] = this.value.pageSize;
-      postData[dataSource.paramFields.pageNum] = this.value.pageNum;
+
+      // 处理分页字段
+      if (this.pagingVisible) {
+        postData[dataSource.paramFields.pageSize] = this.value.pageSize;
+        postData[dataSource.paramFields.pageNum] = this.value.pageNum;
+      }
+      
+      // 处理排序字段
+      if (this.$data.sortField && this.$data.sortOrder) {
+        postData[dataSource.paramFields.sortField] = this.$data.sortField;
+        postData[dataSource.paramFields.sortOrder] = this.$data.sortOrder;
+      }
+
+      // 处理查询字段
       if (dataSource.paramFields.query) {
         postData[dataSource.paramFields.query] = this.value.query;
       } else {

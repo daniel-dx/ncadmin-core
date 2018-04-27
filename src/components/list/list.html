@@ -87,7 +87,7 @@
     <!--列表数据区域-->
     <el-row>
       <el-col :span="24">
-        <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+        <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" @sort-change="handelSortChange">
 
           <!-- 选择 -->
           <el-table-column v-if="mergeConfig.list.selectAll" type="selection">
@@ -95,7 +95,7 @@
 
           <!-- 列表数据 -->
           <template v-for="(item, index) in mergeConfig.list.columns">
-            <el-table-column :label="item.header" v-if="isColumnShow(index)" :key="index" :width="item.width">
+            <el-table-column :label="item.header" v-if="isColumnShow(index)" :key="index" :width="item.width" :sortable="item.sortField ? 'custom' : false" :sort-by="item.sortField">
               <template slot-scope="scope">
                 <template v-if="!item.component">
                   <nc-component comp-name="nca-label" :value="scope.row[item.dataField]" :smart-data="{$item:scope.row}">

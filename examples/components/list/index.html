@@ -251,7 +251,9 @@
               paramFields: {
                 // 传过去的参数
                 pageSize: "pageSize", // 每页显示的项数
-                pageNum: "pageNum", // 请求的页码
+                pageNum: "pageNum", // 请求的页码        
+                sortField: 'sortField', // 排序字段
+                sortOrder: 'sortOrder', // 排序方向
                 query: "" // 查询条件，当为空时，查询对象的每个Key就是字段。当提供值时，即整个查询对象作为值传过去
               },
               otherParams: {
@@ -274,6 +276,7 @@
               {
                 width: 100,
                 header: "姓名", // 表头
+                sortField: "name", // 排序的字段
                 dataField: "name" // 数据源的字段
               },
               {
@@ -395,6 +398,10 @@
                 }
               ]
             }
+          },
+
+          paging: {
+            enable: true
           }
         }
       }
