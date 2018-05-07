@@ -26,6 +26,7 @@ export default {
       formName: 'edit-modal-inside_' + ncformUtils.genRandomId(),
       onlyId: "",
       formValue: {},
+      dataLoaded: false, // 表单数据是否已经加载完毕
       defaultConfig: {
         idField: 'id', // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
         formField: '', // 数据源中哪个字段作为form的数据
@@ -63,6 +64,8 @@ export default {
       this.$data.onlyId = this.value[this.$data.mergeConfig.idField];
       if (this.$data.onlyId && this.$data.onlyId != "0") {
         this._loadFormData();
+      } else {
+        this.$data.dataLoaded = true;
       }
     },
 
@@ -71,6 +74,7 @@ export default {
       // 如果指定数据从本地数据源获取，则直接将value当数据源
       if (this.$data.mergeConfig.formData.isRemote === false) {
         this.$data.formValue = this.$data.mergeConfig.formField ? this.value[this.$data.mergeConfig.formField] : this.value;
+        this.$data.dataLoaded = true;
         return;
       }
 
@@ -91,6 +95,7 @@ export default {
         const resField = formDataConfig.resField;
         let resData = this.$options.remoteData = resField ? _get(res.data, resField) : res.data;
         this.$data.formValue = this.$data.mergeConfig.formField ? resData[this.$data.mergeConfig.formField] : resData;
+        this.$data.dataLoaded = true;
       });
     },
 
