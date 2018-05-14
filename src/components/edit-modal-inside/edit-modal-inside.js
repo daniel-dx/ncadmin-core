@@ -62,18 +62,21 @@ export default {
     _initData() {
       this.$data.formValue = {};
       this.$data.onlyId = this.value[this.$data.mergeConfig.idField];
-      if (this.$data.onlyId && this.$data.onlyId != "0") {
-        this._loadFormData();
-      } else {
-        this.$data.dataLoaded = true;
-      }
+      // 先赋值，这样支持复制这种场景
+      this.$data.formValue = this.value ? (this.$data.mergeConfig.formField ? this.value[this.$data.mergeConfig.formField] : this.value) : null;
+      this._loadFormData();
     },
 
     _loadFormData() {
 
       // 如果指定数据从本地数据源获取，则直接将value当数据源
       if (this.$data.mergeConfig.formData.isRemote === false) {
-        this.$data.formValue = this.$data.mergeConfig.formField ? this.value[this.$data.mergeConfig.formField] : this.value;
+        this.$data.dataLoaded = true;
+        return;
+      }
+
+      // 没有ID则中断请求
+      if (!this.$data.onlyId || this.$data.onlyId == "0") {
         this.$data.dataLoaded = true;
         return;
       }

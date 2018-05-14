@@ -43,6 +43,14 @@
     <nca-modal :visible.sync="config5.visible" :modal-config="config5.modalConfig">
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config5.config" :value="config5.value"></nca-edit-modal-inside>
     </nca-modal>
+
+    <p></p>
+
+    <el-button @click="config6.visible = true">6: 复制</el-button>
+    <nca-modal :visible.sync="config6.visible" :modal-config="config6.modalConfig">
+      <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config6.config" :value="config6.value"></nca-edit-modal-inside>
+    </nca-modal>
+    
   </div>
 
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
@@ -256,6 +264,41 @@
             id: 1,
           }
         },
+      
+        config6: {
+          visible: false,
+          modalConfig: {
+            title: '复制用户', // 弹窗标题
+          },
+          config: {
+            idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+            formData: {
+              isRemote: false,
+            },
+            formSchema: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string",
+                  rules: {
+                    required: true
+                  }
+                },
+              }
+            },
+            buttons: {
+              submit: {
+                // 提交
+                apiUrl: "/api/saveItem", // 提交的Url
+                valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+              }
+            }
+          },
+          value: {
+            name: 'daniel'
+          }
+        },
+
       }
     });
   </script>
