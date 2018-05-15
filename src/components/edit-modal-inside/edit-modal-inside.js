@@ -28,7 +28,8 @@ export default {
       formValue: {},
       dataLoaded: false, // 表单数据是否已经加载完毕
       defaultConfig: {
-        idField: 'id', // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+        idField: 'id', // 该表单记录的唯一标识
+        isCopy: false, // 是否复制模式
         formField: '', // 数据源中哪个字段作为form的数据
         formData: { // 当编辑模式时取表单数据用
           // 是否远程读取，默认是。如果不是，则从value属性中直接读取
@@ -60,10 +61,8 @@ export default {
   methods: {
 
     _initData() {
-      this.$data.formValue = {};
       this.$data.onlyId = this.value[this.$data.mergeConfig.idField];
-      // 先赋值，这样支持复制这种场景
-      this.$data.formValue = this.value ? (this.$data.mergeConfig.formField ? this.value[this.$data.mergeConfig.formField] : this.value) : null;
+      this.$data.formValue = Object.assign({}, this.$data.mergeConfig.formField ? this.value[this.$data.mergeConfig.formField] : this.value);
       this._loadFormData();
     },
 
@@ -71,6 +70,9 @@ export default {
 
       // 如果指定数据从本地数据源获取，则直接将value当数据源
       if (this.$data.mergeConfig.formData.isRemote === false) {
+        if (this.$data.mergeConfig.isCopy) { // 复制模式删除ID
+          delete this.$data.formValue[this.$data.mergeConfig.idField];
+        }
         this.$data.dataLoaded = true;
         return;
       }
@@ -99,6 +101,9 @@ export default {
         let resData = this.$options.remoteData = resField ? _get(res.data, resField) : res.data;
         this.$data.formValue = this.$data.mergeConfig.formField ? resData[this.$data.mergeConfig.formField] : resData;
         this.$data.dataLoaded = true;
+        if (this.$data.mergeConfig.isCopy) { // 复制模式删除ID
+          delete this.$data.formValue[this.$data.mergeConfig.idField];
+        }
       });
     },
 
@@ -120,7 +125,8 @@ export default {
           if (submitConfig.valueField) data[submitConfig.valueField] = submitData;
           else data = submitData;
 
-          data[this.$data.mergeConfig.idField] = this.$data.onlyId;
+          if (!this.$data.mergeConfig.isCopy) data[this.$data.mergeConfig.idField] = this.$data.onlyId;
+
           this.$axios(submitConfig.apiUrl, axiosOptions(submitConfig.method, data)).then(res => {
             this.$message({
               type: "success",
