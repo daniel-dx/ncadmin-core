@@ -360,7 +360,7 @@ export default {
       ).then(res => {
         const listField = dataSource.resField.list;
         const pageingTotalField = dataSource.resField.pageingTotal;
-        this.$data.itemTotal = _get(res.data, `${pageingTotalField}`, 0);
+        this.$data.itemTotal = parseInt(_get(res.data, `${pageingTotalField}`, 0));
         this.$data.tableData = listField
           ? _get(res.data, `${listField}`)
           : res.data;
