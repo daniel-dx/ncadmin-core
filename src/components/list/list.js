@@ -79,6 +79,7 @@ export default {
       sortOrder: '',
 
       pageCount: 1, // 页码总数
+      itemTotal: 0, // 数据项总数
       tableData: [], // 表单数据
       multipleSelection: [], // 多选的选中项
       showAdvSearch: false, //  搜索模式，0为普通搜索, 1为高级搜索
@@ -359,11 +360,12 @@ export default {
       ).then(res => {
         const listField = dataSource.resField.list;
         const pageingTotalField = dataSource.resField.pageingTotal;
+        this.$data.itemTotal = _get(res.data, `${pageingTotalField}`, 0);
         this.$data.tableData = listField
           ? _get(res.data, `${listField}`)
           : res.data;
         this.$data.pageCount = pageingTotalField
-          ? Math.ceil(_get(res.data, `${pageingTotalField}`, 0) / this.value.pageSize)
+          ? Math.ceil(this.$data.itemTotal / this.value.pageSize)
           : 1;
       });
     },

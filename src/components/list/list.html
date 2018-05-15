@@ -140,7 +140,7 @@
   <!--分页区域-->
   <el-row v-if="pagingVisible" class="mgt30">
     <el-col align="right">
-      <el-pagination background @size-change="handleSizeChange" @current-change="currentChange" layout="sizes, prev, pager, next, jumper"
+      <el-pagination background :total="itemTotal" @size-change="handleSizeChange" @current-change="currentChange" layout="total, sizes, prev, pager, next, jumper"
         :page-count="pageCount" :current-page="value.pageNum " :page-sizes="[20, 40, 60, 80, 100]">
       </el-pagination>
     </el-col>
