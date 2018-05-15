@@ -122,6 +122,8 @@ export default {
             submitData = Object.assign({}, this.$options.remoteData || this.value, this.$data.formValue);
           }
 
+          if (this.$data.mergeConfig.isCopy) delete submitData[this.$data.mergeConfig.idField];
+
           if (submitConfig.valueField) data[submitConfig.valueField] = submitData;
           else data = submitData;
 
