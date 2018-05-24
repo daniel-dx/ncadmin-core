@@ -1,6 +1,6 @@
 {
   "name": "ncadmin-core",
-  "version": "1.0.88",
+  "version": "1.0.89",
   "description": "",
   "homepage": "",
   "author": {
@@ -46,7 +46,7 @@
     "lodash-es": "^4.16.2",
     "map-stream": "0.0.6",
     "mocha": "^4.0.1",
-    "ncform": "^1.2.4",
+    "ncform": "^1.2.5",
     "ncform-common": "^1.0.55",
     "ncform-theme-elementui": "^1.1.2",
     "node-libs-browser": "^1.0.0",
