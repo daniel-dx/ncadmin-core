@@ -31,6 +31,7 @@
     "babel-runtime": "^6.3.19",
     "browser-sync": "^2.9.1",
     "concat": "^1.0.0",
+    "cross-env": "^5.1.6",
     "css-loader": "^0.23.1",
     "csswring": "^4.0.0",
     "element-ui": "^2.0.11",
@@ -67,7 +68,7 @@
   },
   "scripts": {
     "dev": "gulp dev",
-    "release": "NODE_ENV=production gulp build",
+    "release": "cross-env NODE_ENV=production gulp build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "up": "npm update ncform ncform-common ncform-theme-elementui"
   },

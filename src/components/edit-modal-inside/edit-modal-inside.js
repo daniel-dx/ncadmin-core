@@ -138,7 +138,7 @@ export default {
               done();
             });
           } else { // 无则通知value改变
-            this.$emit('input', data);
+            this.$emit('input', data); 
             done();
           }
         }
