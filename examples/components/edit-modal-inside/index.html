@@ -58,6 +58,13 @@
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config7.config" :value="config7.value"></nca-edit-modal-inside>
     </nca-modal>
 
+    <p></p>
+
+    <el-button @click="config8.visible = true">8: 不调提交数据</el-button>
+    <nca-modal :visible.sync="config8.visible" :modal-config="config8.modalConfig">
+      <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config8.config" v-model="config8.value"></nca-edit-modal-inside>
+    </nca-modal>
+
   </div>
 
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
@@ -348,6 +355,40 @@
           },
           value: {
             id: 1
+          }
+        },
+
+        config8: {
+          visible: false,
+          modalConfig: {
+            title: '编辑用户', // 弹窗标题
+          },
+          config: {
+            idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+            formData: {
+              isRemote: false,
+            },
+            formSchema: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string",
+                  rules: {
+                    required: true
+                  }
+                }
+              }
+            },
+            buttons: {
+              submit: {
+                // 提交
+                apiUrl: "", // 不提供则表示不调用接口提交
+              }
+            }
+          },
+          value: {
+            id: 1,
+            name: 'daniel'
           }
         },
 

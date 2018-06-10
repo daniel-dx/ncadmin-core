@@ -49,7 +49,7 @@ export default {
         },
         buttons: {
           submit: { // 提交
-            apiUrl: '', // 提交的Url
+            apiUrl: '', // 提交的Url。当为空时表示不调用接口提交，而只是改变model值
             method: 'post', // get/post default:get
             valueField: '', // 当为空时，即表单的每个一级字段即为参数名
           }
@@ -129,13 +129,18 @@ export default {
 
           if (!this.$data.mergeConfig.isCopy) data[this.$data.mergeConfig.idField] = this.$data.onlyId;
 
-          this.$axios(submitConfig.apiUrl, axiosOptions(submitConfig.method, data)).then(res => {
-            this.$message({
-              type: "success",
-              message: "保存成功"
+          if (submitConfig.apiUrl) { // 有则远程调用 
+            this.$axios(submitConfig.apiUrl, axiosOptions(submitConfig.method, data)).then(res => {
+              this.$message({
+                type: "success",
+                message: "保存成功"
+              });
+              done();
             });
+          } else { // 无则通知value改变
+            this.$emit('input', data);
             done();
-          });
+          }
         }
       });
     },
