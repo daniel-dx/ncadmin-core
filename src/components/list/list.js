@@ -57,6 +57,14 @@ export default {
     this.checkSelectAll();
 
     eventHub.$on('nca-component-notify-submit', this.loadTableData);
+
+    const notifyRefreshEventName = _get(this.$data.mergeConfig, 'listenEvents.notifyRefresh');
+    if (notifyRefreshEventName) {
+      eventHub.$on(notifyRefreshEventName, refreshType => {
+        this._refreshHandler(refreshType);
+      });
+    }
+
   },
 
   mounted() {

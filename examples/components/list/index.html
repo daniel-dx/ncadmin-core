@@ -14,6 +14,8 @@
   <!--演示区域-->
   <div id="demo">
     <list :config="config" v-model="valueData" @item-edit="listEventHandler"></list>
+
+    <button @click="notifyRefresh">外部通知列表刷新</button>
   </div>
 
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
@@ -36,6 +38,10 @@
     Vue.component('nca-image', image);
     Vue.component('nca-edit-modal-inside', editModalInside);
 
+    // eventHub 的具体实现，因为这里没法直接引入utils/event-hub.js
+    if (!window.ncadmin_eventHub)
+      window.ncadmin_eventHub = new Vue();
+
     // Bootstrap the app
     new Vue({
       el: '#demo',
@@ -45,6 +51,9 @@
       methods: {
         listEventHandler(data) {
           console.log(data);
+        },
+        notifyRefresh() {
+          window.ncadmin_eventHub.$emit('notifyRefresh', 'resetAll'); // 'resetPage' 'resetAll'
         }
       },
       data: {
@@ -54,6 +63,12 @@
           query: {}
         },
         config: {
+
+          // 事件
+          listenEvents: {
+            notifyRefresh: 'notifyRefresh', // event data: current-当前页码和查询条件刷新 resetPage-重置查询页码进行刷新 resetAll-重置查询条件和页码进行刷新
+          },
+
           // 查询条件
           query: {
             normal: {
