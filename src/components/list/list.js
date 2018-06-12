@@ -60,8 +60,9 @@ export default {
 
     const notifyRefreshEventName = _get(this.$data.mergeConfig, 'listenEvents.notifyRefresh');
     if (notifyRefreshEventName) {
-      eventHub.$on(notifyRefreshEventName, refreshType => {
-        this._refreshHandler(refreshType);
+      eventHub.$on(notifyRefreshEventName, data => {
+        this.$options.outsideAddonQuery = data.query || {}; // 组件外加给组件的查询参数
+        this._refreshHandler(data.refreshType || 'current');
       });
     }
 
@@ -360,7 +361,7 @@ export default {
         postData = Object.assign(postData, this.value.query);
       }
       
-      postData = Object.assign(postData, dataSource.otherParams);
+      postData = Object.assign(postData, dataSource.otherParams, this.$options.outsideAddonQuery || {});
       
       this.$axios(
         dataSource.apiUrl,

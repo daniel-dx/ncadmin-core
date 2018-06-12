@@ -53,7 +53,7 @@
           console.log(data);
         },
         notifyRefresh() {
-          window.ncadmin_eventHub.$emit('notifyRefresh', 'resetAll'); // 'resetPage' 'resetAll'
+          window.ncadmin_eventHub.$emit('notifyRefresh', {refreshType: 'resetAll', query: {a:'b'}}); // 'resetPage' 'resetAll'
         }
       },
       data: {
