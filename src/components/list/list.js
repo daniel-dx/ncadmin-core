@@ -185,6 +185,7 @@ export default {
     // 多选改变时触发
     handleSelectionChange(val) {
       this.$data.multipleSelection = val;
+      this.$emit('select-change', val);
     },
 
     // 表头排序时触发
