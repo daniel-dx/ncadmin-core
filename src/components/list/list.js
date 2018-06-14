@@ -108,6 +108,9 @@ export default {
   },
 
   computed: {
+    actionColumnWidth() {
+      return _get(this.$data.mergeConfig, 'list.actionColumn.width', '');
+    },
     // 搜索栏 是否显示
     seachBarVisible() {
       return this.$data.mergeConfig.query && this.$data.mergeConfig.query.normal;
