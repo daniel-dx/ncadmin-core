@@ -15,6 +15,7 @@ import list from './list/index.vue';
 import modal from './modal/index.vue';
 import label from './widgets/label/index.vue';
 import image from './widgets/image/index.vue';
+import link from './widgets/link/index.vue';
 // Don't touch me - import
 
 Vue.component('nca-detail-modal-inside', detailModalInside);
@@ -26,6 +27,7 @@ Vue.component('nca-modal', modal);
 
 Vue.component('nca-label', label);
 Vue.component('nca-image', image);
+Vue.component('nca-link', link);
 
 export default {
   ncformCommon,

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Component Example</title>
+</head>
+<body>
+
+  <!--演示区域-->
+  <div id="demo">
+    <nca-link v-model="modelValue" :config="config"></nca-link>
+  </div>
+
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="../../../dist/link.js"></script>
+  <script type="text/javascript">
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      components: {
+        'nca-link': link
+      },
+      data: {
+        modelValue: 'baidu',
+        config: {
+          href: 'http://www.baidu.com',
+          newWin: false
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

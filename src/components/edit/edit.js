@@ -45,6 +45,7 @@ export default {
             apiUrl: '', // 提交的Url
             method: 'post', // get/post default: post
             valueField: '', // 当为空时，即表单的每个一级字段即为参数名
+            goBack: true, // 是否返回
           },
           back: { // 返回
             enable: true
@@ -63,7 +64,9 @@ export default {
   methods: {
 
     goBack() {
-      this.$emit("goBack");
+      if (this.$data.mergeConfig.buttons.submit.goBack) {
+        this.$emit("goBack");
+      }
     },
 
     initData() {
