@@ -108,6 +108,9 @@ export default {
   },
 
   computed: {
+    actionColumnWidth() {
+      return _get(this.$data.mergeConfig, 'list.actionColumn.width', '');
+    },
     // 搜索栏 是否显示
     seachBarVisible() {
       return this.$data.mergeConfig.query && this.$data.mergeConfig.query.normal;
@@ -185,6 +188,7 @@ export default {
     // 多选改变时触发
     handleSelectionChange(val) {
       this.$data.multipleSelection = val;
+      this.$emit('select-change', val);
     },
 
     // 表头排序时触发
