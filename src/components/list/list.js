@@ -73,6 +73,12 @@ export default {
     this.loadTableData();
   },
 
+  beforeDestroy() {
+    eventHub.$off('nca-component-notify-submit');
+    const notifyRefreshEventName = _get(this.$data.mergeConfig, 'listenEvents.notifyRefresh');
+    if (notifyRefreshEventName) eventHub.$off(notifyRefreshEventName);
+  },
+
   data() {
     return {
       columnSelectAll: false,

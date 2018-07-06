@@ -25,7 +25,7 @@ export default {
     });
   },
 
-  destroyed() {
+  beforeDestroy() {
     eventHub.$off(`fromModal_${this.modalId}`);
   },
 

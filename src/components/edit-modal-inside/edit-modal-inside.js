@@ -1,6 +1,5 @@
 import _get from "lodash-es/get";
 import { ncformUtils } from "ncform-common";
-import eventHub from '../../utils/event-hub.js';
 import axios from 'axios';
 import modalInsideMixins from '../widgets/modal-inside-mixin.js';
 import { axiosOptions } from "../../utils/helper.js";

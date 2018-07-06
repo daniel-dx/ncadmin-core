@@ -95,7 +95,7 @@ export default {
     }
   },
   
-  destroyed() {
+  beforeDestroy() {
     eventHub.$off(`toModal_${this.$data.modalId}`);
   }
 };
