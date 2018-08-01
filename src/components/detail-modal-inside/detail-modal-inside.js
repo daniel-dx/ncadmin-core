@@ -94,13 +94,6 @@ export default {
       handler() {
         this.initData();
       }
-    },
-    formValue: {
-      handler(newVal) {
-        if(JSON.stringify(newVal)!=JSON.stringify(this.value)){
-          this.$emit("input", JSON.parse(JSON.stringify(newVal)));
-        }
-      }
     }
   }
 };

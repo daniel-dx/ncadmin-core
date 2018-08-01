@@ -147,9 +147,20 @@ export default {
 
   watch: {
     value: {
-      handler() {
-        this._initData();
-      }
+      handler(newVal, oldVal) {
+        if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
+          this.initData();
+        }
+      },
+      deep: true
+    },
+    formValue: {
+      handler(newVal) {
+        if (JSON.stringify(newVal) != JSON.stringify(this.value)) {
+          Object.assign(this.value, newVal);
+        }
+      },
+      deep: true
     }
   }
 };
