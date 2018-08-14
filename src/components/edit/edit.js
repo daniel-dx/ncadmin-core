@@ -22,6 +22,7 @@ export default {
 
   data() {
     return {
+      editFormName: `edit-${new Date().getTime()}`,
       onlyId: "",
       formValue: {},
       defaultConfig: {
@@ -103,29 +104,32 @@ export default {
     },
 
     submitData() {
-      const submitConfig = this.$data.mergeConfig.buttons.submit;
-      let data = {}, submitData;
+      this.$ncformValidate(this.$data.editFormName).then( dataNeverUsed => {
+        if (!dataNeverUsed.result) {return;}
+        const submitConfig = this.$data.mergeConfig.buttons.submit;
+        let data = {}, submitData;
 
-      // 保证取回什么样的数据格式，就提交什么样的数据格式
-      if (this.$data.mergeConfig.formField) {
-        submitData = Object.assign({}, this.$options.remoteData || this.value);
-        submitData[this.$data.mergeConfig.formField] = Object.assign(submitData[this.$data.mergeConfig.formField], this.$data.formValue);
-      } else {
-        submitData = Object.assign({}, this.$options.remoteData || this.value, this.$data.formValue);
-      }
+        // 保证取回什么样的数据格式，就提交什么样的数据格式
+        if (this.$data.mergeConfig.formField) {
+          submitData = Object.assign({}, this.$options.remoteData || this.value);
+          submitData[this.$data.mergeConfig.formField] = Object.assign(submitData[this.$data.mergeConfig.formField], this.$data.formValue);
+        } else {
+          submitData = Object.assign({}, this.$options.remoteData || this.value, this.$data.formValue);
+        }
 
-      if (submitConfig.valueField) data[submitConfig.valueField] = submitData;
-      else data = submitData;
+        if (submitConfig.valueField) data[submitConfig.valueField] = submitData;
+        else data = submitData;
 
-      this.$axios(
-        submitConfig.apiUrl,
-        axiosOptions(submitConfig.method, data)
-      ).then(res => {
-        this.$message({
-          type: "success",
-          message: "保存成功"
+        this.$axios(
+          submitConfig.apiUrl,
+          axiosOptions(submitConfig.method, data)
+        ).then(res => {
+          this.$message({
+            type: "success",
+            message: "保存成功"
+          });
+          this.goBack();
         });
-        this.goBack();
       });
     }
   },
