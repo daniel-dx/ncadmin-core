@@ -48,11 +48,11 @@ ncform的通用类库，请参考ncform-common项目的文档
 
 请参考ncform项目的文档
 
-### nac-detail
+### nca-detail
 
 ```html
 <template>
-  <nac-detail></nac-detail>
+  <nca-detail></nca-detail>
 </template>
 <script>
   export default {
@@ -65,28 +65,11 @@ ncform的通用类库，请参考ncform-common项目的文档
 </script>
 ```
 
-### nac-detail-modal
+### nca-detail-modal
 
 ```html
 <template>
-  <nac-detail-modal></nac-detail-modal>
-</template>
-<script>
-  export default {
-    data() {
-      return {
-        
-      }
-    }
-  }
-</script>
-```
-
-### nac-edit
-
-```html
-<template>
-  <nac-edit></nac-edit>
+  <nca-detail-modal></nca-detail-modal>
 </template>
 <script>
   export default {
@@ -99,11 +82,11 @@ ncform的通用类库，请参考ncform-common项目的文档
 </script>
 ```
 
-### nac-edit-modal
+### nca-edit
 
 ```html
 <template>
-  <nac-edit-modal></nac-edit-modal>
+  <nca-edit></nca-edit>
 </template>
 <script>
   export default {
@@ -116,11 +99,11 @@ ncform的通用类库，请参考ncform-common项目的文档
 </script>
 ```
 
-### nac-list
+### nca-edit-modal
 
 ```html
 <template>
-  <nac-list></nac-list>
+  <nca-edit-modal></nca-edit-modal>
 </template>
 <script>
   export default {
@@ -133,20 +116,37 @@ ncform的通用类库，请参考ncform-common项目的文档
 </script>
 ```
 
-### nac-modal
+### nca-list
+
+```html
+<template>
+  <nca-list></nca-list>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        
+      }
+    }
+  }
+</script>
+```
+
+### nca-modal
 
 弹窗组件，可配置弹窗的标题，底部按钮
 
-弹窗里面的内容需要当一个组件来开发，组件需遵循nac-modal内容组件的规则来开发
+弹窗里面的内容需要当一个组件来开发，组件需遵循nca-modal内容组件的规则来开发
 
 ```html
 <template>
-  <nac-modal :visible.sync="visible" :modal-config="modalConfig">
+  <nca-modal :visible.sync="visible" :modal-config="modalConfig">
     <!--
       当组件需要与弹窗进行交互时（比如通知弹窗关闭），请按下面的例子填写slot-scope和modal-id
     -->
     <component slot-scope="modalProps" :modal-id="modalProps.modalId"></component>
-  </nac-modal>
+  </nca-modal>
 </template>
 <script>
   export default {
@@ -225,11 +225,11 @@ ncform的通用类库，请参考ncform-common项目的文档
 
 ## Widgets
 
-### nac-label
+### nca-label
 
 ```js
 component: {
-  name: 'nac-label',
+  name: 'nca-label',
   config: {
     color: ''
   },
@@ -237,11 +237,11 @@ component: {
 }
 ```
 
-### nac-image
+### nca-image
 
 ```js
 component: {
-  name: 'nac-image',
+  name: 'nca-image',
   config: {
     maxWidth: ''
   },
