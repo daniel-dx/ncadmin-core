@@ -25,16 +25,18 @@
   </div>
 
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
-  <script type="text/javascript" src="../../../node_modules/ncform-common/dist/ncformCommon.min.js"></script>
-  <script type="text/javascript" src="../../../node_modules/ncform/dist/vueNcform.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/@ncform//ncform/dist/vueNcform.min.js"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script type="text/javascript" src="../../../node_modules/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
 
   <script type="text/javascript" src="../../../dist/modal.js"></script>
   <script type="text/javascript" src="../../../dist/detailModalInside.js"></script>
+  <script type="text/javascript" src="../../../dist/label.js"></script>
 
   <script type="text/javascript">
     Vue.use(vueNcform, { extComponents: ncformStdComps.default });
+    Vue.component('nca-label', label);
     Vue.component('nca-modal', modal);
     Vue.component('nca-detail-modal-inside', detailModalInside);
 

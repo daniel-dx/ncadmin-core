@@ -1,4 +1,4 @@
-import { ncformUtils } from "ncform-common";
+import { ncformUtils } from "@ncform/ncform-common";
 
 export default {
   props: ["config", "value", "rootData"],

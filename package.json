@@ -47,9 +47,6 @@
     "lodash-es": "^4.16.2",
     "map-stream": "0.0.6",
     "mocha": "^4.0.1",
-    "ncform": "^1.2.5",
-    "ncform-common": "^1.0.55",
-    "ncform-theme-elementui": "^1.1.2",
     "node-libs-browser": "^1.0.0",
     "node-sass": "^4.5.3",
     "postcss-loader": "^0.8.0",
@@ -64,13 +61,16 @@
     "vue-html-loader": "^1.1.0",
     "vue-loader": "^8.0.1",
     "vue-style-loader": "^1.0.0",
-    "webpack": "^1.12.1"
+    "webpack": "^1.12.1",
+    "@ncform/ncform": "^0.1.10",
+    "@ncform/ncform-common": "^0.1.10",
+    "@ncform/ncform-theme-elementui": "^0.1.10"
   },
   "scripts": {
     "dev": "gulp dev",
     "release": "cross-env NODE_ENV=production gulp build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "up": "npm update ncform ncform-common ncform-theme-elementui"
+    "up": "npm update @ncform/ncform @ncform/ncform-common @ncform/ncform-theme-elementui"
   },
   "license": "MIT",
   "dependencies": {

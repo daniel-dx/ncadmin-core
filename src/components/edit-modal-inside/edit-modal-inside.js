@@ -1,5 +1,5 @@
 import _get from "lodash-es/get";
-import { ncformUtils } from "ncform-common";
+import { ncformUtils } from "@ncform/ncform-common";
 import axios from 'axios';
 import modalInsideMixins from '../widgets/modal-inside-mixin.js';
 import { axiosOptions } from "../../utils/helper.js";

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { ncformUtils } from "ncform-common";
+import { ncformUtils } from "@ncform/ncform-common";
 import ncComponent from "./nc-component.vue";
 
 export default {

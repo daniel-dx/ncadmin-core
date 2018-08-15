@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import ncformCommon from 'ncform-common';
-import ncform from 'ncform';
-import ncformThemeElementui from 'ncform-theme-elementui';
+import ncformCommon from '@ncform/ncform-common';
+import ncform from '@ncform/ncform';
+import ncformThemeElementui from '@ncform/ncform-theme-elementui';
 
 import widgetMixin from './widgets/mixin.js';
 import modalInsideMixin from './widgets/modal-inside-mixin.js';

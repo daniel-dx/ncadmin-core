@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import { ncformUtils } from "ncform-common";
+import { ncformUtils } from "@ncform/ncform-common";
 import eventHub from '../../utils/event-hub.js'
 
 export default {
