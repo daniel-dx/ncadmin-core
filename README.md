@@ -255,7 +255,7 @@ component: {
 
 通过配置开发一个新建/编辑的页面
 （根据配置中的idField字段，在$route中取页面唯一值（通常为Id）。值为0时，页面为新建状态，值为其他值时，页面为编辑状态。）
-具体配置参考[文档](http://gitlab.tools.vipshop.com/daniel.xiao/admin-terminator/blob/master/ediable-detail-config.md)
+具体配置参考[文档](config-edit.md)
 
 ### 示例
 ```html
@@ -284,7 +284,7 @@ component: {
 
 通过配置开发一个查询列表的页面
 
-具体配置参考[文档](http://gitlab.tools.vipshop.com/daniel.xiao/admin-terminator/blob/master/query-list-config.md)
+具体配置参考[文档](config-list.md)
 
 ### 示例
 ```html
