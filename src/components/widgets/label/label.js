@@ -12,7 +12,12 @@ export default {
 
   created() {
     // 在这里做一些跟DOM无关的初始化, 比如获取初始化数据
-
+    let filterFn = this.$data.mergeConfig.filterFn;
+    if (filterFn && typeof(filterFn) === 'function') {
+      this.$data.modelVal = filterFn.apply(null, [this.value].concat(this.$data.mergeConfig.filterFnParam || []));
+    } else {
+      this.$data.modelVal = this.value;
+    }
   },
 
   mounted() {
@@ -39,9 +44,12 @@ export default {
 
   data() {
     return {
+      modelVal: '',
       defaultConfig: {
-        color: '',
-        class: ''
+        color: '', // 字体颜色
+        class: '', // css类名
+        filterFn: null, // filter function
+        filterFnParam: [], // filter function parameters
       }
     }
   },

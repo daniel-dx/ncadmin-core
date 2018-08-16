@@ -111,7 +111,7 @@
           </template>
 
           <!-- 操作 -->
-          <el-table-column align="left" label="操作" :width="actionColumnWidth">
+          <el-table-column v-if="mergeConfig.list.actions && Object.keys(mergeConfig.list.actions).length > 0" align="left" label="操作" :width="actionColumnWidth">
             <template slot-scope="scope">
               <action-object class="item-op-btn" v-if="mergeConfig.list.actions.view" :config="mergeConfig.list.actions.view" :item="scope.row">
                 <el-button v-if="actionObjectEnable(mergeConfig.list.actions.view.enable, scope.row) !== false" type="success" size="mini" @click="eventHandlerConfirm(mergeConfig.list.actions.view.handler, scope.row)">{{mergeConfig.list.actions.view.name || '查看'}}</el-button>
@@ -130,7 +130,6 @@
               </template>
             </template>
           </el-table-column>
-
 
         </el-table>
       </el-col>
