@@ -89,7 +89,7 @@ module.exports = {
         {
           id: 1,
           date: '2018-12-12',
-          name: 'daniel',
+          name: 'daniel' + Math.random(),
           address: 'china',
           photo: 'http://img1.imgtn.bdimg.com/it/u=1195753862,969387509&fm=11&gp=0.jpg'
         },
