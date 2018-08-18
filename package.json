@@ -1,6 +1,6 @@
 {
   "name": "ncadmin-core",
-  "version": "1.0.107",
+  "version": "1.0.108",
   "description": "",
   "homepage": "",
   "author": {
@@ -19,6 +19,9 @@
     "README.md"
   ],
   "devDependencies": {
+    "@ncform/ncform": "^0.1.11",
+    "@ncform/ncform-common": "^0.1.10",
+    "@ncform/ncform-theme-elementui": "^0.1.11",
     "autoprefixer": "^6.0.2",
     "babel-core": "^6.2.21",
     "babel-eslint": "^6.0.4",
@@ -61,10 +64,7 @@
     "vue-html-loader": "^1.1.0",
     "vue-loader": "^8.0.1",
     "vue-style-loader": "^1.0.0",
-    "webpack": "^1.12.1",
-    "@ncform/ncform": "^0.1.10",
-    "@ncform/ncform-common": "^0.1.10",
-    "@ncform/ncform-theme-elementui": "^0.1.10"
+    "webpack": "^1.12.1"
   },
   "scripts": {
     "dev": "gulp dev",
