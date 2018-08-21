@@ -14,13 +14,13 @@ npm install ncadmin-core
 ## Usage
 
 ``` js
-// 使用其工具库
+// 使用其工具库
 import {
   ncformCommon,
   eventHub,
 } from 'ncadmin-core';
 
-// 使用其组件。具体的组件请阅读下面的组件文档
+// 使用其组件。具体的组件请阅读下面的组件文档
 <nca-xxx></nca-xxx>
 ```
 
@@ -29,7 +29,7 @@ import {
 ### eventHub
 
 事件总线，用于全局触发和监听事件
-
+
 ```js
   import ncadminCore from 'ncadmin-core';
   const { eventHub } = ncadminCore;
@@ -42,11 +42,11 @@ import {
 
 ncform的通用类库，请参考ncform-common项目的文档
 
-## 组件列表
+## 组件列表
 
-### ncform
+### ncform
 
-请参考ncform项目的文档
+请参考ncform项目的文档
 
 ### nca-detail
 
@@ -253,9 +253,9 @@ component: {
 
 # edit-page.vue
 
-通过配置开发一个新建/编辑的页面
+通过配置开发一个新建/编辑的页面
 （根据配置中的idField字段，在$route中取页面唯一值（通常为Id）。值为0时，页面为新建状态，值为其他值时，页面为编辑状态。）
-具体配置参考[文档](config-edit.md)
+具体配置参考[文档](config-edit.md)
 
 ### 示例
 ```html
@@ -284,7 +284,7 @@ component: {
 
 通过配置开发一个查询列表的页面
 
-具体配置参考[文档](config-list.md)
+具体配置参考[文档](config-list.md)
 
 ### 示例
 ```html
