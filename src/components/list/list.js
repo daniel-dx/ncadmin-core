@@ -31,6 +31,11 @@ export default {
 
   created() {
     this.$axios = !this.$axios ? axios : this.$axios;
+
+    // 设置默认值（因为value是个对象，这里不设置，上面的default值是不生效的）
+    this.value.pageNum = this.value.pageNum || 1;
+    this.value.pageSize = this.value.pageSize || 20;
+
     // 初始化搜索内容
     if(this.seachBarVisible){
       this.$data.normalQueryValue = JSON.parse(JSON.stringify(this.value.query));
@@ -38,8 +43,10 @@ export default {
     if(this.advSearchBarVisible){
       this.$data.advQueryValue = JSON.parse(JSON.stringify(this.value.query));
     }
+
     // 获取列配置信息
     this.$data.columnFilters = this.$data.mergeConfig.list.columns.map((item, index) => ({ text: item.header, value: index }));
+    
     // 存储列配置信息（根据mergeConfig）
     this.$data.mergeConfig.list.columns.forEach((item, index) => {
       if (item.defShow !== false) {
@@ -150,7 +157,7 @@ export default {
     },
 
     pagingVisible() {
-      return !this.$data.initLoading && (!this.$data.mergeConfig.paging || this.$data.mergeConfig.paging.enable);
+      return !this.$data.mergeConfig.paging || this.$data.mergeConfig.paging.enable;
     }
   },
   methods: {
@@ -365,7 +372,7 @@ export default {
         postData[dataSource.paramFields.pageSize] = this.value.pageSize;
         postData[dataSource.paramFields.pageNum] = this.value.pageNum;
       }
-      
+
       // 处理排序字段
       if (this.$data.sortField && this.$data.sortOrder) {
         postData[dataSource.paramFields.sortField] = this.$data.sortField;
