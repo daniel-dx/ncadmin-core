@@ -70,7 +70,11 @@ export default {
 
   mounted() {
     // 加载数据
-    this.loadTableData();
+    this.loadTableData().then(() => {
+      this.$data.initLoading = false;
+    }).catch(() => {
+      this.$data.initLoading = false;
+    });
   },
 
   beforeDestroy() {
@@ -81,6 +85,10 @@ export default {
 
   data() {
     return {
+
+      initLoading: true,
+
+      // 是否支持全选
       columnSelectAll: false,
       // 列的选项
       columnFilters: [],
@@ -142,7 +150,7 @@ export default {
     },
 
     pagingVisible() {
-      return !this.$data.mergeConfig.paging || this.$data.mergeConfig.paging.enable;
+      return !this.$data.initLoading && (!this.$data.mergeConfig.paging || this.$data.mergeConfig.paging.enable);
     }
   },
   methods: {
@@ -373,7 +381,7 @@ export default {
       
       postData = Object.assign(postData, dataSource.otherParams, this.$options.outsideAddonQuery || {});
       
-      this.$axios(
+      return this.$axios(
         dataSource.apiUrl,
         axiosOptions(dataSource.method, postData)
       ).then(res => {
@@ -386,6 +394,7 @@ export default {
         this.$data.pageCount = pageingTotalField
           ? Math.ceil(this.$data.itemTotal / this.value.pageSize)
           : 1;
+        return;
       });
     },
 

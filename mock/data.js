@@ -102,7 +102,7 @@ module.exports = {
         }
       ],
       page: {
-        total: 2
+        total: 21
       }
     }
   },
