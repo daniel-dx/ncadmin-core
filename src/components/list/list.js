@@ -395,9 +395,12 @@ export default {
         const listField = dataSource.resField.list;
         const pageingTotalField = dataSource.resField.pageingTotal;
         this.$data.itemTotal = parseInt(_get(res.data, `${pageingTotalField}`, 0));
-        this.$data.tableData = listField
+        this.$data.tableData = [];
+        this.$nextTick(() => { // 这里先置空，再在下一个循环赋值，是为了绕开el-table没法正确显示更新后的值的BUG
+          this.$data.tableData = listField
           ? _get(res.data, `${listField}`)
           : res.data;
+        })
         this.$data.pageCount = pageingTotalField
           ? Math.ceil(this.$data.itemTotal / this.value.pageSize)
           : 1;
