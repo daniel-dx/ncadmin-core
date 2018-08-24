@@ -37,16 +37,16 @@ export default {
     this.value.pageSize = this.value.pageSize || 20;
 
     // 初始化搜索内容
-    if(this.seachBarVisible){
+    if (this.seachBarVisible) {
       this.$data.normalQueryValue = JSON.parse(JSON.stringify(this.value.query));
     }
-    if(this.advSearchBarVisible){
+    if (this.advSearchBarVisible) {
       this.$data.advQueryValue = JSON.parse(JSON.stringify(this.value.query));
     }
 
     // 获取列配置信息
     this.$data.columnFilters = this.$data.mergeConfig.list.columns.map((item, index) => ({ text: item.header, value: index }));
-    
+
     // 存储列配置信息（根据mergeConfig）
     this.$data.mergeConfig.list.columns.forEach((item, index) => {
       if (item.defShow !== false) {
@@ -76,12 +76,20 @@ export default {
   },
 
   mounted() {
-    // 加载数据
-    this.loadTableData().then(() => {
-      this.$data.initLoading = false;
-    }).catch(() => {
-      this.$data.initLoading = false;
-    });
+    // 初始加载数据（放在nextTick是为了取得查询条件表单的默认值）
+    this.$nextTick(() => {
+      this.value.query = Object.assign(
+        {},
+        this.value.query,
+        this.$data.normalQueryValue,
+        this.$data.advQueryValue
+      );
+      this.loadTableData().then(() => {
+        this.$data.initLoading = false;
+      }).catch(() => {
+        this.$data.initLoading = false;
+      });
+    })
   },
 
   beforeDestroy() {
@@ -216,7 +224,7 @@ export default {
     handelSortChange(data) {
       let sortField = _get(data, 'column.sortBy');
       let order = data.order;
-      this.$data.sortField  = sortField;
+      this.$data.sortField = sortField;
       this.$data.sortOrder = order;
       this.search();
     },
@@ -235,7 +243,7 @@ export default {
       }
     },
 
-    actionObjectEnable(enable, item={}, multipleSelection = []){
+    actionObjectEnable(enable, item = {}, multipleSelection = []) {
       const handlerData = [
         {
           symbol: "$item",
@@ -254,7 +262,7 @@ export default {
     },
 
     _actionObjectEvent(options, data) {
-      if(options && options.name){
+      if (options && options.name) {
         const emitData = ncformUtils.smartAnalyze(options.data, {
           data
         });
@@ -385,9 +393,9 @@ export default {
       } else {
         postData = Object.assign(postData, this.value.query);
       }
-      
+
       postData = Object.assign(postData, dataSource.otherParams, this.$options.outsideAddonQuery || {});
-      
+
       return this.$axios(
         dataSource.apiUrl,
         axiosOptions(dataSource.method, postData)
@@ -398,8 +406,8 @@ export default {
         this.$data.tableData = [];
         this.$nextTick(() => { // 这里先置空，再在下一个循环赋值，是为了绕开el-table没法正确显示更新后的值的BUG
           this.$data.tableData = listField
-          ? _get(res.data, `${listField}`)
-          : res.data;
+            ? _get(res.data, `${listField}`)
+            : res.data;
         })
         this.$data.pageCount = pageingTotalField
           ? Math.ceil(this.$data.itemTotal / this.value.pageSize)

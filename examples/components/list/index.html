@@ -53,7 +53,7 @@
           console.log(data);
         },
         notifyRefresh() {
-          window.ncadmin_eventHub.$emit('notifyRefresh', {refreshType: 'resetAll', query: {a:'b'}}); // 'resetPage' 'resetAll'
+          window.ncadmin_eventHub.$emit('notifyRefresh', { refreshType: 'resetAll', query: { a: 'b' } }); // 'resetPage' 'resetAll'
         }
       },
       data: {
@@ -77,7 +77,8 @@
               type: "object",
               properties: {
                 kw1: {
-                  type: "string ",
+                  type: "string",
+                  default: 'hello',
                   ui: {
                     label: "查询条件一",
                     columns: 3,
@@ -85,7 +86,7 @@
                   }
                 },
                 kw2: {
-                  type: "string ",
+                  type: "string",
                   ui: {
                     label: "查询条件二",
                     columns: 3,
@@ -93,7 +94,7 @@
                   }
                 },
                 kw3: {
-                  type: "string ",
+                  type: "string",
                   ui: {
                     label: "查询条件三",
                     columns: 3,
@@ -101,7 +102,7 @@
                   }
                 },
                 kw4: {
-                  type: "string ",
+                  type: "string",
                   ui: {
                     label: "查询条件四",
                     columns: 3,
@@ -109,7 +110,7 @@
                   }
                 },
                 kw5: {
-                  type: "string ",
+                  type: "string",
                   ui: {
                     label: "查询条件五",
                     columns: 3,
