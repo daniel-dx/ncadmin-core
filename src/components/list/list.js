@@ -394,7 +394,8 @@ export default {
         postData = Object.assign(postData, this.value.query);
       }
 
-      postData = Object.assign(postData, dataSource.otherParams, this.$options.outsideAddonQuery || {});
+      // otherParams的优先级低于查询参数，排序参数
+      postData = Object.assign(dataSource.otherParams, postData, this.$options.outsideAddonQuery || {});
 
       return this.$axios(
         dataSource.apiUrl,

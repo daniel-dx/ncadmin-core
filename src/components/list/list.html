@@ -95,7 +95,7 @@
 
           <!-- 列表数据 -->
           <template v-for="(item, index) in mergeConfig.list.columns">
-            <el-table-column :label="item.header" v-if="isColumnShow(index)" :key="index" :width="item.width" :sortable="item.sortField ? 'custom' : false" :sort-by="item.sortField">
+            <el-table-column :label="item.header" v-if="isColumnShow(index)" :key="index" :width="item.width" :sort-orders="['ascending', 'descending']" :sortable="item.sortField ? 'custom' : false" :sort-by="item.sortField">
               <template slot-scope="scope">
                 <template v-if="!item.component">
                   <nc-component comp-name="nca-label" :value="scope.row[item.dataField]" :smart-data="{$item:scope.row}">
