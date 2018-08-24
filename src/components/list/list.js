@@ -372,7 +372,11 @@ export default {
       this.$data.sortField = _get(datasource.otherParams, datasource.paramFields.sortField, '');
       this.$data.sortOrder = _get(datasource.otherParams, datasource.paramFields.sortOrder, '');
 
-      this.loadTableData();
+      // 这里用setTimeout是为了让normalQueryValue和advQueryValue能取到实际的默认值，而非{}
+      // why not nextTick，因为nextTick取到的还是{}
+      setTimeout(() => {
+        this.search();
+      })
     },
 
     // 加载表格数据 - 不重置pageNum和查询条件
