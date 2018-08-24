@@ -366,43 +366,49 @@ export default {
       this.advQueryValue = {};
       this.value.pageNum = 1;
       this.value.query = {};
+
+      this.$refs.table.clearSort();
+      const datasource = this.$data.mergeConfig.list.datasource;
+      this.$data.sortField = _get(datasource.otherParams, datasource.paramFields.sortField, '');
+      this.$data.sortOrder = _get(datasource.otherParams, datasource.paramFields.sortOrder, '');
+
       this.loadTableData();
     },
 
     // 加载表格数据 - 不重置pageNum和查询条件
     loadTableData() {
-      const dataSource = this.$data.mergeConfig.list.datasource;
+      const datasource = this.$data.mergeConfig.list.datasource;
 
       let postData = {};
 
       // 处理分页字段
       if (this.pagingVisible) {
-        postData[dataSource.paramFields.pageSize] = this.value.pageSize;
-        postData[dataSource.paramFields.pageNum] = this.value.pageNum;
+        postData[datasource.paramFields.pageSize] = this.value.pageSize;
+        postData[datasource.paramFields.pageNum] = this.value.pageNum;
       }
 
       // 处理排序字段
       if (this.$data.sortField && this.$data.sortOrder) {
-        postData[dataSource.paramFields.sortField] = this.$data.sortField;
-        postData[dataSource.paramFields.sortOrder] = this.$data.sortOrder;
+        postData[datasource.paramFields.sortField] = this.$data.sortField;
+        postData[datasource.paramFields.sortOrder] = this.$data.sortOrder;
       }
 
       // 处理查询字段
-      if (dataSource.paramFields.query) {
-        postData[dataSource.paramFields.query] = this.value.query;
+      if (datasource.paramFields.query) {
+        postData[datasource.paramFields.query] = this.value.query;
       } else {
         postData = Object.assign(postData, this.value.query);
       }
 
       // otherParams的优先级低于查询参数，排序参数
-      postData = Object.assign(dataSource.otherParams, postData, this.$options.outsideAddonQuery || {});
+      postData = Object.assign({}, datasource.otherParams, postData, this.$options.outsideAddonQuery || {});
 
       return this.$axios(
-        dataSource.apiUrl,
-        axiosOptions(dataSource.method, postData)
+        datasource.apiUrl,
+        axiosOptions(datasource.method, postData)
       ).then(res => {
-        const listField = dataSource.resField.list;
-        const pageingTotalField = dataSource.resField.pageingTotal;
+        const listField = datasource.resField.list;
+        const pageingTotalField = datasource.resField.pageingTotal;
         this.$data.itemTotal = parseInt(_get(res.data, `${pageingTotalField}`, 0));
         this.$data.tableData = [];
         this.$nextTick(() => { // 这里先置空，再在下一个循环赋值，是为了绕开el-table没法正确显示更新后的值的BUG
