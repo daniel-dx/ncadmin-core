@@ -37,7 +37,7 @@
           <template v-if="mergeConfig.toolbar.batchActions.others">
             <action-object class="batch-btn" v-for="(item, idx) in mergeConfig.toolbar.batchActions.others" :config="item" :key="idx"
               :selected="multipleSelection">
-              <el-button :disabled="multipleSelection.length == 0" v-if="item.enable !== false" @click="eventHandlerConfirm(item.handler, null, multipleSelection)">
+              <el-button :type="item.btnType" :disabled="multipleSelection.length == 0" v-if="item.enable !== false" @click="eventHandlerConfirm(item.handler, null, multipleSelection)">
                 {{item.name}}
               </el-button>
             </action-object>
@@ -51,7 +51,7 @@
         <template v-if="toolsVisible">
           <template v-if="mergeConfig.toolbar.tools.others">
             <action-object class="toolbar-btn" v-for="(item, key) in mergeConfig.toolbar.tools.others" :key="key" :config="item">
-              <el-button v-if="item.enable !== false" @click="eventHandlerConfirm(item.handler)">
+              <el-button v-if="item.enable !== false" :type="item.btnType" @click="eventHandlerConfirm(item.handler)">
                 {{item.name}}
               </el-button>
             </action-object>
