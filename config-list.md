@@ -20,7 +20,8 @@
     },
     adv: { // 高级搜索
       // ncform的配置
-    }
+    },
+    autoQueryFields: [], // 搜索字段值改变时自动触发查询，如下拉框等
   },
 
   // 工具栏，位于列表之上
@@ -48,14 +49,14 @@
   // 显示列表
   list: {
     datasource: { // 数据源
-      apiUrl: '', // 请求url
+      apiUrl: '', // 请求url
       method: 'get', // get/post default:get
       paramFields: { // 传过去的参数
         pageSize: 'pageSize', // 每页显示的项数
         pageNum: 'pageNum', // 请求的页码
         sortField: 'sortField', // 排序字段
         sortOrder: 'sortOrder', // 排序方向
-        query: '', // 查询条件，当为空时，查询对象的每个Key就是字段。当提供值时，即整个查询对象作为值传过去
+        query: '', // 查询条件，当为空时，查询对象的每个Key就是字段。当提供值时，即整个查询对象作为值传过去
       },
       otherParams: { // 其它的请求参数，如 type: 1
       },
@@ -69,14 +70,14 @@
 
     columnsConfigurable: false, // 是否可配置显示列
 
-    columns: [ // 所有列
+    columns: [ // 所有列
       {
         header: '', // 表头
         width: 100, // 指定列宽度，非必填
         defShow: true, // 默认是否显示。默认为true
         dataField: '', // 数据源的字段
         sortField: '', // 当有值时才启动表头排序
-        component: { // 以组件形式显示。复杂形式的显示方式可用此种形式，比如点击即可编辑之类的 (注：component和dataField只有其中一个生效，component的优先级高于dataField)
+        component: { // 以组件形式显示。复杂形式的显示方式可用此种形式，比如点击即可编辑之类的 (注：component和dataField只有其中一个生效，component的优先级高于dataField)
           name: '', // 组件名称
           config: {}, // 组件配置
           value: {} // 传给组件的值

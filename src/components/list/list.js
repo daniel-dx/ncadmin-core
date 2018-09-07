@@ -458,6 +458,40 @@ export default {
         this._saveLocalColumnConfig(newVal);
       },
       deep: true
+    },
+    normalQueryValue: {
+      handler: function (newVal, oldVal) {
+
+        // Ignore when no autoQueryFields
+        const autoQueryFields = _get(this.$data.mergeConfig, 'query.autoQueryFields', []);
+        if (autoQueryFields.length === 0) return;
+
+        // Ignore when newVal/oldVal is empty obj or newVal equals oldVal 
+        if (Object.keys(newVal).length === 0 || Object.keys(oldVal).length === 0 || JSON.stringify(newVal) === JSON.stringify(oldVal)) return;
+
+        const foundOne = autoQueryFields.find(field => newVal[field] !== oldVal[field]);
+        if (foundOne) {
+          this.search();
+        }
+      },
+      deep: false
+    },
+    advQueryValue: {
+      handler: function (newVal, oldVal) {
+
+        // Ignore when no autoQueryFields
+        const autoQueryFields = _get(this.$data.mergeConfig, 'query.autoQueryFields', []);
+        if (autoQueryFields.length === 0) return;
+
+        // Ignore when newVal/oldVal is empty obj or newVal equals oldVal 
+        if (Object.keys(newVal).length === 0 || Object.keys(oldVal).length === 0 || JSON.stringify(newVal) === JSON.stringify(oldVal)) return;
+
+        const foundOne = autoQueryFields.find(field => newVal[field] !== oldVal[field]);
+        if (foundOne) {
+          this.search();
+        }
+      },
+      deep: false
     }
   }
 };

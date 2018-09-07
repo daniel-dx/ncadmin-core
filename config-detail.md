@@ -45,7 +45,7 @@
         properties: [
           {
             label: '', // 标签
-            value: '' // 只支持dx表达式（支持$root和$parent）
+            value: '' // 只支持dx表达式（支持$root和$parent）
           },
         ],
       },
@@ -59,7 +59,7 @@
         },
         items: {
           label: '', // 标签
-          value: '' // dx表达式（支持$root和$item）
+          value: '' // dx表达式（支持$root和$item）
         },
       },
     ]

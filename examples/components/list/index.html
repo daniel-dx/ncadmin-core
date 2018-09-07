@@ -110,11 +110,12 @@
                   }
                 },
                 kw5: {
-                  type: "string",
+                  type: "boolean",
+                  default: true,
                   ui: {
                     label: "查询条件五",
                     columns: 3,
-                    placeholder: "普通关键字"
+                    widget: 'radio'
                   }
                 },
               },
@@ -128,7 +129,7 @@
               type: "object",
               properties: {
                 kw6: {
-                  type: "string ",
+                  type: "string",
                   ui: {
                     label: "查询条件六",
                     columns: 3,
@@ -136,7 +137,7 @@
                   }
                 },
                 kw7: {
-                  type: "string ",
+                  type: "string",
                   ui: {
                     label: "查询条件七",
                     columns: 3,
@@ -144,11 +145,23 @@
                   }
                 },
                 kw8: {
-                  type: "string ",
+                  type: "string",
                   ui: {
                     label: "查询条件八",
                     columns: 3,
-                    placeholder: "普通关键字"
+                    widget: 'select',
+                    widgetConfig: {
+                      "enumSource": [
+                        {
+                          "value": 1,
+                          "label": "option1"
+                        },
+                        {
+                          "value": 2,
+                          "label": "option2"
+                        }
+                      ]
+                    }
                   }
                 },
               },
@@ -157,7 +170,8 @@
                   layout: 'h'
                 }
               }
-            }
+            },
+            autoQueryFields: ['kw5', 'kw8']
           },
 
           // 工具栏，位于列表之上
