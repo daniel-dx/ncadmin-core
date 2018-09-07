@@ -483,7 +483,7 @@ export default {
         const autoQueryFields = _get(this.$data.mergeConfig, 'query.autoQueryFields', []);
         if (autoQueryFields.length === 0) return;
 
-        // Ignore when newVal/oldVal is empty obj or newVal equals oldVal 
+        // Ignore when newVal/oldVal is an empty obj or newVal equals oldVal 
         if (Object.keys(newVal).length === 0 || Object.keys(oldVal).length === 0 || JSON.stringify(newVal) === JSON.stringify(oldVal)) return;
 
         const foundOne = autoQueryFields.find(field => newVal[field] !== oldVal[field]);
