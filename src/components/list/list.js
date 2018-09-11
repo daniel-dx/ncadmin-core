@@ -469,7 +469,7 @@ export default {
         // Ignore when newVal/oldVal is empty obj or newVal equals oldVal 
         if (Object.keys(newVal).length === 0 || Object.keys(oldVal).length === 0 || JSON.stringify(newVal) === JSON.stringify(oldVal)) return;
 
-        const foundOne = autoQueryFields.find(field => newVal[field] !== oldVal[field]);
+        const foundOne = autoQueryFields.find(field => JSON.stringify(newVal[field]) !== JSON.stringify(oldVal[field]));
         if (foundOne) {
           this.search();
         }
@@ -486,7 +486,7 @@ export default {
         // Ignore when newVal/oldVal is an empty obj or newVal equals oldVal 
         if (Object.keys(newVal).length === 0 || Object.keys(oldVal).length === 0 || JSON.stringify(newVal) === JSON.stringify(oldVal)) return;
 
-        const foundOne = autoQueryFields.find(field => newVal[field] !== oldVal[field]);
+        const foundOne = autoQueryFields.find(field => JSON.stringify(newVal[field]) !== JSON.stringify(oldVal[field]));
         if (foundOne) {
           this.search();
         }
