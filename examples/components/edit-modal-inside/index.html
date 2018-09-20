@@ -119,7 +119,8 @@
               submit: {
                 // 提交
                 apiUrl: "/api/saveItem", // 提交的Url
-                valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+                valueField: "", // 当为空时，即表单的每个一级字段即为参数名
+                notifyEvent: 'success_save', // 你可以通过 eventHub.$on('success_save', formData => { ... }) 继续提交成功后的工作
               }
             }
           },

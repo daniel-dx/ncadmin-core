@@ -1,8 +1,10 @@
 import _get from "lodash-es/get";
+import _merge from "lodash-es/merge";
 import { ncformUtils } from "@ncform/ncform-common";
 import axios from 'axios';
 import modalInsideMixins from '../widgets/modal-inside-mixin.js';
 import { axiosOptions } from "../../utils/helper.js";
+import eventHub from '../../utils/event-hub.js';
 
 export default {
 
@@ -51,6 +53,7 @@ export default {
             apiUrl: '', // 提交的Url。当为空时表示不调用接口提交，而只是改变model值
             method: 'post', // get/post default:get
             valueField: '', // 当为空时，即表单的每个一级字段即为参数名
+            notifyEvent: '', // 成功后通过事件总线发出的事件名
           }
         }
       }
@@ -134,6 +137,11 @@ export default {
                 type: "success",
                 message: "保存成功"
               });
+
+              if (submitConfig.notifyEvent) {
+                eventHub.$emit(submitConfig.notifyEvent, _merge(res.data, data));
+              }
+
               done();
             });
           } else { // 无则通知value改变
