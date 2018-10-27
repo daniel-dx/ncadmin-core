@@ -109,7 +109,7 @@ gulp.task('publish', () => {
     return exec('npm run release');
   }).then(() => {
     console.info('publish...');
-    return exec('npm publish');
+    return exec('npm publish --access=public');
   }).then(() => {
     console.info('publish success!');
     return exec('mv .temp_npmrc .npmrc')
