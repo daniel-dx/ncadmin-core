@@ -22,12 +22,14 @@
   },
   buttons: {
     submit: { // 提交
+      name: '', // 按钮文本，默认值为保存
       apiUrl: '', // 提交的Url。当为空时表示不调用接口提交，而只是改变model值
       method: 'post', // get/post default:post
       valueField: '', // 当为空时，即表单的每个一级字段即为参数名
       notifyEvent: '', // 提交成功后发出的事件名，可通过eventHub.$on()来捕获事件
     },
     back: { // 返回
+      name: '', // 按钮文本，默认值为返回 
       enable: true
     }
   }

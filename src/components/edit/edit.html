@@ -7,10 +7,8 @@
       <ncform :form-schema="mergeConfig.formSchema" v-model="formValue" :form-name="editFormName"></ncform>
     </el-col>
   </el-row>
-  <el-row class="btn-area" type="flex">
-    <el-col>
-    </el-col>
-    <el-button type="success" @click="submitData()" plain>{{value.id != '0' ? '保存' : '新建'}}</el-button>
-    <el-button v-if="mergeConfig.buttons.back.enable" type="info" @click="goBack()" plain>返回</el-button>
+  <el-row class="btn-area">
+    <el-button type="primary" @click="submitData()">{{mergeConfig.buttons.submit.name}}</el-button>
+    <el-button v-if="mergeConfig.buttons.back.enable" @click="goBack()">{{mergeConfig.buttons.back.name}}</el-button>
   </el-row>
 </div>

@@ -45,6 +45,7 @@ export default {
         },
         buttons: {
           submit: { // 提交
+            name: '保存',
             apiUrl: '', // 提交的Url
             method: 'post', // get/post default: post
             valueField: '', // 当为空时，即表单的每个一级字段即为参数名
@@ -52,6 +53,7 @@ export default {
             notifyEvent: '', // 成功后通过事件总线发出的事件名
           },
           back: { // 返回
+            name: '返回',
             enable: true
           }
         }

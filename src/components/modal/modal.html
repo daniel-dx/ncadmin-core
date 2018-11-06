@@ -4,15 +4,15 @@
     <slot v-if="visibleData" :modal-id="modalId"></slot>
     <el-row type="flex" style="margin-top:10px;">
       <el-col></el-col>
-      <el-button v-if="mdConfig.buttons.confirm.enable" @click="modalButtonEvent(mdConfig.buttons.confirm)" type="success" plain>
+      <el-button v-if="mdConfig.buttons.confirm.enable" @click="modalButtonEvent(mdConfig.buttons.confirm)" type="primary">
         {{mdConfig.buttons.confirm.name}}
       </el-button>
       <template v-for="(item, index) in mdConfig.buttons.others">
-        <el-button v-if="item.enable" @click="modalButtonEvent(item)" type="primary" plain>
+        <el-button v-if="item.enable" @click="modalButtonEvent(item)" type="success">
           {{item.name}}
         </el-button>
       </template>
-      <el-button v-if="mdConfig.buttons.cancel.enable" @click="closeModal" type="info" plain>
+      <el-button v-if="mdConfig.buttons.cancel.enable" @click="closeModal">
         {{mdConfig.buttons.cancel.name}}
       </el-button>
     </el-row>

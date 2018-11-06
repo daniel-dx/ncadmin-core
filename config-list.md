@@ -26,6 +26,7 @@
 
   // 工具栏，位于列表之上
   toolbar: {
+    btnSize: '', // medium, small, mini, 默认是为空，即normal
     batchActions: { // 批量操作，当selectAll为true时有效
       delete: { // 批量删除
         enable: true,
@@ -108,7 +109,8 @@
 
   // 分页配置
   paging: {
-    enable: true
+    enable: true,
+    layout: '', // 默认值："total, sizes, prev, pager, next, jumper"
   }
 }
 ```

@@ -132,7 +132,9 @@ export default {
       },
       defaultConfig: {
 
-      }
+      },
+
+      toolBtnType: _get(this.config, 'toolbar.btnSize') || '', // 工具栏的按钮大小
     };
   },
 
