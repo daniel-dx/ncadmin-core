@@ -110,7 +110,8 @@
   // 分页配置
   paging: {
     enable: true,
-    layout: '', // 默认值："total, sizes, prev, pager, next, jumper"
+    unlimitedLoading: false, // 是否无限加载形式
+    layout: '', // 默认值："total, sizes, prev, pager, next, jumper" ( 当 unlimitedLoading 为true时不生效 )
   }
 }
 ```

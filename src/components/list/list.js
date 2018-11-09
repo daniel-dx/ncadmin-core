@@ -350,6 +350,12 @@ export default {
       this.loadTableData();
     },
 
+    // 加载更多 - 无限加载模式使用
+    loadMore() {
+      this.value.pageNum += 1;
+      this.loadTableData();
+    },
+
     // 搜索 - 重置pageNum为1
     search() {
       this.value.pageNum = 1;
@@ -416,11 +422,17 @@ export default {
         const listField = datasource.resField.list;
         const pageingTotalField = datasource.resField.pageingTotal;
         this.$data.itemTotal = parseInt(_get(res.data, `${pageingTotalField}`, 0));
+        let origintableData = this.$data.tableData;
         this.$data.tableData = [];
         this.$nextTick(() => { // 这里先置空，再在下一个循环赋值，是为了绕开el-table没法正确显示更新后的值的BUG
-          this.$data.tableData = listField
+          let tableData = listField
             ? _get(res.data, `${listField}`)
             : res.data;
+          if (_get(this.$data.mergeConfig, 'paging.unlimitedLoading', false) && this.value.pageNum !== 1) { // 无限加载模式 且 非第一页（如查询条件更改重置）
+            this.$data.tableData = origintableData.concat(tableData);
+          } else {
+            this.$data.tableData = tableData;
+          }
         })
         this.$data.pageCount = pageingTotalField
           ? Math.ceil(this.$data.itemTotal / this.value.pageSize)
