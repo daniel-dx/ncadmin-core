@@ -58,8 +58,8 @@
       },
       data: {
         valueData: {
-          pageNum: 2,
-          pageSize: 20,
+          pageNum: 1,
+          pageSize: 2,
           query: {}
         },
         config: {
@@ -441,7 +441,8 @@
             enable: true,
             // layout: 'total, sizes, prev, next',
 
-            // unlimitedLoading: true, // 当这个为true时，layout无效
+            unlimitedLoading: true, // 当这个为true时，layout无效
+            autoLoad: false,
           }
         }
       }

@@ -1,4 +1,5 @@
 import _get from "lodash-es/get";
+import _debounce from "lodash-es/debounce";
 import { ncformUtils } from "@ncform/ncform-common";
 import actionObject from "../private/action-object.vue";
 import ncComponent from "../private/nc-component.vue";
@@ -73,6 +74,20 @@ export default {
       });
     }
 
+    if (_get(this.$data.mergeConfig, 'paging.unlimitedLoading') && _get(this.$data.mergeConfig, 'paging.autoLoad')) { // 无限加载模式
+      let handleScroll = _debounce(() => {
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        let windowHeight = document.documentElement.clientHeight;
+        let scrollHeight = document.documentElement.scrollHeight;
+        if (scrollTop + windowHeight === scrollHeight) {
+          if (this.value.pageNum <= this.$data.pageCount) this.loadMore();
+        }
+      }, 250);
+      window.onscroll = () => {
+        handleScroll();
+      }
+    }
+
   },
 
   mounted() {
@@ -135,6 +150,8 @@ export default {
       },
 
       toolBtnType: _get(this.config, 'toolbar.btnSize') || '', // 工具栏的按钮大小
+
+      loadingData: false, // 是否在加载数据
     };
   },
 
@@ -415,6 +432,9 @@ export default {
       // otherParams的优先级低于查询参数，排序参数
       postData = Object.assign({}, datasource.otherParams, postData, this.$options.outsideAddonQuery || {});
 
+      this.$data.loadingData = true;
+      let currentScrollTop = document.body.scrollTop || document.documentElement.scrollTop; // 记录当前的滚动位置，供无限加载模式使用
+
       return this.$axios(
         datasource.apiUrl,
         axiosOptions(datasource.method, postData)
@@ -430,13 +450,15 @@ export default {
             : res.data;
           if (_get(this.$data.mergeConfig, 'paging.unlimitedLoading', false) && this.value.pageNum !== 1) { // 无限加载模式 且 非第一页（如查询条件更改重置）
             this.$data.tableData = origintableData.concat(tableData);
+            this.$nextTick(() => window.scrollTo(0, currentScrollTop));
           } else {
             this.$data.tableData = tableData;
           }
         })
-        this.$data.pageCount = pageingTotalField
-          ? Math.ceil(this.$data.itemTotal / this.value.pageSize)
-          : 1;
+        this.$data.pageCount = Math.ceil(this.$data.itemTotal / this.value.pageSize);
+
+        this.$data.loadingData = false;
+
         return;
       });
     },

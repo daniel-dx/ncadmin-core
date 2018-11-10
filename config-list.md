@@ -110,8 +110,14 @@
   // 分页配置
   paging: {
     enable: true,
+
     unlimitedLoading: false, // 是否无限加载形式
-    layout: '', // 默认值："total, sizes, prev, pager, next, jumper" ( 当 unlimitedLoading 为true时不生效 )
+
+    // 当 unlimitedLoading 为 true 时有效
+    autoLoad: false, // 是否自动加载。true-滚动到底部自动加载（注意：第一页请给足数据以出现滚动条） false-显示加载更多按钮，点击才加载
+
+    // 当 unlimitedLoading 为 false 时有效
+    layout: '', // 默认值："total, sizes, prev, pager, next, jumper"
   }
 }
 ```

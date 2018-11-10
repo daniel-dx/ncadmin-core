@@ -87,7 +87,7 @@
     <!--列表数据区域-->
     <el-row>
       <el-col :span="24">
-        <el-table ref="table" :data="tableData" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" @sort-change="handelSortChange">
+        <el-table ref="table" :data="tableData" :stripe="true" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" @sort-change="handelSortChange">
 
           <!-- 选择 -->
           <el-table-column v-if="mergeConfig.list.selectAll" type="selection">
@@ -143,7 +143,14 @@
   <el-row v-if="!initLoading && pagingVisible" class="mgt30">
     <!-- 无限加载 -->
     <el-col align="center" v-if="mergeConfig.paging.unlimitedLoading">
-          <el-button style="width: 40%" type="primary" @click="loadMore()" plain>加载更多</el-button>
+      <!-- 手动点击触发 -->
+      <el-button v-if="!mergeConfig.paging.autoLoad" :loading="loadingData" :disabled="value.pageNum >= pageCount" style="width: 40%" type="primary" @click="loadMore()" plain>加载更多</el-button>
+
+      <!-- 滚动到底部自动触发 -->
+      <div v-else style="color: #909399">
+        <span v-show="loadingData">加载中。。。</span>
+        <span v-show="!loadingData && value.pageNum > pageCount">已经没有数据啦~~~</span>
+      </div>
     </el-col>
 
     <!-- 普通分页 -->
