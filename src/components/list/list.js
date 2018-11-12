@@ -75,6 +75,8 @@ export default {
   },
 
   mounted() {
+    this.$options.scrollParentElm = findClosetScrollParent(this.$refs.ncaList);
+
     if (_get(this.$data.mergeConfig, 'paging.unlimitedLoading') && _get(this.$data.mergeConfig, 'paging.autoLoad')) {
       // 无限加载模式
 
@@ -85,7 +87,6 @@ export default {
       }, 500);
 
       // 给滚动父元素监听滚动事件
-      this.$options.scrollParentElm = findClosetScrollParent(this.$refs.ncaList);
       if (this.$options.scrollParentElm) {
         this.$options.scrollParentElm.onscroll = () => {
           handleScroll();

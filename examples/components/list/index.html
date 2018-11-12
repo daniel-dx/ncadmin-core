@@ -11,9 +11,17 @@
 
 <body>
 
+  <style type="text/css">
+    .demo {
+      height: 350px; 
+      overflow-y: auto;
+    }
+  </style>
+
   <!--演示区域-->
   <!-- <div id="demo"> -->
-  <div id="demo" style="height: 350px; overflow-y: auto">
+  <div id="demo" class="demo">
+  <!-- <div id="demo" style="height: 350px; overflow-y: auto"> -->
     <list :config="config" v-model="valueData" @item-edit="listEventHandler"></list>
 
     <button @click="notifyRefresh">外部通知列表刷新</button>
@@ -442,8 +450,8 @@
             enable: true,
             // layout: 'total, sizes, prev, next',
 
-            unlimitedLoading: true, // 当这个为true时，layout无效
-            autoLoad: true,
+            // unlimitedLoading: true, // 当这个为true时，layout无效
+            // autoLoad: true,
           }
         }
       }

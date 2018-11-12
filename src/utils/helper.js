@@ -56,11 +56,11 @@ export function findClosetScrollParent(element, direction) {
   let parentElm = element.parentElement;
   while (parentElm != null) {
     // 这里判断的值并不严谨，暂且满足一般场景即可
-    let isOverflow = ['auto', 'scroll'].indexOf(parentElm.style.overflow) >= 0;
-    let isOverflowX = ['auto', 'scroll'].indexOf(parentElm.style.overflowX) >= 0;
-    let isOverflowY = ['auto', 'scroll'].indexOf(parentElm.style.overflowY) >= 0;
-    let hasHeight = parentElm.style.height || parentElm.style.maxHeight;
-    let hasWidth = parentElm.style.width || parentElm.style.maxWidth;
+    let isOverflow = ['auto', 'scroll'].indexOf(getComputedStyles(parentElm, 'overflow')) >= 0;
+    let isOverflowX = ['auto', 'scroll'].indexOf(getComputedStyles(parentElm, 'overflow-x')) >= 0;
+    let isOverflowY = ['auto', 'scroll'].indexOf(getComputedStyles(parentElm, 'overflow-y')) >= 0;
+    let hasHeight = getComputedStyles(parentElm, 'height') || getComputedStyles(parentElm, 'maxHeight');
+    let hasWidth = getComputedStyles(parentElm, 'width') || getComputedStyles(parentElm, 'maxWidth');
 
     switch (direction) {
       case 'v':
@@ -83,6 +83,13 @@ export function findClosetScrollParent(element, direction) {
   return null;
 }
 
+function getComputedStyles(elem, prop) {
+  let cs = window.getComputedStyle(elem, null);
+  return cs.getPropertyValue(prop);
+}
+
 export default {
-  axiosOptions
+  axiosOptions,
+  isScrolledIntoView,
+  findClosetScrollParent,
 };
