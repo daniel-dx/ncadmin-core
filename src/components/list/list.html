@@ -162,6 +162,9 @@
 
   </el-row>
 
+  <!-- 置顶按钮 -->
+  <el-button @click="toTop()" v-if="mergeConfig.paging.unlimitedLoading" v-show="showToTopBtn" style="top: 9999px" ref="toTopBtn" type="primary" class="to-top-btn" type="danger" icon="el-icon-caret-top" circle></el-button>
+
   <modal :visible.sync="modal.visible" :modal-config="modal.modalConfig" @confirm="onModalClose()">
     <component slot-scope="modalProps" class="modalComponent" :is="modal.name.replace(/\./g, '_')" :config="modal.config" :value="modal.value"
       :modal-id="modalProps.modalId">

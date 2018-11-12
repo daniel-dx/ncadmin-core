@@ -75,25 +75,49 @@ export default {
   },
 
   mounted() {
-    this.$options.scrollParentElm = findClosetScrollParent(this.$refs.ncaList);
-
-    if (_get(this.$data.mergeConfig, 'paging.unlimitedLoading') && _get(this.$data.mergeConfig, 'paging.autoLoad')) {
+    if (_get(this.$data.mergeConfig, 'paging.unlimitedLoading')) {
       // 无限加载模式
 
+      this.$options.scrollParentElm = findClosetScrollParent(this.$refs.ncaList);
+      this.$options.visualAreaHeight = this.$options.scrollParentElm
+        ? this.$options.scrollParentElm.offsetHeight
+        : document.documentElement.clientHeight; // 可视区域高度
+      let toTopBtnHeight = this.$refs.toTopBtn.$vnode.elm.offsetHeight;
+      let toTopBtnBottom = this.mergeConfig.paging.topBtnBottom || 20;
+
+      this.$data.showToTopBtn = false; // 取完高度后先隐藏
+
       let handleScroll = _debounce(() => {
-        if (this.value.pageNum < this.$data.pageCount && isScrolledIntoView(this.$refs.unlimitedLoadingWrapper.$vnode.elm, this.$options.scrollParentElm)) {
-          this.loadMore();
+        if (_get(this.$data.mergeConfig, 'paging.autoLoad')) {
+          // 滚动加载
+          if (
+            this.value.pageNum < this.$data.pageCount &&
+            isScrolledIntoView(this.$refs.unlimitedLoadingWrapper.$vnode.elm, this.$options.scrollParentElm)
+          ) {
+            this.loadMore();
+          }
         }
-      }, 500);
+
+        if ((this.$options.scrollParentElm || document.documentElement).scrollTop >= this.$options.visualAreaHeight * 2) {
+          // 两倍高度后显示
+          this.$data.showToTopBtn = true;
+        } else {
+          this.$data.showToTopBtn = false;
+        }
+      }, 250);
 
       // 给滚动父元素监听滚动事件
       if (this.$options.scrollParentElm) {
         this.$options.scrollParentElm.onscroll = () => {
           handleScroll();
+          this.$refs.toTopBtn.$vnode.elm.style.top =
+            this.$options.visualAreaHeight + this.$options.scrollParentElm.scrollTop - toTopBtnHeight - toTopBtnBottom + 'px';
         };
       } else {
         window.onscroll = () => {
           handleScroll();
+          this.$refs.toTopBtn.$vnode.elm.style.top =
+            this.$options.visualAreaHeight + document.documentElement.scrollTop - toTopBtnHeight - toTopBtnBottom + 'px';
         };
       }
     }
@@ -152,7 +176,9 @@ export default {
 
       toolBtnType: _get(this.config, 'toolbar.btnSize') || '', // 工具栏的按钮大小
 
-      loadingData: false // 是否在加载数据
+      loadingData: false, // 是否在加载数据
+
+      showToTopBtn: true // 是否显示滚动到顶部按钮
     };
   },
 
@@ -432,7 +458,9 @@ export default {
           if (_get(this.$data.mergeConfig, 'paging.unlimitedLoading', false) && this.value.pageNum !== 1) {
             // 无限加载模式 且 非第一页（如查询条件更改重置）
             this.$data.tableData = origintableData.concat(tableData);
-            this.$nextTick(() => this.$options.scrollParentElm ? this.$options.scrollParentElm.scrollTop = currentScrollTop : window.scrollTo(0, currentScrollTop));
+            this.$nextTick(() =>
+              this.$options.scrollParentElm ? (this.$options.scrollParentElm.scrollTop = currentScrollTop) : window.scrollTo(0, currentScrollTop)
+            );
           } else {
             this.$data.tableData = tableData;
           }
@@ -461,6 +489,11 @@ export default {
           this.resetList();
           break;
       }
+    },
+
+    // 置顶 - 供无限加载模式使用
+    toTop() {
+      this.$options.scrollParentElm ? (this.$options.scrollParentElm.scrollTop = 0) : window.scrollTo(0, 0);
     }
   },
 

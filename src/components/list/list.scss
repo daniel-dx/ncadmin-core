@@ -1,4 +1,10 @@
 .nca-list {
+  position: relative;
+  .to-top-btn {
+    position: absolute; 
+    right: 20px; 
+    z-index: 1
+  }
   .mgt30{
     margin-top: 30px;
   }
