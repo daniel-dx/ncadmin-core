@@ -1,16 +1,15 @@
-import _get from "lodash-es/get";
-import _debounce from "lodash-es/debounce";
-import { ncformUtils } from "@ncform/ncform-common";
-import actionObject from "../private/action-object.vue";
-import ncComponent from "../private/nc-component.vue";
-import modal from "../modal/index-link.vue";
-import { axiosOptions } from "../../utils/helper";
+import _get from 'lodash-es/get';
+import _debounce from 'lodash-es/debounce';
+import { ncformUtils } from '@ncform/ncform-common';
+import actionObject from '../private/action-object.vue';
+import ncComponent from '../private/nc-component.vue';
+import modal from '../modal/index-link.vue';
+import { axiosOptions, findClosetScrollParent, isScrolledIntoView } from '../../utils/helper';
 import axios from 'axios';
 import widgetMixin from '../widgets/mixin.js';
 import eventHub from '../../utils/event-hub.js';
 
 export default {
-
   mixins: [widgetMixin],
 
   components: {
@@ -73,38 +72,42 @@ export default {
         this._refreshHandler(data.refreshType || 'current');
       });
     }
-
-    if (_get(this.$data.mergeConfig, 'paging.unlimitedLoading') && _get(this.$data.mergeConfig, 'paging.autoLoad')) { // 无限加载模式
-      let handleScroll = _debounce(() => {
-        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        let windowHeight = document.documentElement.clientHeight;
-        let scrollHeight = document.documentElement.scrollHeight;
-        if (scrollTop + windowHeight === scrollHeight) {
-          if (this.value.pageNum <= this.$data.pageCount) this.loadMore();
-        }
-      }, 250);
-      window.onscroll = () => {
-        handleScroll();
-      }
-    }
-
   },
 
   mounted() {
+    if (_get(this.$data.mergeConfig, 'paging.unlimitedLoading') && _get(this.$data.mergeConfig, 'paging.autoLoad')) {
+      // 无限加载模式
+
+      let handleScroll = _debounce(() => {
+        if (this.value.pageNum < this.$data.pageCount && isScrolledIntoView(this.$refs.unlimitedLoadingWrapper.$vnode.elm, this.$options.scrollParentElm)) {
+          this.loadMore();
+        }
+      }, 500);
+
+      // 给滚动父元素监听滚动事件
+      this.$options.scrollParentElm = findClosetScrollParent(this.$refs.ncaList);
+      if (this.$options.scrollParentElm) {
+        this.$options.scrollParentElm.onscroll = () => {
+          handleScroll();
+        };
+      } else {
+        window.onscroll = () => {
+          handleScroll();
+        };
+      }
+    }
+
     // 初始加载数据（放在nextTick是为了取得查询条件表单的默认值）
     this.$nextTick(() => {
-      this.value.query = Object.assign(
-        {},
-        this.value.query,
-        this.$data.normalQueryValue,
-        this.$data.advQueryValue
-      );
-      this.loadTableData().then(() => {
-        this.$data.initLoading = false;
-      }).catch(() => {
-        this.$data.initLoading = false;
-      });
-    })
+      this.value.query = Object.assign({}, this.value.query, this.$data.normalQueryValue, this.$data.advQueryValue);
+      this.loadTableData()
+        .then(() => {
+          this.$data.initLoading = false;
+        })
+        .catch(() => {
+          this.$data.initLoading = false;
+        });
+    });
   },
 
   beforeDestroy() {
@@ -115,7 +118,6 @@ export default {
 
   data() {
     return {
-
       initLoading: true,
 
       // 是否支持全选
@@ -140,18 +142,16 @@ export default {
       advQueryValue: {}, // 高级搜索value
       modal: {
         visible: false,
-        componentName: "",
+        componentName: '',
         config: {},
         value: {},
         modalConfig: {}
       },
-      defaultConfig: {
-
-      },
+      defaultConfig: {},
 
       toolBtnType: _get(this.config, 'toolbar.btnSize') || '', // 工具栏的按钮大小
 
-      loadingData: false, // 是否在加载数据
+      loadingData: false // 是否在加载数据
     };
   },
 
@@ -166,17 +166,11 @@ export default {
 
     // 高级搜索 是否显示
     advSearchBarVisible() {
-      return (
-        this.$data.mergeConfig.query && this.$data.mergeConfig.query.normal && this.$data.mergeConfig.query.adv
-      );
+      return this.$data.mergeConfig.query && this.$data.mergeConfig.query.normal && this.$data.mergeConfig.query.adv;
     },
 
     batchActionsVisible() {
-      return (
-        this.$data.mergeConfig.list.selectAll &&
-        this.$data.mergeConfig.toolbar &&
-        this.$data.mergeConfig.toolbar.batchActions
-      );
+      return this.$data.mergeConfig.list.selectAll && this.$data.mergeConfig.toolbar && this.$data.mergeConfig.toolbar.batchActions;
     },
 
     toolsVisible() {
@@ -226,7 +220,8 @@ export default {
     // 存储列配置到本地
     _saveLocalColumnConfig(newVal) {
       // 配置信息与本地存储以及与config不同时，才保存到本地
-      if (JSON.stringify(newVal) !== JSON.stringify(this.$data.configColumnShow) &&
+      if (
+        JSON.stringify(newVal) !== JSON.stringify(this.$data.configColumnShow) &&
         JSON.stringify(newVal) !== window.localStorage['columnConfig:' + window.location.href]
       ) {
         window.localStorage.setItem('columnConfig:' + window.location.href, JSON.stringify(newVal));
@@ -250,10 +245,10 @@ export default {
 
     eventHandlerConfirm(handler, item = {}, multipleSelection = [], defConfirmTxt) {
       if (handler.confirmTxt || defConfirmTxt) {
-        this.$confirm(handler.confirmTxt || defConfirmTxt, "提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
+        this.$confirm(handler.confirmTxt || defConfirmTxt, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
         }).then(() => {
           this.eventHandler(handler, item, multipleSelection);
         });
@@ -265,11 +260,11 @@ export default {
     actionObjectEnable(enable, item = {}, multipleSelection = []) {
       const handlerData = [
         {
-          symbol: "$item",
+          symbol: '$item',
           value: item
         },
         {
-          symbol: "$selected",
+          symbol: '$selected',
           value: multipleSelection
         }
       ];
@@ -277,7 +272,6 @@ export default {
       return ncformUtils.smartAnalyze(enable, {
         data: handlerData
       });
-
     },
 
     _actionObjectEvent(options, data) {
@@ -293,11 +287,11 @@ export default {
       const { type, options } = handler;
       const handlerData = [
         {
-          symbol: "$item",
+          symbol: '$item',
           value: item
         },
         {
-          symbol: "$selected",
+          symbol: '$selected',
           value: multipleSelection
         }
       ];
@@ -305,7 +299,7 @@ export default {
       this._actionObjectEvent(options.event, handlerData);
 
       switch (type) {
-        case "ajax":
+        case 'ajax':
           const params = {};
           options.params.forEach(item => {
             params[item.name] = ncformUtils.smartAnalyze(item.value, {
@@ -313,30 +307,25 @@ export default {
             });
           });
 
-          this.$axios(
-            handler.options.apiUrl,
-            axiosOptions(handler.options.method, params)
-          ).then(res => {
+          this.$axios(handler.options.apiUrl, axiosOptions(handler.options.method, params)).then(res => {
             this._refreshHandler(handler.refresh);
           });
           break;
-        case "page":
+        case 'page':
           const path = ncformUtils.smartAnalyze(options.route, {
             data: handlerData
           });
-          if (path.search(/^(http)?[s]?[:]?\/\//) >= 0) { // 普通的链接，非SPA路由
+          if (path.search(/^(http)?[s]?[:]?\/\//) >= 0) {
+            // 普通的链接，非SPA路由
             window.open(path);
           } else {
             this.$emit('pathChange', path);
           }
           break;
-        case "modal":
-          const newValue = ncformUtils.smartAnalyze(
-            options.component.value,
-            {
-              data: handlerData
-            }
-          );
+        case 'modal':
+          const newValue = ncformUtils.smartAnalyze(options.component.value, {
+            data: handlerData
+          });
 
           this.$data.modal = Object.assign(
             {
@@ -376,12 +365,7 @@ export default {
     // 搜索 - 重置pageNum为1
     search() {
       this.value.pageNum = 1;
-      this.value.query = Object.assign(
-        {},
-        this.value.query,
-        this.$data.normalQueryValue,
-        this.$data.advQueryValue
-      );
+      this.value.query = Object.assign({}, this.value.query, this.$data.normalQueryValue, this.$data.advQueryValue);
       this.loadTableData();
     },
 
@@ -401,7 +385,7 @@ export default {
       // why not nextTick，因为nextTick取到的还是{}
       setTimeout(() => {
         this.search();
-      })
+      });
     },
 
     // 加载表格数据 - 不重置pageNum和查询条件
@@ -433,28 +417,25 @@ export default {
       postData = Object.assign({}, datasource.otherParams, postData, this.$options.outsideAddonQuery || {});
 
       this.$data.loadingData = true;
-      let currentScrollTop = document.body.scrollTop || document.documentElement.scrollTop; // 记录当前的滚动位置，供无限加载模式使用
+      let currentScrollTop = (this.$options.scrollParentElm || document.documentElement).scrollTop; // 记录当前的滚动位置，供无限加载模式使用
 
-      return this.$axios(
-        datasource.apiUrl,
-        axiosOptions(datasource.method, postData)
-      ).then(res => {
+      return this.$axios(datasource.apiUrl, axiosOptions(datasource.method, postData)).then(res => {
         const listField = datasource.resField.list;
         const pageingTotalField = datasource.resField.pageingTotal;
         this.$data.itemTotal = parseInt(_get(res.data, `${pageingTotalField}`, 0));
         let origintableData = this.$data.tableData;
         this.$data.tableData = [];
-        this.$nextTick(() => { // 这里先置空，再在下一个循环赋值，是为了绕开el-table没法正确显示更新后的值的BUG
-          let tableData = listField
-            ? _get(res.data, `${listField}`)
-            : res.data;
-          if (_get(this.$data.mergeConfig, 'paging.unlimitedLoading', false) && this.value.pageNum !== 1) { // 无限加载模式 且 非第一页（如查询条件更改重置）
+        this.$nextTick(() => {
+          // 这里先置空，再在下一个循环赋值，是为了绕开el-table没法正确显示更新后的值的BUG
+          let tableData = listField ? _get(res.data, `${listField}`) : res.data;
+          if (_get(this.$data.mergeConfig, 'paging.unlimitedLoading', false) && this.value.pageNum !== 1) {
+            // 无限加载模式 且 非第一页（如查询条件更改重置）
             this.$data.tableData = origintableData.concat(tableData);
-            this.$nextTick(() => window.scrollTo(0, currentScrollTop));
+            this.$nextTick(() => this.$options.scrollParentElm ? this.$options.scrollParentElm.scrollTop = currentScrollTop : window.scrollTo(0, currentScrollTop));
           } else {
             this.$data.tableData = tableData;
           }
-        })
+        });
         this.$data.pageCount = Math.ceil(this.$data.itemTotal / this.value.pageSize);
 
         this.$data.loadingData = false;
@@ -470,7 +451,7 @@ export default {
     _refreshHandler(refresh) {
       switch (refresh) {
         case 'current':
-          this.loadTableData()
+          this.loadTableData();
           break;
         case 'resetPage':
           this.search();
@@ -484,25 +465,24 @@ export default {
 
   watch: {
     value: {
-      handler: function (newVal) {
-        this.$emit("input", newVal);
+      handler: function(newVal) {
+        this.$emit('input', newVal);
       },
       deep: true
     },
     columnShow: {
-      handler: function (newVal) {
+      handler: function(newVal) {
         this._saveLocalColumnConfig(newVal);
       },
       deep: true
     },
     normalQueryValue: {
-      handler: function (newVal, oldVal) {
-
+      handler: function(newVal, oldVal) {
         // Ignore when no autoQueryFields
         const autoQueryFields = _get(this.$data.mergeConfig, 'query.autoQueryFields', []);
         if (autoQueryFields.length === 0) return;
 
-        // Ignore when newVal/oldVal is empty obj or newVal equals oldVal 
+        // Ignore when newVal/oldVal is empty obj or newVal equals oldVal
         if (Object.keys(newVal).length === 0 || Object.keys(oldVal).length === 0 || JSON.stringify(newVal) === JSON.stringify(oldVal)) return;
 
         const foundOne = autoQueryFields.find(field => JSON.stringify(newVal[field]) !== JSON.stringify(oldVal[field]));
@@ -513,13 +493,12 @@ export default {
       deep: false
     },
     advQueryValue: {
-      handler: function (newVal, oldVal) {
-
+      handler: function(newVal, oldVal) {
         // Ignore when no autoQueryFields
         const autoQueryFields = _get(this.$data.mergeConfig, 'query.autoQueryFields', []);
         if (autoQueryFields.length === 0) return;
 
-        // Ignore when newVal/oldVal is an empty obj or newVal equals oldVal 
+        // Ignore when newVal/oldVal is an empty obj or newVal equals oldVal
         if (Object.keys(newVal).length === 0 || Object.keys(oldVal).length === 0 || JSON.stringify(newVal) === JSON.stringify(oldVal)) return;
 
         const foundOne = autoQueryFields.find(field => JSON.stringify(newVal[field]) !== JSON.stringify(oldVal[field]));

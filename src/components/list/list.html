@@ -1,4 +1,4 @@
-<div class="nca-list">
+<div class="nca-list" ref="ncaList">
 
   <!--查询区域-->
   <el-row type="flex" align="top" class='mbSpace' v-if="seachBarVisible">
@@ -142,14 +142,14 @@
   <!--用initLoading就为了绕过el-pagination异步加载完数据更新currentPage不生效的BUG-->
   <el-row v-if="!initLoading && pagingVisible" class="mgt30">
     <!-- 无限加载 -->
-    <el-col align="center" v-if="mergeConfig.paging.unlimitedLoading">
+    <el-col ref="unlimitedLoadingWrapper" align="center" v-if="mergeConfig.paging.unlimitedLoading" style="min-height: 10px">
       <!-- 手动点击触发 -->
       <el-button v-if="!mergeConfig.paging.autoLoad" :loading="loadingData" :disabled="value.pageNum >= pageCount" style="width: 40%" type="primary" @click="loadMore()" plain>加载更多</el-button>
 
       <!-- 滚动到底部自动触发 -->
       <div v-else style="color: #909399">
         <span v-show="loadingData">加载中。。。</span>
-        <span v-show="!loadingData && value.pageNum > pageCount">已经没有数据啦~~~</span>
+        <span v-show="!loadingData && value.pageNum >= pageCount">已经没有数据啦~~~</span>
       </div>
     </el-col>
 
