@@ -142,7 +142,7 @@
   <!--用initLoading就为了绕过el-pagination异步加载完数据更新currentPage不生效的BUG-->
   <el-row v-if="!initLoading && pagingVisible" class="mgt30">
     <!-- 无限加载 -->
-    <el-col ref="unlimitedLoadingWrapper" align="center" v-if="mergeConfig.paging.unlimitedLoading" style="min-height: 10px">
+    <el-col ref="unlimitedLoadingWrapper" align="center" v-if="mergeConfig.paging.unlimitedLoading" style="min-height: 40px">
       <!-- 手动点击触发 -->
       <el-button v-if="!mergeConfig.paging.autoLoad" :loading="loadingData" :disabled="value.pageNum >= pageCount" style="width: 40%" type="primary" @click="loadMore()" plain>加载更多</el-button>
 
