@@ -2,7 +2,7 @@ import widgetMixin from "./mixin.js";
 import eventHub from '../../utils/event-hub.js'
 
 /**
- * - 覆盖methods._confirmHandler(done)方法可实现点击确认按钮操作逻辑（请务必在执行确认操作后调用done方法，否则后果自负）
+ * - 覆盖methods._confirmHandler(done)方法可实现点击确认按钮操作逻辑（请务必在执行确认操作后调用done方法，可通过给done方法传参来传递参数，如form数据）
  * - 覆盖methods._btnsEventHandler(config)方法可实现自定义按钮的操作逻辑
  * - 调用this._closeModal(isConfirm)方法可关闭modal
  */
@@ -15,8 +15,8 @@ export default {
     eventHub.$on(`fromModal_${this.modalId}`, config => {
       switch (config.eventName) {
         case "modalConfirm":
-          this._confirmHandler(() => {
-            this._closeModal(true);
+          this._confirmHandler(data => {
+            this._closeModal(true, data);
           });
           break;
         default:
@@ -44,11 +44,12 @@ export default {
      */
     _btnsEventHandler(config) {},
     
-    _closeModal(isConfirm) {
+    _closeModal(isConfirm, data) {
       eventHub.$emit(`toModal_${this.modalId}`, {
         eventName: "modalCancel",
         data: {
-          isConfirm: isConfirm
+          isConfirm: isConfirm,
+          data
         }
       });
     }

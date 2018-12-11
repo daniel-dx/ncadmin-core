@@ -21,7 +21,7 @@ export default {
       switch (config.eventName) {
         case "modalCancel":
           if (config.data.isConfirm) { // 通过confirm事件通知调用者是用户点击确认关闭，而非右上角的关闭按钮或取消按钮关闭的
-            this.$emit('confirm');
+            this.$emit('confirm', config.data.data);
           }
           this.closeModal();
           break;

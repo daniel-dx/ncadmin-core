@@ -142,11 +142,11 @@ export default {
                 eventHub.$emit(submitConfig.notifyEvent, _merge(res.data, data));
               }
 
-              done();
+              done(_merge(res.data, data));
             });
           } else { // 无则通知value改变
             this.$emit('input', data); 
-            done();
+            done(data);
           }
         }
       });

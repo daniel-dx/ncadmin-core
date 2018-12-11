@@ -12,56 +12,56 @@
   <!--演示区域-->
   <div id="demo">
     <el-button @click="config1.visible = true">1: 远程获取数据</el-button>
-    <nca-modal :visible.sync="config1.visible" :modal-config="config1.modalConfig">
+    <nca-modal :visible.sync="config1.visible" :modal-config="config1.modalConfig" @confirm="confirm">
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config1.config" :value="config1.value"></nca-edit-modal-inside>
     </nca-modal>
 
     <p></p>
 
     <el-button @click="config2.visible = true">2: 本地提供数据</el-button>
-    <nca-modal :visible.sync="config2.visible" :modal-config="config2.modalConfig">
+    <nca-modal :visible.sync="config2.visible" :modal-config="config2.modalConfig" @confirm="confirm">
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config2.config" :value="config2.value"></nca-edit-modal-inside>
     </nca-modal>
 
     <p></p>
 
     <el-button @click="config3.visible = true">3: 新建</el-button>
-    <nca-modal :visible.sync="config3.visible" :modal-config="config3.modalConfig">
+    <nca-modal :visible.sync="config3.visible" :modal-config="config3.modalConfig" @confirm="confirm">
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config3.config" :value="config3.value"></nca-edit-modal-inside>
     </nca-modal>
 
     <p></p>
 
     <el-button @click="config4.visible = true">4: 远程获取数据 - 表单数据只是返回数据的一个字段的值</el-button>
-    <nca-modal :visible.sync="config4.visible" :modal-config="config4.modalConfig">
+    <nca-modal :visible.sync="config4.visible" :modal-config="config4.modalConfig" @confirm="confirm">
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config4.config" :value="config4.value"></nca-edit-modal-inside>
     </nca-modal>
 
     <p></p>
 
     <el-button @click="config5.visible = true">5: 本地提供数据 - 表单数据只是返回数据的一个字段的值</el-button>
-    <nca-modal :visible.sync="config5.visible" :modal-config="config5.modalConfig">
+    <nca-modal :visible.sync="config5.visible" :modal-config="config5.modalConfig" @confirm="confirm">
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config5.config" :value="config5.value"></nca-edit-modal-inside>
     </nca-modal>
 
     <p></p>
 
     <el-button @click="config6.visible = true">6: 复制</el-button>
-    <nca-modal :visible.sync="config6.visible" :modal-config="config6.modalConfig">
+    <nca-modal :visible.sync="config6.visible" :modal-config="config6.modalConfig" @confirm="confirm">
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config6.config" :value="config6.value"></nca-edit-modal-inside>
     </nca-modal>
 
     <p></p>
 
     <el-button @click="config7.visible = true">7: 复制(远程数据)</el-button>
-    <nca-modal :visible.sync="config7.visible" :modal-config="config7.modalConfig">
+    <nca-modal :visible.sync="config7.visible" :modal-config="config7.modalConfig" @confirm="confirm">
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config7.config" :value="config7.value"></nca-edit-modal-inside>
     </nca-modal>
 
     <p></p>
 
     <el-button @click="config8.visible = true">8: 不调提交数据</el-button>
-    <nca-modal :visible.sync="config8.visible" :modal-config="config8.modalConfig">
+    <nca-modal :visible.sync="config8.visible" :modal-config="config8.modalConfig" @confirm="confirm">
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config8.config" v-model="config8.value"></nca-edit-modal-inside>
     </nca-modal>
 
@@ -393,6 +393,12 @@
           }
         },
 
+      }
+      ,
+      methods: {
+        confirm(formData) {
+          console.log(JSON.stringify(formData, null, 2));
+        }
       }
     });
   </script>
