@@ -31,6 +31,7 @@ export default {
 
   created() {
     this.$axios = !this.$axios ? axios : this.$axios;
+    this.$options.debounceSearch = _debounce(this.search, 500);
 
     // 设置默认值（因为value是个对象，这里不设置，上面的default值是不生效的）
     this.value.pageNum = this.value.pageNum || 1;
@@ -521,7 +522,7 @@ export default {
 
         const foundOne = autoQueryFields.find(field => JSON.stringify(newVal[field]) !== JSON.stringify(oldVal[field]));
         if (foundOne) {
-          this.search();
+          this.$options.debounceSearch();
         }
       },
       deep: false
@@ -537,7 +538,7 @@ export default {
 
         const foundOne = autoQueryFields.find(field => JSON.stringify(newVal[field]) !== JSON.stringify(oldVal[field]));
         if (foundOne) {
-          this.search();
+          this.$options.debounceSearch();
         }
       },
       deep: false
