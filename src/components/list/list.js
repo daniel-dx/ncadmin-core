@@ -272,8 +272,27 @@ export default {
     },
 
     eventHandlerConfirm(handler, item = {}, multipleSelection = [], defConfirmTxt) {
-      if (handler.confirmTxt || defConfirmTxt) {
-        this.$confirm(handler.confirmTxt || defConfirmTxt, '提示', {
+
+      let confirmTxt = defConfirmTxt;
+
+      if (handler.confirmTxt) {
+        const handlerData = [
+          {
+            symbol: '$item',
+            value: item
+          },
+          {
+            symbol: '$selected',
+            value: multipleSelection
+          }
+        ];
+        confirmTxt = ncformUtils.smartAnalyze(handler.confirmTxt, {
+          data: handlerData
+        });
+      }
+
+      if (confirmTxt) {
+        this.$confirm(confirmTxt, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -329,7 +348,7 @@ export default {
       switch (type) {
         case 'ajax':
           const params = {};
-          options.params.forEach(item => {
+          (options.params || []).forEach(item => {
             params[item.name] = ncformUtils.smartAnalyze(item.value, {
               data: handlerData
             });

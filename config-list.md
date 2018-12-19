@@ -131,7 +131,7 @@
   btnType: '', // 按钮类型 primary / success / warning / danger / info / text
   handler: {
     type: 'ajax', // ajax / page / modal / component
-    confirmTxt: '', // 确认提示语。当需求让用户确认操作时提供，不提供则操作不需要用户确认
+    confirmTxt: '', // 确认提示语。当需求让用户确认操作时提供，不提供则操作不需要用户确认。支持dx表达式
     event: { // 点击的时候对外发送事件，可用于通知组件外的环境去做某些事
         name: '',
         data: 'dx: {{$item}}'

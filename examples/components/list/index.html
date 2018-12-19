@@ -19,8 +19,8 @@
   </style>
 
   <!--演示区域-->
-  <!-- <div id="demo"> -->
-  <div id="demo" class="demo">
+  <div id="demo">
+  <!-- <div id="demo" class="demo"> -->
   <!-- <div id="demo" style="height: 350px; overflow-y: auto"> -->
     <list :config="config" v-model="valueData" @item-edit="listEventHandler"></list>
 
@@ -191,6 +191,7 @@
               delete: {
                 handler: {
                   type: "ajax",
+                  confirmTxt: 'dx: "确定要删除" + {{$selected}}.map(item => item.name).join(",") + "吗？"',
                   options: {
                     apiUrl: "/api/deleteItem",
                     method: 'post',
@@ -416,6 +417,16 @@
                   type: "page",
                   options: {
                     route: "http://www.baidu.com"
+                  }
+                }
+              },
+              // 删除
+              delete: {
+                handler: {
+                  type: "ajax",
+                  confirmTxt: "dx: '确定要删除' + {{$item.name}} + '吗?'",
+                  options: {
+                    apiUrl: "/api/saveItem", // 提交的Url
                   }
                 }
               },
