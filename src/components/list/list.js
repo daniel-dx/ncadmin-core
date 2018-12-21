@@ -5,7 +5,6 @@ import actionObject from '../private/action-object.vue';
 import ncComponent from '../private/nc-component.vue';
 import modal from '../modal/index-link.vue';
 import { axiosOptions, findClosetScrollParent, isScrolledIntoView } from '../../utils/helper';
-import axios from 'axios';
 import widgetMixin from '../widgets/mixin.js';
 import eventHub from '../../utils/event-hub.js';
 
@@ -30,7 +29,6 @@ export default {
   },
 
   created() {
-    this.$axios = !this.$axios ? axios : this.$axios;
     this.$options.debounceSearch = _debounce(this.search, 500);
 
     // 设置默认值（因为value是个对象，这里不设置，上面的default值是不生效的）
@@ -354,7 +352,7 @@ export default {
             });
           });
 
-          this.$axios(handler.options.apiUrl, axiosOptions(handler.options.method, params)).then(res => {
+          this.$http(handler.options.apiUrl, axiosOptions(handler.options.method, params)).then(res => {
             this._refreshHandler(handler.refresh);
           });
           break;
@@ -466,7 +464,7 @@ export default {
       this.$data.loadingData = true;
       let currentScrollTop = (this.$options.scrollParentElm || document.documentElement).scrollTop; // 记录当前的滚动位置，供无限加载模式使用
 
-      return this.$axios(datasource.apiUrl, axiosOptions(datasource.method, postData)).then(res => {
+      return this.$http(datasource.apiUrl, axiosOptions(datasource.method, postData)).then(res => {
         const listField = datasource.resField.list;
         const pageingTotalField = datasource.resField.pageingTotal;
         this.$data.itemTotal = parseInt(_get(res.data, `${pageingTotalField}`, 0));

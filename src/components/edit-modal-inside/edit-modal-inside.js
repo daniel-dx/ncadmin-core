@@ -1,7 +1,6 @@
 import _get from "lodash-es/get";
 import _merge from "lodash-es/merge";
 import { ncformUtils } from "@ncform/ncform-common";
-import axios from 'axios';
 import modalInsideMixins from '../widgets/modal-inside-mixin.js';
 import { axiosOptions } from "../../utils/helper.js";
 import eventHub from '../../utils/event-hub.js';
@@ -18,7 +17,6 @@ export default {
   },
 
   created() {
-    this.$axios = !this.$axios ? axios : this.$axios;
     this._initData();
   },
 
@@ -98,7 +96,7 @@ export default {
         });
       });
 
-      this.$axios(formDataConfig.apiUrl, axiosOptions(formDataConfig.method, data)).then(res => {
+      this.$http(formDataConfig.apiUrl, axiosOptions(formDataConfig.method, data)).then(res => {
         const resField = formDataConfig.resField;
         let resData = this.$options.remoteData = resField ? _get(res.data, resField) : res.data;
         this.$data.formValue = this.$data.mergeConfig.formField ? resData[this.$data.mergeConfig.formField] : resData;
@@ -132,7 +130,7 @@ export default {
           if (!this.$data.mergeConfig.isCopy) data[this.$data.mergeConfig.idField] = this.$data.onlyId;
 
           if (submitConfig.apiUrl) { // 有则远程调用 
-            this.$axios(submitConfig.apiUrl, axiosOptions(submitConfig.method, data)).then(res => {
+            this.$http(submitConfig.apiUrl, axiosOptions(submitConfig.method, data)).then(res => {
               this.$message({
                 type: "success",
                 message: "保存成功"

@@ -2,7 +2,6 @@ import detailRecursion from "../private/detail-widget/detail-recursion.vue";
 import _get from "lodash-es/get";
 import { ncformUtils } from "@ncform/ncform-common";
 import { axiosOptions } from "../../utils/helper.js";
-import axios from "axios";
 import modalInsideMixins from '../widgets/modal-inside-mixin.js';
 
 export default {
@@ -21,7 +20,6 @@ export default {
   },
 
   created() {
-    this.$axios = !this.$axios ? axios : this.$axios;
     this.initData();
   },
 
@@ -79,7 +77,7 @@ export default {
         });
       });
 
-      this.$axios(
+      this.$http(
         formDataConfig.apiUrl,
         axiosOptions(formDataConfig.method, data)
       ).then(res => {

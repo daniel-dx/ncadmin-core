@@ -2,7 +2,6 @@ import _get from "lodash-es/get";
 import _merge from "lodash-es/merge";
 import { ncformUtils } from "@ncform/ncform-common";
 import { axiosOptions } from "../../utils/helper.js";
-import axios from 'axios';
 import widgetMixin from '../widgets/mixin.js';
 import eventHub from '../../utils/event-hub.js';
 
@@ -11,7 +10,6 @@ export default {
   mixins: [widgetMixin],
 
   created() {
-    this.$axios = !this.$axios ? axios : this.$axios;
     this.initData();
   },
 
@@ -98,7 +96,7 @@ export default {
         });
       });
 
-      this.$axios(
+      this.$http(
         formDataConfig.apiUrl,
         axiosOptions(formDataConfig.method, data)
       ).then(res => {
@@ -125,7 +123,7 @@ export default {
         if (submitConfig.valueField) data[submitConfig.valueField] = submitData;
         else data = submitData;
 
-        this.$axios(
+        this.$http(
           submitConfig.apiUrl,
           axiosOptions(submitConfig.method, data)
         ).then(res => {
