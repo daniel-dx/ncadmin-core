@@ -10,7 +10,7 @@
 
   <!--演示区域-->
   <div id="demo">
-    <modal model-config="modalConfig" :visible.sync="visible">
+    <modal :modal-config="modalConfig" :visible.sync="visible">
       随便弹出点东西试试。
     </modal>
   </div>
@@ -43,13 +43,19 @@
           title: "弹窗title",
           buttons: {
             confirm: {
-              enable: false
+              enable: true
             },
             cancel: {
               name: '关闭',
               enable: true
             },
             others: [
+              {
+                name: '其它',
+                enable: true,
+                eventName: 'other',
+                showLoading: true
+              }
             ]
           }
         }

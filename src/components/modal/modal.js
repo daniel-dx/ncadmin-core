@@ -1,4 +1,5 @@
 import eventHub from '../../utils/event-hub.js';
+import _set from 'lodash-es/set';
 
 // modal内接收的事件由开发者自己定义，在modalConfig中配置即可。
 export default {
@@ -19,11 +20,26 @@ export default {
   created() {
     eventHub.$on(`toModal_${this.$data.modalId}`, config => {
       switch (config.eventName) {
-        case "modalCancel":
-          if (config.data.isConfirm) { // 通过confirm事件通知调用者是用户点击确认关闭，而非右上角的关闭按钮或取消按钮关闭的
-            this.$emit('confirm', config.data.data);
-          }
+        case "modalCancel": // 关闭窗口事件
           this.closeModal();
+          break;
+        case "modalConfirm": // 确认逻辑处理完的事件
+          if (this.mdConfig.buttons.confirm.showLoading) {
+            this.$data.loading.modalConfirm = false;
+          }
+          if (!(config.data.data instanceof Error)) { // 有异步请求时出现异常
+            this.$emit('confirm', config.data.data);
+            this.closeModal();
+          }
+          break;
+        default: // 其它按钮事件逻辑处理完的事件
+          let foundBtnConfig = this.mdConfig.buttons.others.find(bItem => bItem.eventName === config.eventName);
+          if (foundBtnConfig.showLoading) {
+            this.$data.loading[config.eventName] = false;
+          }
+          if (foundBtnConfig.close && !(config.data.data instanceof Error)) { // 有异步请求时出现异常
+            this.closeModal();
+          }
           break;
       }
     });
@@ -36,7 +52,10 @@ export default {
         "event_" +
         Math.random()
           .toString(36)
-          .substring(2)
+          .substring(2),
+      loading: {
+        // 通过button的eventName来识别按钮的loading状态
+      }
     };
   },
 
@@ -52,7 +71,8 @@ export default {
           enable: true,
           name: "确定",
           eventName: "modalConfirm",
-          close: true
+          close: true,
+          showLoading: true
         },
         mdConfig.buttons.confirm
       );
@@ -73,6 +93,10 @@ export default {
   methods: {
 
     modalButtonEvent(config) {
+      if (config.showLoading && config.eventName) {
+        this.$set(this.$data.loading, config.eventName, true);
+      }
+      
       eventHub.$emit(`fromModal_${this.$data.modalId}`, config);
     },
 
@@ -81,7 +105,6 @@ export default {
     }
   },
   watch: {
-
     visibleData(newVal) {
       if (this.visible != newVal) {
         this.$emit("update:visible", newVal);

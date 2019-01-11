@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import promiseFinallyShim from 'promise.prototype.finally/shim';
 import ncformCommon from '@ncform/ncform-common';
 import ncform from '@ncform/ncform';
 import ncformThemeElementui from '@ncform/ncform-theme-elementui';
@@ -28,6 +29,8 @@ Vue.component('nca-modal', modal);
 Vue.component('nca-label', label);
 Vue.component('nca-image', image);
 Vue.component('nca-link', link);
+
+promiseFinallyShim();
 
 export default {
   ncformCommon,

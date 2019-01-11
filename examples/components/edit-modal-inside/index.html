@@ -85,11 +85,24 @@
     new Vue({
       el: '#demo',
       data: {
-
         config1: {
           visible: false,
           modalConfig: {
             title: '编辑用户', // 弹窗标题
+            buttons: {
+              confirm: {
+                showLoading: true
+              },
+              // 这里仅仅用于调试Modal的others，该组件并未实现其它按钮功能
+              // others: [
+              //   {
+              //     name: '其它',
+              //     eventName: 'other',
+              //     showLoading: true,
+              //     close: true
+              //   }
+              // ]
+            }
           },
           config: {
             idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式

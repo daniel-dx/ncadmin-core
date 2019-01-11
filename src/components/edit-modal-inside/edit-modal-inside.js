@@ -141,7 +141,7 @@ export default {
               }
 
               done(_merge(res.data, data));
-            });
+            }).catch(e => done(e));
           } else { // 无则通知value改变
             this.$emit('input', data); 
             done(data);
@@ -149,6 +149,13 @@ export default {
         }
       });
     },
+
+    // 仅用于调试其它按钮配置
+    // _btnsEventHandler(config, done) {
+    //   setTimeout(() => {
+    //     done(1)
+    //   }, 2000)
+    // },
   },
 
   watch: {

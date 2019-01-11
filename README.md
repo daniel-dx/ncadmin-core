@@ -157,17 +157,21 @@ ncform的通用类库，请参考ncform-common项目的文档
           title: '', // 弹窗标题
           buttons: {
             confirm: { // 确定按钮
-              enable: true
+              enable: true,
+              name: '',   // 按钮名称，默认确定
+              showLoading: true, // 是否在异步请求时显示loading状态
             },
             cancel: { // 取消按钮
-              enable: true
+              enable: true,
+              name: '',   // 取消
             },
             others: [
               {
                 enable: true,
                 name: '',   // 按钮名称
                 eventName: '', // 按钮触发事件名称
-                close: true // 操作后是否关闭弹窗
+                close: true, // 操作后是否关闭弹窗
+                showLoading: false, // 是否在异步请求时显示loading状态，true的情况eventName必须提供
               }
             ]
           }
@@ -185,39 +189,28 @@ ncform的通用类库，请参考ncform-common项目的文档
 </template>
 
 <script>
-  import ncadminCore from 'ncadmin-core';
-  const { eventHub } = ncadminCore;
+  import ncadminCore from '@danieldx/ncadmin-core';
+  const { eventHub, modalInsideMixins } = ncadminCore;
   
   export default {
-    // modalId 为弹窗传入的唯一标识
-    props: ["modalId"],
 
-    created() {
-      /* 
-      *  监听modal容器事件，通过eventName区分事件。
-      *  fromModal_${this.modalId} 为modal触发的事件。
-      */
-      eventHub.$on(`fromModal_${this.modalId}`, config => {
-        switch (config.eventName) {
-          // 点击确定按钮
-          case "modalConfirm":
-            // do something;
-            break;
+    mixins: [modalInsideMixins],
 
-          // 点击自定义按钮的事件（事件名用户自定义，以下仅仅是演示）
-          case "commonEditCancel":
-            // do something;
-            break;
-        }
-      });
-    },
-    mounted() {
-      /*
-      *  toModal_${this.modalId} 为发送给modal容器的事件。
-      */
-      eventHub.$emit(`toModal_${this.modalId}`, {
-        eventName: 'modalCancel' // 触发弹窗的关闭事件
-      });
+    methods: {
+
+      /**
+       * 确认按钮事件处理
+       * 请务必在执行确认操作后调用done方法。如果请求失败，把Error对象传给done
+       * 如 成功：done()或done(data) 失败：done(e)
+       */ 
+      _confirmHandler(done) { },
+
+      /**
+       * 自定义的其它按钮的事件处理
+       * 请务必在执行确认操作后调用done方法。如果请求失败，把Error对象传给done
+       * 如 成功：done()或done(data) 失败：done(e)
+       */ 
+      _btnsEventHandler(config, done) { },
     }
   }
 </script>
