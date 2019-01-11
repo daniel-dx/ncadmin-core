@@ -146,6 +146,8 @@ export default {
             this.$emit('input', data); 
             done(data);
           }
+        } else {
+          done(new Error('Form validation failed'));
         }
       });
     },
