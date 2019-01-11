@@ -8,7 +8,7 @@
     </el-col>
   </el-row>
   <el-row class="btn-area">
-    <el-button type="primary" @click="submitData()">{{mergeConfig.buttons.submit.name}}</el-button>
+    <el-button type="primary" :loading="isSaving" @click="submitData()">{{mergeConfig.buttons.submit.name}}</el-button>
     <el-button v-if="mergeConfig.buttons.back.enable" @click="goBack()">{{mergeConfig.buttons.back.name}}</el-button>
   </el-row>
 </div>

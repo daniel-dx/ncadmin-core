@@ -25,6 +25,7 @@ export default {
       editFormName: `edit-${new Date().getTime()}`,
       onlyId: "",
       formValue: {},
+      isSaving: false,
       defaultConfig: {
         title: '', // 标题，editMode不同，显示也不同。比如这里写“商品”，编辑模式下显示为编辑商品，新建模式下显示新建商品
         idField: 'id', // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
@@ -123,6 +124,7 @@ export default {
         if (submitConfig.valueField) data[submitConfig.valueField] = submitData;
         else data = submitData;
 
+        this.$data.isSaving = true;
         this.$http(
           submitConfig.apiUrl,
           axiosOptions(submitConfig.method, data)
@@ -136,6 +138,8 @@ export default {
           if (submitConfig.notifyEvent) {
             eventHub.$emit(submitConfig.notifyEvent, _merge(res.data, data));
           }
+        }).finally(() => {
+          this.$data.isSaving = false;
         });
       });
     }
