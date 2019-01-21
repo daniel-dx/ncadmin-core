@@ -17,7 +17,7 @@ export default {
 
     config: Object,
 
-    value: [String, Number, Boolean, Object, Array],
+    value: [String, Number, Boolean, Object, Array, Function],
 
     smartData: {
       type: Object,

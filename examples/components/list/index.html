@@ -331,7 +331,8 @@
                 header: '控件-label',
                 component: {
                   name: 'nca-label',
-                  value: 'dx: {{$item.name}}',
+                  // value: 'dx: {{$item.name}}',
+                  value: $item => $item.name,
                   config: {
                     color: 'dx: {{$item.name}} === "daniel" ? "red" : "orange"'
                   }

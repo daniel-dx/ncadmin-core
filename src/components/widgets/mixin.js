@@ -15,7 +15,10 @@ export default {
     })
   },
 
-  props: ["config", "value"],
+  props: {
+    config: [Object, Function],
+    value: [String, Number, Boolean, Object, Array, Function],
+  },
 
   data() {
     return {
