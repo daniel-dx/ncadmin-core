@@ -7,6 +7,7 @@ import modal from '../modal/index-link.vue';
 import { axiosOptions, findClosetScrollParent, isScrolledIntoView } from '../../utils/helper';
 import widgetMixin from '../widgets/mixin.js';
 import eventHub from '../../utils/event-hub.js';
+import detailRecursion from "../private/detail-widget/detail-recursion.vue";
 
 export default {
   mixins: [widgetMixin],
@@ -14,7 +15,8 @@ export default {
   components: {
     ncComponent,
     actionObject,
-    modal
+    modal,
+    detailRecursion
   },
 
   props: {

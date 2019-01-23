@@ -13,15 +13,15 @@
 
   <style type="text/css">
     .demo {
-      height: 350px; 
+      height: 350px;
       overflow-y: auto;
     }
   </style>
 
   <!--演示区域-->
   <div id="demo">
-  <!-- <div id="demo" class="demo"> -->
-  <!-- <div id="demo" style="height: 350px; overflow-y: auto"> -->
+    <!-- <div id="demo" class="demo"> -->
+    <!-- <div id="demo" style="height: 350px; overflow-y: auto"> -->
     <list :config="config" v-model="valueData" @item-edit="listEventHandler"></list>
 
     <button @click="notifyRefresh">外部通知列表刷新</button>
@@ -349,6 +349,34 @@
                 }
               }
             ],
+            rowExtend: {
+              properties: [
+                {
+                  label: '', // 标签
+                  value: '', // 【非必填】。只支持dx表达式（支持$root和$parent）
+                  widget: 'object', // 使用的widget，默认是object
+                  widgetConfig: {
+                    // 针对自身的
+                    titleColor: "red",
+                    showOwnLabel: false,
+                    showTitle: true,
+                    // 针对子元素的
+                    labelWidth: "",
+                    labelColor: "",
+                  },
+                  properties: [
+                    {
+                      label: '日期', // 标签
+                      value: 'dx: {{$root.date}}' // 只支持dx表达式（支持$root和$parent）
+                    },
+                    {
+                      label: '姓名', // 标签
+                      value: 'dx: {{$root.name}}' // 只支持dx表达式（支持$root和$parent）
+                    },
+                  ],
+                },
+              ]
+            },
             actionColumn: {
               width: 300,
             },

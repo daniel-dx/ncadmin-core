@@ -89,6 +89,13 @@
       <el-col :span="24">
         <el-table ref="table" :data="tableData" :stripe="true" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" @sort-change="handelSortChange">
 
+          <!-- 展开 -->
+          <el-table-column v-if="mergeConfig.list.rowExtend && mergeConfig.list.rowExtend.properties && mergeConfig.list.rowExtend.properties.length > 0" type="expand">
+            <template slot-scope="props">
+              <detail-recursion :config="mergeConfig.list.rowExtend" :value="props.row"></detail-recursion>
+            </template>
+          </el-table-column>
+
           <!-- 选择 -->
           <el-table-column v-if="mergeConfig.list.selectAll" type="selection">
           </el-table-column>

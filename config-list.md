@@ -86,6 +86,11 @@
       }
     ],
 
+    rowExtend: { // 行展开的配置项
+      properties: [  // 参考config-detail.md中的配置 
+      ]
+    },
+
     actions: { // 项操作
       delete: { // 删除
         enable: true, // 或 dx表达式，如 dx: !!{{$item.id}}
