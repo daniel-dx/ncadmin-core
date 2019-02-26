@@ -17,6 +17,7 @@ import modal from './modal/index.vue';
 import label from './widgets/label/index.vue';
 import image from './widgets/image/index.vue';
 import link from './widgets/link/index.vue';
+import detailRecursion from './private/detail-widget/detail-recursion.vue';
 // Don't touch me - import
 
 Vue.component('nca-detail-modal-inside', detailModalInside);
@@ -26,6 +27,7 @@ Vue.component('nca-edit', edit);
 Vue.component('nca-list', list);
 Vue.component('nca-modal', modal);
 
+Vue.component('nca-detail-widget', detailRecursion);
 Vue.component('nca-label', label);
 Vue.component('nca-image', image);
 Vue.component('nca-link', link);
