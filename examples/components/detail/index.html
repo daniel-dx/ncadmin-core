@@ -94,6 +94,7 @@
               {
                 label: "对象套对象",
                 value: "dx: {{$root.obj}}",
+                columns: 6,
                 properties: [
                   {
                     label: "",
@@ -101,11 +102,13 @@
                     properties: [
                       {
                         label: "a.a",
-                        value: "dx: {{$parent.a}}"
+                        value: "dx: {{$parent.a}}",
+                        columns: 6,
                       },
                       {
                         label: "a.b",
-                        value: "dx: {{$parent.b}}"
+                        value: "dx: {{$parent.b}}",
+                        columns: 6,
                       }
                     ]
                   },

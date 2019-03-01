@@ -1,5 +1,5 @@
 <template>
-  <el-col class="detail-recursion" :span="columns" v-if="allShow">
+  <el-col class="detail-recursion" v-if="allShow">
     <!-- 对象 -->
     <component v-if="config.properties" :is="config.widget ? 'layout-'+config.widget : defaultWidget.object" :config="config" :value="value" :root-data="rootValue">
       <template slot-scope="props">
