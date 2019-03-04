@@ -133,7 +133,9 @@
 {
   name: '',
   enable: true, // 支持dx表达式
-  btnType: '', // 按钮类型 primary / success / warning / danger / info / text
+  btnType: '', // 按钮类型 primary / success / warning / danger / info / text （当handler.type != 'component' 有效）
+  btnIcon: '', // 按钮ICON样式名 （当handler.type != 'component' 有效）
+  btnTips: '', // 鼠标移到按钮上的显示的title属性值 （当handler.type != 'component' 有效）
   handler: {
     type: 'ajax', // ajax / page / modal / component
     confirmTxt: '', // 确认提示语。当需求让用户确认操作时提供，不提供则操作不需要用户确认。支持dx表达式
