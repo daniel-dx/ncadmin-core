@@ -1,6 +1,6 @@
 {
   "name": "@danieldx/ncadmin-core",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "description": "",
   "homepage": "",
   "author": {
@@ -19,9 +19,9 @@
     "README.md"
   ],
   "devDependencies": {
-    "@ncform/ncform": "^0.1.27",
-    "@ncform/ncform-common": "^0.1.27",
-    "@ncform/ncform-theme-elementui": "^0.1.27",
+    "@ncform/ncform": "^0.1.28",
+    "@ncform/ncform-common": "^0.1.28",
+    "@ncform/ncform-theme-elementui": "^0.1.28",
     "autoprefixer": "^6.0.2",
     "babel-core": "^6.2.21",
     "babel-eslint": "^6.0.4",
