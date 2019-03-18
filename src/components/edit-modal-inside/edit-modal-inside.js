@@ -1,5 +1,6 @@
 import _get from "lodash-es/get";
 import _merge from "lodash-es/merge";
+import _cloneDeep from "lodash-es/cloneDeep";
 import { ncformUtils } from "@ncform/ncform-common";
 import modalInsideMixins from '../widgets/modal-inside-mixin.js';
 import { axiosOptions } from "../../utils/helper.js";
@@ -17,6 +18,7 @@ export default {
   },
 
   created() {
+    this.$options.valueCopy = _cloneDeep(this.value);
     this._initData();
   },
 
@@ -61,8 +63,8 @@ export default {
   methods: {
 
     _initData() {
-      this.$data.onlyId = this.value[this.$data.mergeConfig.idField];
-      this.$data.formValue = Object.assign({}, this.$data.mergeConfig.formField ? this.value[this.$data.mergeConfig.formField] : this.value);
+      this.$data.onlyId = this.$options.valueCopy[this.$data.mergeConfig.idField];
+      this.$data.formValue = Object.assign({}, this.$data.mergeConfig.formField ? this.$options.valueCopy[this.$data.mergeConfig.formField] : this.$options.valueCopy);
       this._loadFormData();
     },
 
@@ -116,10 +118,10 @@ export default {
 
           // 保证取回什么样的数据格式，就提交什么样的数据格式
           if (this.$data.mergeConfig.formField) {
-            submitData = Object.assign({}, this.$options.remoteData || this.value);
+            submitData = Object.assign({}, this.$options.remoteData || this.$options.valueCopy);
             submitData[this.$data.mergeConfig.formField] = Object.assign(submitData[this.$data.mergeConfig.formField], this.$data.formValue);
           } else {
-            submitData = Object.assign({}, this.$options.remoteData || this.value, this.$data.formValue);
+            submitData = Object.assign({}, this.$options.remoteData || this.$options.valueCopy, this.$data.formValue);
           }
 
           if (this.$data.mergeConfig.isCopy) delete submitData[this.$data.mergeConfig.idField];
@@ -171,8 +173,8 @@ export default {
     },
     formValue: {
       handler(newVal) {
-        if (JSON.stringify(newVal) != JSON.stringify(this.value)) {
-          Object.assign(this.value, newVal);
+        if (JSON.stringify(newVal) != JSON.stringify(this.$options.valueCopy)) {
+          Object.assign(this.$options.valueCopy, newVal);
         }
       },
       deep: true
