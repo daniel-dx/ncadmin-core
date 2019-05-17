@@ -3,7 +3,7 @@
     <div v-if="titleShow(config)" class="label" :style="titleStyle()">{{config.label}}</div>
     <div class="content">
       <el-row>
-        <el-col v-for="(item, index) in config.properties" :span="columns(item)" style="margin:5px 0;" :key="index">
+        <el-col v-for="(item, index) in config.properties" :span="columns(item)" style="margin:5px 0;" :key="index" v-show="itemShow(item)">
           <div class="flexBox">
             <div v-if="propertyLabelShow(item)" class="labelArea" :style="labelStyle()">
               {{item.label}}
@@ -53,7 +53,10 @@ export default {
     },
     columns(item){
       return item.columns ? item.columns * 2 : 24;
-    }
+    },
+    itemShow(item) {
+      return !this.analyze(_get(item, "hidden", false));
+    } 
   }
 };
 </script>

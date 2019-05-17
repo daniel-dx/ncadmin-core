@@ -1,6 +1,6 @@
 {
   "name": "@danieldx/ncadmin-core",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "",
   "homepage": "",
   "author": {
@@ -77,6 +77,6 @@
     "axios": "^0.17.1",
     "extend": "^3.0.1",
     "promise.prototype.finally": "^3.1.0",
-    "vue": "^2.1.8"
+    "vue": "^2.6.10"
   }
 }

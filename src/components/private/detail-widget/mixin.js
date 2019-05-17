@@ -6,7 +6,7 @@ export default {
     analyze(val, inputData) {
       const rootData = this.rootData || this.value;
       inputData = inputData || this.value;
-      val = val ? val.replace(/(\$parent|\$item)/g, "$data") : 'dx: {{$root}}';
+      val = val !== undefined ? (typeof val === 'string' ? val.replace(/(\$parent|\$item)/g, "$data") : val) : 'dx: {{$root}}';
       return ncformUtils.smartAnalyze(val, {
         data: [
           {

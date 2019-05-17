@@ -24,6 +24,7 @@
         label: '', // 标签
         value: '', // 【必填】。只支持dx表达式（支持$root，$parent，$item）
         columns: 6, // 所占的列数，默认是12（一行为12列）
+        hidden: false, //支持dx表达式
         widget: 'label', // 使用的widget，默认是label，即只显示只读文本
         widgetConfig: {} // widget的一些配置信息
       },
