@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import promiseFinallyShim from 'promise.prototype.finally/shim';
 import ncformCommon from '@ncform/ncform-common';
 import ncform from '@ncform/ncform';
@@ -20,30 +19,32 @@ import link from './widgets/link/index.vue';
 import detailRecursion from './private/detail-widget/detail-recursion.vue';
 // Don't touch me - import
 
-Vue.component('nca-detail-modal-inside', detailModalInside);
-Vue.component('nca-edit-modal-inside', editModalInside);
-Vue.component('nca-detail', detail);
-Vue.component('nca-edit', edit);
-Vue.component('nca-list', list);
-Vue.component('nca-modal', modal);
 
-Vue.component('nca-detail-widget', detailRecursion);
-Vue.component('nca-label', label);
-Vue.component('nca-image', image);
-Vue.component('nca-link', link);
 
 promiseFinallyShim();
 
 export default {
+  install(Vue, {ncformExtComponents, ncformExtRules}) {
+    Vue.component('nca-detail-modal-inside', detailModalInside);
+    Vue.component('nca-edit-modal-inside', editModalInside);
+    Vue.component('nca-detail', detail);
+    Vue.component('nca-edit', edit);
+    Vue.component('nca-list', list);
+    Vue.component('nca-modal', modal);
+    
+    Vue.component('nca-detail-widget', detailRecursion);
+    Vue.component('nca-label', label);
+    Vue.component('nca-image', image);
+    Vue.component('nca-link', link);
+
+    Vue.use(ncform, { 
+      extComponents: Object.assign(ncformThemeElementui, ncformExtComponents),
+      extRules: ncformExtRules
+    });
+  },
   ncformCommon,
   eventHub,
   widgetMixin,
-  modalInsideMixin,
-  initNcform(extComponents, extRules) {
-    Vue.use(ncform, { 
-      extComponents: Object.assign(ncformThemeElementui, extComponents),
-      extRules
-    });
-  }
+  modalInsideMixin
   // Don't touch me - export
 };
