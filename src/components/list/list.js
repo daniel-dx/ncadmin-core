@@ -484,10 +484,9 @@ export default {
           } else {
             this.$data.tableData = tableData;
           }
+          this.$data.loadingData = false;
         });
         this.$data.pageCount = Math.ceil(this.$data.itemTotal / this.value.pageSize);
-
-        this.$data.loadingData = false;
 
         return;
       });
