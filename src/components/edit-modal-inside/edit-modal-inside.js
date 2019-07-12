@@ -50,6 +50,7 @@ export default {
         },
         buttons: {
           submit: { // 提交
+            triggerByExternal: false, // 是否通过外部组件通过调用confirm方法来触发
             apiUrl: '', // 提交的Url。当为空时表示不调用接口提交，而只是改变model值
             method: 'post', // get/post default:get
             valueField: '', // 当为空时，即表单的每个一级字段即为参数名
@@ -61,6 +62,25 @@ export default {
   },
 
   methods: {
+    
+    /**
+     * 暴露该方法给外面组件（也是基于modalInsideMixins，请在_confirmHandler方法内调用confirm方法）来触发该组件的提交事件
+     */
+    confirm(done) {
+      this._confirmHandler(done, true);
+    },
+
+    /**
+     * 暴露该方法给外面组件（也是基于modalInsideMixins，请在_confirmHandler方法内调用getFormData方法）来获取表单的校验状态和数据
+     */
+    getFormData() {
+      return this.$ncformValidate(this.$data.formName).then(data => {
+        return {
+          valid: data.result,
+          data: this.$data.formValue
+        }
+      })
+    },
 
     _initData() {
       this.$data.onlyId = this.$options.valueCopy[this.$data.mergeConfig.idField];
@@ -109,12 +129,16 @@ export default {
       });
     },
 
-    _confirmHandler(done) {
+    _confirmHandler(done, triggerByExternal) {
 
       this.$ncformValidate(this.$data.formName).then(data => {
         if (data.result) {
           let data = {}, submitData;
           const submitConfig = this.$data.mergeConfig.buttons.submit;
+
+          if (submitConfig.triggerByExternal && !triggerByExternal) {
+            return done(new Error('must be submit externally'));
+          }
 
           // 保证取回什么样的数据格式，就提交什么样的数据格式
           if (this.$data.mergeConfig.formField) {
@@ -166,7 +190,7 @@ export default {
     value: {
       handler(newVal, oldVal) {
         if (JSON.stringify(newVal) != JSON.stringify(oldVal)) {
-          this.initData();
+          this._initData();
         }
       },
       deep: true
