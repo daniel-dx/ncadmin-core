@@ -133,6 +133,7 @@ export default {
 
       this.$ncformValidate(this.$data.formName).then(data => {
         if (data.result) {
+
           let data = {}, submitData;
           const submitConfig = this.$data.mergeConfig.buttons.submit;
 
@@ -154,6 +155,11 @@ export default {
           else data = submitData;
 
           if (!this.$data.mergeConfig.isCopy) data[this.$data.mergeConfig.idField] = this.$data.onlyId;
+
+          if (submitConfig.triggerByExternal && !triggerByExternal) {
+            this.$emit('input', data);
+            return done(new Error('must be submit externally'));
+          }
 
           if (submitConfig.apiUrl) { // 有则远程调用 
             this.$http(submitConfig.apiUrl, axiosOptions(submitConfig.method, data)).then(res => {

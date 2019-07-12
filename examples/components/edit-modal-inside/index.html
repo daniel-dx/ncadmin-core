@@ -86,6 +86,13 @@
     // Bootstrap the app
     new Vue({
       el: '#demo',
+      created() {
+        // debug calling confirm method
+        // setTimeout(() => {
+        //   alert('test');
+        //   this.$refs.modal2.confirm(() => {});
+        // }, 5000)
+      },
       data: {
         config1: {
           visible: false,
