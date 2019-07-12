@@ -125,8 +125,6 @@ export default {
           let data = {}, submitData;
           const submitConfig = this.$data.mergeConfig.buttons.submit;
 
-          if (submitConfig.triggerByExternal && !triggerByExternal) return done(new Error('must be submit externally'));
-
           // 保证取回什么样的数据格式，就提交什么样的数据格式
           if (this.$data.mergeConfig.formField) {
             submitData = Object.assign({}, this.$options.remoteData || this.$options.valueCopy);
@@ -141,6 +139,11 @@ export default {
           else data = submitData;
 
           if (!this.$data.mergeConfig.isCopy) data[this.$data.mergeConfig.idField] = this.$data.onlyId;
+
+          if (submitConfig.triggerByExternal && !triggerByExternal) {
+            this.$emit('input', data);
+            return done(new Error('must be submit externally'));
+          }
 
           if (submitConfig.apiUrl) { // 有则远程调用 
             this.$http(submitConfig.apiUrl, axiosOptions(submitConfig.method, data)).then(res => {
