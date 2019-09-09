@@ -55,6 +55,7 @@ export default {
             method: 'post', // get/post default:get
             valueField: '', // 当为空时，即表单的每个一级字段即为参数名
             notifyEvent: '', // 成功后通过事件总线发出的事件名
+            successTips: '保存成功', // 成功提示信息
           }
         }
       }
@@ -165,7 +166,7 @@ export default {
             this.$http(submitConfig.apiUrl, axiosOptions(submitConfig.method, data)).then(res => {
               this.$message({
                 type: "success",
-                message: "保存成功"
+                message: submitConfig.successTips
               });
 
               if (submitConfig.notifyEvent) {
