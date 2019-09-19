@@ -68,10 +68,7 @@ export default {
 
     const notifyRefreshEventName = _get(this.$data.mergeConfig, 'listenEvents.notifyRefresh');
     if (notifyRefreshEventName) {
-      eventHub.$on(notifyRefreshEventName, data => {
-        this.$options.outsideAddonQuery = data.query || {}; // 组件外加给组件的查询参数
-        this._refreshHandler(data.refreshType || 'current');
-      });
+      eventHub.$on(notifyRefreshEventName, this._handleNotifyRefreshEvent);
     }
   },
 
@@ -137,9 +134,9 @@ export default {
   },
 
   beforeDestroy() {
-    eventHub.$off('nca-component-notify-submit');
+    eventHub.$off('nca-component-notify-submit', this.loadTableData);
     const notifyRefreshEventName = _get(this.$data.mergeConfig, 'listenEvents.notifyRefresh');
-    if (notifyRefreshEventName) eventHub.$off(notifyRefreshEventName);
+    if (notifyRefreshEventName) eventHub.$off(notifyRefreshEventName, this._handleNotifyRefreshEvent);
   },
 
   data() {
@@ -329,6 +326,12 @@ export default {
         this.$emit(options.name, emitData);
       }
     },
+
+    _handleNotifyRefreshEvent(data) {
+      this.$options.outsideAddonQuery = data.query || {}; // 组件外加给组件的查询参数
+      this._refreshHandler(data.refreshType || 'current');
+    },
+
     // Action Object config 实现
     eventHandler(handler, item = {}, multipleSelection = []) {
       const { type, options } = handler;
