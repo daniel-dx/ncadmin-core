@@ -387,7 +387,8 @@ export default {
 
           this.$data.modal.value = newValue;
 
-          this.$data.modal.modalConfig = options.modalConfig;
+          this.$data.modal.modalConfig = JSON.parse(JSON.stringify(options.modalConfig));
+          this.$data.modal.modalConfig.title = ncformUtils.smartAnalyze(options.modalConfig.title, {data: handlerData});
           this.$data.modal.visible = true;
           break;
       }
