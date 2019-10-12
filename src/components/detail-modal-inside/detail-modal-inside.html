@@ -1,5 +1,5 @@
 <div class="nca-detail-modal-inside">
   <el-row>
-    <detail-recursion :config="mergeConfig.detail" :value="formValue"></detail-recursion>
+    <detail-recursion v-if="isReady" :config="mergeConfig.detail" :value="formValue"></detail-recursion>
   </el-row>
 </div>

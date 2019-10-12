@@ -27,6 +27,7 @@ export default {
     return {
       onlyId: "",
       formValue: {},
+      isReady: false,
       defaultConfig: {
         idField: 'id', // 作为该详情信息的唯一标识
         source: { // 详细页的数据源
@@ -57,11 +58,13 @@ export default {
     },
 
     loadFormData() {
+      this.$data.isReady = false;
       const formDataConfig = this.$data.mergeConfig.source;
 
       // 如果指定数据从本地数据源获取，则直接将value当数据源
       if (formDataConfig.isRemote === false) {
         this.$data.formValue = this.value;
+        this.$data.isReady = true;
         return;
       }
 
@@ -83,6 +86,7 @@ export default {
       ).then(res => {
         const resField = formDataConfig.resField;
         this.$data.formValue = resField ? _get(res.data, resField) : res.data;
+        this.$data.isReady = true;
       });
     }
   },
