@@ -1,7 +1,7 @@
 <div class="nca-edit-modal-inside">
   <el-row>
     <el-col>
-      <ncform v-if="dataLoaded" :form-schema="mergeConfig.formSchema" v-model="formValue" :form-name="formName"></ncform>
+      <ncform v-if="dataLoaded" :form-schema="mergeConfig.formSchema" v-model="formValue" :form-name="formName" :is-dirty.sync="isFormDirty"></ncform>
     </el-col>
   </el-row>
 </div>

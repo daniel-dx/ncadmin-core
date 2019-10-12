@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       formName: 'edit-modal-inside_' + ncformUtils.genRandomId(),
+      isFormDirty: false,
       onlyId: "",
       formValue: {},
       dataLoaded: false, // 表单数据是否已经加载完毕
@@ -160,6 +161,11 @@ export default {
           if (submitConfig.triggerByExternal && !triggerByExternal) {
             this.$emit('input', data);
             return done(new Error('must be submit externally'));
+          }
+
+          if (!this.$data.isFormDirty) {
+            done(data);
+            return;
           }
 
           if (submitConfig.apiUrl) { // 有则远程调用 
