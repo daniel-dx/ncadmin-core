@@ -48,6 +48,11 @@ export default {
           resField: '' // 返回数据的实际字段
         },
         formSchema: { // ncform 配置
+          globalConfig: {
+            scrollToFailField: {
+              container: '.el-dialog__wrapper'
+            }
+          }
         },
         buttons: {
           submit: { // 提交
