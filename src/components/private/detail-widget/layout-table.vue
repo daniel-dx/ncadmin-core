@@ -1,30 +1,38 @@
 <template>
   <table class="layout-table" cellspacing="0" cellpadding="0" border="0" >
-    <!-- 内嵌信息为Object -->
-    <template v-if="config.items.properties">
-      <tr>
-        <th v-for="item in config.items.properties">{{item.label}}</th>
-      </tr>
-      <tr v-for="item in valueData">
-        <td v-for="item2 in config.items.properties">
-            <!-- 这里的item-value为items.value的值根据数组每一项的值来解析 -->
-            <slot :item-config="item2" :item-value="analyze(config.items.value, item)"></slot>
-        </td>
-      </tr>
-    </template>
 
-    <!-- 内嵌信息为其它 -->
-    <template v-else>
-      <tr v-if="config.label">
-        <th>{{config.label}}</th>
-      </tr>
-      <tr v-for="item in valueData">
-        <td>
-          <slot :item-config="config.items" :item-value="item">
-          </slot>
-        </td>
-      </tr>
-    </template>
+    <colgroup v-if="config.widgetConfig && config.widgetConfig.colgroup">
+      <col v-for="(item, idx) in config.widgetConfig.colgroup" :key="idx" :width="item.width" />
+    </colgroup>
+
+    <tbody>
+      <!-- 内嵌信息为Object -->
+      <template v-if="config.items.properties">
+        <tr>
+          <th v-for="(item, idx) in config.items.properties" :key="idx">{{item.label}}</th>
+        </tr>
+        <tr v-for="(item, idx) in valueData" :key="idx">
+          <td v-for="(item2, idx) in config.items.properties" :key="idx">
+              <!-- 这里的item-value为items.value的值根据数组每一项的值来解析 -->
+              <slot :item-config="item2" :item-value="analyze(config.items.value, item)"></slot>
+          </td>
+        </tr>
+      </template>
+
+      <!-- 内嵌信息为其它 -->
+      <template v-else>
+        <tr v-if="config.label">
+          <th>{{config.label}}</th>
+        </tr>
+        <tr v-for="(item, idx) in valueData" :key="idx"> 
+          <td>
+            <slot :item-config="config.items" :item-value="item">
+            </slot>
+          </td>
+        </tr>
+      </template>
+    </tbody>
+
   </table>
 </template>
 <script>
