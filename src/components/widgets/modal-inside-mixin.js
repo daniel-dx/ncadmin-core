@@ -12,7 +12,36 @@ export default {
   props: ["modalId"],
 
   created() {
-    eventHub.$on(`fromModal_${this.modalId}`, config => {
+    eventHub.$on(`fromModal_${this.modalId}`, this.handleFromModalEvent);
+  },
+
+  beforeDestroy() {
+    eventHub.$off(`fromModal_${this.modalId}`, this.handleFromModalEvent);
+  },
+
+  methods: {
+    /**
+     * [可覆盖]
+     * 确认按钮事件处理。通过覆盖该方法可自行处理确认按钮事件
+     * @param {Function} done 请务必在执行确认操作后调用done方法，否则后果自负。如果请求失败，把Error对象传给done
+     */
+    _confirmHandler(done) { },
+
+    /**
+     * [可覆盖]
+     * 自定义的其它按钮的事件处理。通过覆盖该方法可自行处理自定义按钮事件
+     * @param {*} config 
+     * @param {Function} done 请务必在执行确认操作后调用done方法，否则后果自负。如果请求失败，把Error对象传给done
+     */
+    _btnsEventHandler(config, done) { },
+
+    _closeModal() {
+      eventHub.$emit(`toModal_${this.modalId}`, {
+        eventName: "modalCancel"
+      });
+    },
+
+    handleFromModalEvent(config) {
       switch (config.eventName) {
         case "modalConfirm": // 确认按钮事件
           this._confirmHandler(data => {
@@ -36,33 +65,6 @@ export default {
             }
           });
       }
-    });
-  },
-
-  beforeDestroy() {
-    eventHub.$off(`fromModal_${this.modalId}`);
-  },
-
-  methods: {
-    /**
-     * [可覆盖]
-     * 确认按钮事件处理。通过覆盖该方法可自行处理确认按钮事件
-     * @param {Function} done 请务必在执行确认操作后调用done方法，否则后果自负。如果请求失败，把Error对象传给done
-     */
-    _confirmHandler(done) { },
-
-    /**
-     * [可覆盖]
-     * 自定义的其它按钮的事件处理。通过覆盖该方法可自行处理自定义按钮事件
-     * @param {*} config 
-     * @param {Function} done 请务必在执行确认操作后调用done方法，否则后果自负。如果请求失败，把Error对象传给done
-     */
-    _btnsEventHandler(config, done) { },
-
-    _closeModal() {
-      eventHub.$emit(`toModal_${this.modalId}`, {
-        eventName: "modalCancel"
-      });
     }
   }
 }

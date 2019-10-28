@@ -18,31 +18,7 @@ export default {
   },
 
   created() {
-    eventHub.$on(`toModal_${this.$data.modalId}`, config => {
-      switch (config.eventName) {
-        case "modalCancel": // 关闭窗口事件
-          this.closeModal();
-          break;
-        case "modalConfirm": // 确认逻辑处理完的事件
-          if (this.mdConfig.buttons.confirm.showLoading) {
-            this.$data.loading.modalConfirm = false;
-          }
-          if (!(config.data.data instanceof Error)) { // 有异步请求时出现异常
-            this.$emit('confirm', config.data.data);
-            this.closeModal();
-          }
-          break;
-        default: // 其它按钮事件逻辑处理完的事件
-          let foundBtnConfig = this.mdConfig.buttons.others.find(bItem => bItem.eventName === config.eventName);
-          if (foundBtnConfig.showLoading) {
-            this.$data.loading[config.eventName] = false;
-          }
-          if (foundBtnConfig.close && !(config.data.data instanceof Error)) { // 有异步请求时出现异常
-            this.closeModal();
-          }
-          break;
-      }
-    });
+    eventHub.$on(`toModal_${this.$data.modalId}`, this.handelToModalEvent);
   },
 
   data() {
@@ -102,6 +78,32 @@ export default {
 
     closeModal() {
       this.$data.visibleData = false;
+    },
+
+    handelToModalEvent(config) {
+      switch (config.eventName) {
+        case "modalCancel": // 关闭窗口事件
+          this.closeModal();
+          break;
+        case "modalConfirm": // 确认逻辑处理完的事件
+          if (this.mdConfig.buttons.confirm.showLoading) {
+            this.$data.loading.modalConfirm = false;
+          }
+          if (!(config.data.data instanceof Error)) { // 有异步请求时出现异常
+            this.$emit('confirm', config.data.data);
+            this.closeModal();
+          }
+          break;
+        default: // 其它按钮事件逻辑处理完的事件
+          let foundBtnConfig = this.mdConfig.buttons.others.find(bItem => bItem.eventName === config.eventName);
+          if (foundBtnConfig.showLoading) {
+            this.$data.loading[config.eventName] = false;
+          }
+          if (foundBtnConfig.close && !(config.data.data instanceof Error)) { // 有异步请求时出现异常
+            this.closeModal();
+          }
+          break;
+      }
     }
   },
   watch: {
@@ -119,6 +121,6 @@ export default {
   },
   
   beforeDestroy() {
-    eventHub.$off(`toModal_${this.$data.modalId}`);
+    eventHub.$off(`toModal_${this.$data.modalId}`, this.handelToModalEvent);
   }
 };

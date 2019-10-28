@@ -163,11 +163,6 @@ export default {
 
           if (!this.$data.mergeConfig.isCopy) data[this.$data.mergeConfig.idField] = this.$data.onlyId;
 
-          if (submitConfig.triggerByExternal && !triggerByExternal) {
-            this.$emit('input', data);
-            return done(new Error('must be submit externally'));
-          }
-
           if (!this.$data.isFormDirty) {
             done(data);
             return;
