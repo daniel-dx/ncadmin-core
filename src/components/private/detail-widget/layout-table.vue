@@ -66,10 +66,8 @@ export default {
   th, td{
     border-right: 1px solid #ebeef5;
     border-bottom: 1px solid #ebeef5;
-    user-select: none;
     text-align: left;
     background-color: #fff;
-
 
     padding: 12px 10px;
     min-width: 0;
