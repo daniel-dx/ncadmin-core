@@ -20,7 +20,7 @@
 
     <el-button @click="config2.visible = true">2: 本地提供数据</el-button>
     <nca-modal :visible.sync="config2.visible" :modal-config="config2.modalConfig" @confirm="confirm">
-      <nca-edit-modal-inside ref="modal2" slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config2.config" :value="config2.value"></nca-edit-modal-inside>
+      <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config2.config" :value="config2.value"></nca-edit-modal-inside>
     </nca-modal>
 
     <p></p>
@@ -65,7 +65,14 @@
       <nca-edit-modal-inside slot-scope="modalProps" :modal-id="modalProps.modalId" :config="config8.config" v-model="config8.value"></nca-edit-modal-inside>
     </nca-modal>
 
-    <button @click="test" style="position: absolute; z-index: 9999; bottom: 0">test triggerByExternal</button>
+    <p></p>
+
+    <el-button @click="config9.visible = true">9: 外部触发提交</el-button>
+    <nca-modal :visible.sync="config9.visible" :modal-config="config9.modalConfig" @confirm="confirm">
+      <nca-edit-modal-inside slot-scope="modalProps" ref="modal9" :modal-id="modalProps.modalId" :config="config9.config" v-model="config9.value"></nca-edit-modal-inside>
+    </nca-modal>
+
+    <button @click="test" style="position: absolute; z-index: 9999; bottom: 0; right: 0">test triggerByExternal</button>
 
   </div>
 
@@ -209,7 +216,6 @@
             buttons: {
               submit: {
                 // 提交
-                // triggerByExternal: true,
                 apiUrl: "/api/saveItem", // 提交的Url
                 valueField: "" // 当为空时，即表单的每个一级字段即为参数名
               }
@@ -450,6 +456,43 @@
           }
         },
 
+        config9: {
+          visible: false,
+          modalConfig: {
+            title: '外部触发提交', // 弹窗标题
+          },
+          config: {
+            idField: "id", // 该表单记录的唯一标识，通过该字段可判断编辑模式还是新建模式
+            formData: {
+              isRemote: false,
+            },
+            formSchema: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string",
+                  rules: {
+                    required: true
+                  }
+                }
+              }
+            },
+            buttons: {
+              submit: {
+                // 提交
+                triggerByExternal: true,
+                apiUrl: "https://daniel-dx.github.io/mock-host/user-widgets/", // 提交的Url
+                valueField: "" // 当为空时，即表单的每个一级字段即为参数名
+              }
+            }
+          },
+          value: {
+            id: 1,
+            name: 'hello daniel',
+            notInFormField: 'i do not in the form',
+          }
+        },
+
       }
       ,
       methods: {
@@ -457,11 +500,13 @@
           console.log(JSON.stringify(formData, null, 2));
         },
         test() {
-          // 调试时请先点击modal的确认按钮
-          // this.$refs.modal2.confirm(() => {});
-          // this.$refs.modal2.getFormData().then(res => {
-          //   console.log(JSON.stringify(res));
-          // })
+          // 以下实现应该写在 _confirmHandler(done) 的方法里面，这里没法写，所以这样调试
+          const done = () => {}; // 这个done应该是_confirmHandler的参数
+          this.$refs.modal9.getFormData().then(({ valid, data }) => {
+            if (valid) {
+              this.$refs.modal9.confirm(done);
+            }
+          })
         }
       }
     });

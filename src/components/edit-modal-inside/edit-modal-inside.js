@@ -169,6 +169,11 @@ export default {
           }
 
           if (submitConfig.apiUrl) { // 有则远程调用 
+            
+            if (submitConfig.triggerByExternal) { 
+              this._showConfirmLoading(true); // 手动显示确认按钮的loading状态，因为 _confirmHandler 是被上面的 confirm 方法调用的，而不是 modal 组件调用的
+            }  
+
             this.$http(submitConfig.apiUrl, axiosOptions(submitConfig.method, data)).then(res => {
               this.$message({
                 type: "success",
@@ -180,7 +185,13 @@ export default {
               }
 
               done(_merge(res.data, data));
-            }).catch(e => done(e));
+            }).catch(e => done(e)).finally(() => {
+              if (submitConfig.triggerByExternal) {
+                this._showConfirmLoading(false);
+              }
+            });
+
+
           } else { // 无则通知value改变
             this.$emit('input', data); 
             done(data);

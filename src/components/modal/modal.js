@@ -94,6 +94,9 @@ export default {
             this.closeModal();
           }
           break;
+        case "confirmLoading": // 显示确认按钮的 loading 状态
+          this.$set(this.$data.loading, 'modalConfirm', config.data.loading);
+          break;
         default: // 其它按钮事件逻辑处理完的事件
           let foundBtnConfig = this.mdConfig.buttons.others.find(bItem => bItem.eventName === config.eventName);
           if (foundBtnConfig.showLoading) {

@@ -65,6 +65,18 @@ export default {
             }
           });
       }
+    },
+
+    /**
+     * 通知确认按钮显示 loading 状态与否
+     */
+    _showConfirmLoading(loading) {
+      eventHub.$emit(`toModal_${this.modalId}`, {
+        eventName: "confirmLoading",
+        data: {
+          loading
+        }
+      }); 
     }
   }
 }
