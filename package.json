@@ -38,7 +38,7 @@
     "css-loader": "^0.23.1",
     "csswring": "^4.0.0",
     "element-ui": "^2.0.11",
-    "eslint": "~2.2.0",
+    "eslint": "~4.18.2",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-html": "^1.5.3",
     "file-loader": "^0.8.5",
