@@ -31,6 +31,9 @@ export default {
           .substring(2),
       loading: {
         // 通过button的eventName来识别按钮的loading状态
+      },
+      disabled: {
+        // 通过button的eventName来识别按钮的disabled状态
       }
     };
   },
@@ -48,7 +51,7 @@ export default {
           name: "确定",
           eventName: "modalConfirm",
           close: true,
-          showLoading: true
+          showLoading: true,
         },
         mdConfig.buttons.confirm
       );
@@ -96,6 +99,9 @@ export default {
           break;
         case "confirmLoading": // 显示确认按钮的 loading 状态
           this.$set(this.$data.loading, 'modalConfirm', config.data.loading);
+          break;
+        case "confirmDisabled": // 显示确认按钮的 loading 状态
+          this.$set(this.$data.disabled, 'modalConfirm', config.data.disabled);
           break;
         default: // 其它按钮事件逻辑处理完的事件
           let foundBtnConfig = this.mdConfig.buttons.others.find(bItem => bItem.eventName === config.eventName);

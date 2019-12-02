@@ -20,6 +20,17 @@ export default {
   created() {
     this.$options.valueCopy = _cloneDeep(this.value);
     this._initData();
+
+    // 编辑初始状态下通知“确定”按钮呈现不可用状态
+    if (this.isEdit && this.$data.mergeConfig.buttons.submit.toggleDisabled) {
+      this._disableConfirm(true);
+    }
+  },
+
+  computed: {
+    isEdit() {
+      return this.$data.onlyId && this.$data.onlyId !== '0';
+    }
   },
 
   data() {
@@ -62,6 +73,7 @@ export default {
             valueField: '', // 当为空时，即表单的每个一级字段即为参数名
             notifyEvent: '', // 成功后通过事件总线发出的事件名
             successTips: '保存成功', // 成功提示信息
+            toggleDisabled: true, // 自动切换 disabled 状态
           }
         }
       }
@@ -107,7 +119,7 @@ export default {
       }
 
       // 没有ID则中断请求
-      if (!this.$data.onlyId || this.$data.onlyId == "0") {
+      if (!this.isEdit) {
         this.$data.dataLoaded = true;
         return;
       }
@@ -163,10 +175,10 @@ export default {
 
           if (!this.$data.mergeConfig.isCopy) data[this.$data.mergeConfig.idField] = this.$data.onlyId;
 
-          if (!this.$data.isFormDirty) {
-            done(data);
-            return;
-          }
+          // if (!this.$data.isFormDirty) {
+          //   done(data);
+          //   return;
+          // }
 
           if (submitConfig.apiUrl) { // 有则远程调用 
             
@@ -226,6 +238,11 @@ export default {
         }
       },
       deep: true
+    },
+    isFormDirty(newVal) {
+      if (this.isEdit && this.$data.mergeConfig.buttons.submit.toggleDisabled) { 
+        this._disableConfirm(!newVal);
+      }
     }
   }
 };

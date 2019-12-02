@@ -77,6 +77,18 @@ export default {
           loading
         }
       }); 
+    },
+
+    /**
+     * 通知确认按钮切换 Disabled 状态
+     */
+    _disableConfirm(disabled) {
+      eventHub.$emit(`toModal_${this.modalId}`, {
+        eventName: "confirmDisabled",
+        data: {
+          disabled
+        }
+      });
     }
   }
 }
