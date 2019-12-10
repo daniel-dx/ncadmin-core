@@ -422,21 +422,18 @@ export default {
 
     // 重置 - 重置pageNum为1和查询条件
     resetList() {
-      this.normalQueryValue = {};
-      this.advQueryValue = {};
       this.value.pageNum = 1;
       this.value.query = {};
+
+      this.$ncformReset('normalQuery');
+      this.$ncformReset('advQuery');
 
       this.$refs.table.clearSort();
       const datasource = this.$data.mergeConfig.list.datasource;
       this.$data.sortField = _get(datasource.otherParams, datasource.paramFields.sortField, '');
       this.$data.sortOrder = _get(datasource.otherParams, datasource.paramFields.sortOrder, '');
 
-      // 这里用setTimeout是为了让normalQueryValue和advQueryValue能取到实际的默认值，而非{}
-      // why not nextTick，因为nextTick取到的还是{}
-      setTimeout(() => {
-        this.search();
-      });
+      this.search();
     },
 
     // 加载表格数据 - 不重置pageNum和查询条件
